@@ -1,0 +1,111 @@
+//
+// Socials Links (Settings)
+//
+.dlsocials-links {
+
+  &__list {
+    @extend .u-no-list-style;
+  }
+
+  &__item {
+    display:        inline-block;
+    vertical-align: middle;
+  }
+
+  &__link {
+    @include flexboxtweener((-ms-flex-pack:center, -ms-flex-align:center));
+    align-items:      center;
+    background-color: $color-primary;
+    color:            $color-white;
+    display:          flex;
+    height:           2em;
+    justify-content:  center;
+    line-height:      1;
+    padding:          .6em;
+    width:            2em;
+
+    &,
+    &:hover {
+      // Explicitly set to 0. Icons not text.
+      border-bottom: 0;
+    }
+
+    &:hover {
+      background-color: $color-primary--dark;
+    }
+
+    &::before {
+      @include font-smoothing;
+      font-family: Fontawesome;
+      line-height: 1;
+    }
+
+    &--facebook::before {
+      content: '\f09a';
+    }
+    &--twitter::before {
+      content: '\f099';
+    }
+    &--instagram::before {
+      content: '\f16d';
+    }
+    &--pinterest::before {
+      content: '\f231';
+    }
+    &--linkedin::before {
+      content: '\f0e1';
+    }
+    &--youtube::before {
+      content: '\f16a';
+    }
+    &--vimeo::before {
+      content: '\f27d';
+    }
+    &--tripadvisor::before {
+      content: '\f262';
+    }
+    &--email::before {
+      content: '\f003';
+    }
+  }
+
+  &__label {
+    @extend .screen-reader-text;
+  }
+}
+
+//
+// Footer Socials
+//
+.dlfooter .dlsocials-links {
+  // Increase the default font size to get icons bigger so the user can tap easy on them.
+  font-size:     1.3rem;
+  margin-bottom: $global-vertical-margin / 2;
+
+  &__item + .dlsocials-links__item {
+    margin-left: .4em;
+  }
+
+  &__link {
+    background-color: transparent;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, .1);
+    }
+  }
+}
+
+//
+// MEDIA QUERIES
+//
+
+@media only screen and (min-width: map-get($breakpoints, 'md')) {
+
+  .dlfooter .dlsocials-links {
+    // Reset the font size added to facilitate the user to tap on icons on small devices.
+    font-size:     $font-size;
+    // Reset the margin added by default.
+    margin-bottom: 0;
+  }
+
+}

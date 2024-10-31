@@ -1,0 +1,105 @@
+//
+// Mixins Alert
+//
+@mixin alert {
+  background-color:  $color-white;
+  border-left-style: solid;
+  border-left-width: .25em;
+  border-radius:     $global-border-radius;
+  display:           block;
+  font-size:         1.19rem;
+  line-height:       1.5;
+  // Little hack for hide overflow elements and woocommerce message btn.
+  overflow:          hidden;
+  padding:           .7em 1.6em;
+
+  &--info,
+  &--error,
+  &--success,
+  &--warning {
+    i {
+      display:      none;
+      margin-right: 1em;
+    }
+  }
+
+  a {
+    background:   none;
+    color:        $color-font-body;
+    font-size:    inherit !important;
+    font-weight:  $font-weight;
+    margin:       0;
+    margin-right: .63em !important;
+    padding:      0;
+  }
+
+  p {
+    display:        inline-block;
+    margin:         0;
+    vertical-align: middle;
+  }
+
+  //
+  // MEDIA QUERIES
+  //
+  @media only screen and (min-width: map-get($breakpoints, 'sm')) {
+
+    &--info,
+    &--error,
+    &--success,
+    &--warning {
+      i {
+        display: inline-block;
+      }
+    }
+
+  }
+}
+
+// Alert Info
+@mixin alert--info {
+  background-color:  $color-alert-background--info;
+  border-left-color: $color-alert--info;
+  color:             $color-alert--info;
+
+  a:hover {
+    border-bottom-color: $color-alert--info;
+    color:               $color-alert--info;
+  }
+}
+
+// Alert Success
+@mixin alert--success {
+  background-color:  $color-alert-background--success;
+  border-left-color: $color-alert--success;
+  color:             $color-alert--success;
+
+  a:hover {
+    border-bottom-color: $color-alert--success;
+    color:               $color-alert--success;
+  }
+}
+
+// Alert Warning
+@mixin alert--warning {
+  background-color:  $color-alert-background--warning;
+  border-left-color: $color-alert--warning;
+  color:             $color-alert--warning;
+
+  a:hover {
+    border-bottom-color: $color-alert--warning;
+    color:               $color-alert--warning;
+  }
+}
+
+// Alert Error
+@mixin alert--error {
+  background-color:  $color-alert-background--error;
+  border-left-color: $color-alert--error;
+  color:             $color-alert--error;
+
+  a:hover {
+    border-bottom-color: $color-alert--error;
+    color:               $color-alert--error;
+  }
+}

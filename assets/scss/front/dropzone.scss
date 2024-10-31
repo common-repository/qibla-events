@@ -1,0 +1,291 @@
+//
+// Dropzone Component
+//
+@import 'settings/settings',
+'mixins/mixins',
+'utils/utils',
+'grid/grid';
+
+.dropzone {
+  @include flexboxtweener;
+  background:      transparent;
+  border:          .13em dashed $color-gray--light;
+  display:         flex;
+  justify-content: space-around;
+  padding:         $global-padding / 2;
+
+  * {
+    transition: all $global-transition-duration $global-transition-timing;
+  }
+
+  &:hover {
+    border-color: $color-primary;
+  }
+
+  &.dz-drag-hover {
+    background-color: transparentize($color-primary, .7);
+    border-color:     $color-primary;
+  }
+
+  // Message
+  .dz-message {
+    color:      $color-gray--light;
+    margin:     $global-vertical-margin / 2 0;
+    text-align: center;
+  }
+
+  // When is Clickable
+  &.dz-clickable {
+    cursor: pointer;
+
+    * {
+      cursor: default;
+    }
+
+    .dz-message,
+    .dz-message * {
+      cursor: pointer;
+    }
+  }
+
+  // When at least an image has been set.
+  &.dz-started {
+    // Now that we have files, let's set the justify content on flex-start.
+    justify-content: flex-start;
+
+    .dz-message {
+      display: none;
+    }
+  }
+
+  // Preview
+  .dz-preview {
+    display:        inline-block;
+    margin:         .63em;
+    min-height:     100px;
+    position:       relative;
+    vertical-align: top;
+
+    // On Hover
+    &:hover {
+      z-index: 1000;
+
+      .dz-details {
+        background-color: transparentize($color-white, .6);
+        opacity:          1;
+      }
+    }
+
+    // Grouped
+    .dz-filename span,
+    .dz-size span {
+      border-radius: $global-border-radius;
+    }
+
+    // Details
+    .dz-details {
+      bottom:     0;
+      color:      $color-gray;
+      top:        0;
+      left:       0;
+      opacity:    0;
+      font-size:  $font-size--small;
+      min-width:  100%;
+      max-width:  100%;
+      padding:    2em 1em;
+      position:   absolute;
+      text-align: center;
+      z-index:    20;
+
+      .dz-size {
+        margin-bottom: $global-vertical-margin / 2;
+      }
+
+      .dz-filename {
+        white-space: nowrap;
+
+        &:hover span {
+          border: 1px solid $color-border;
+        }
+
+        &:not(:hover) {
+          overflow:      hidden;
+          text-overflow: ellipsis;
+        }
+
+        :not(:hover) span {
+          border: 1px solid transparent;
+        }
+      }
+    }
+
+    // Image
+    .dz-image {
+      border-radius: $global-border-radius;
+      box-shadow:    $global-box-shadow;
+      display:       block;
+      overflow:      hidden;
+      position:      relative;
+      z-index:       10;
+
+      img {
+        display: block;
+      }
+    }
+
+    // Remove
+    .dz-remove {
+      border:     none;
+      cursor:     pointer;
+      display:    block;
+      position:   absolute;
+      text-align: center;
+      top:        0;
+      z-index:    100;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    i.la-close {
+      background: $color-white;
+      cursor:     pointer;
+      padding:    .63em;
+      position:   absolute;
+      top:        0;
+      z-index:    100;
+    }
+
+    // Progress
+    .dz-progress {
+      opacity:           1;
+      z-index:           1000;
+      pointer-events:    none;
+      position:          absolute;
+      height:            16px;
+      left:              50%;
+      top:               50%;
+      margin-top:        -8px;
+      width:             80px;
+      margin-left:       -40px;
+      background:        transparentize($color-white, .9);
+      -webkit-transform: scale(1);
+      border-radius:     $global-border-radius;
+      overflow:          hidden;
+
+      .dz-upload {
+        background: $color-gray;
+        position:   absolute;
+        top:        0;
+        left:       0;
+        bottom:     0;
+        width:      0;
+        transition: width $global-transition-duration $global-transition-timing;
+      }
+    }
+
+    &:not(.dz-processing) .dz-progress {
+      animation: flash 6s ease infinite;
+    }
+  }
+
+  // File Preview
+  .dz-file-preview {
+    .dz-image {
+      border-radius: $global-border-radius;
+      background:    $color-gray;
+    }
+
+    .dz-details {
+      opacity: 1;
+    }
+  }
+
+  // Image Preview
+  .dz-image-preview {
+    background: transparent;
+
+    .dz-details {
+      transition: opacity $global-transition-duration $global-transition-timing;
+    }
+  }
+
+  // Error and Success Marks
+  .dz-error .dz-error-mark,
+  .dz-success .dz-success-mark {
+    animation: fadeIn;
+  }
+
+  .dz-success-mark,
+  .dz-error-mark {
+    opacity:        0;
+    z-index:        500;
+    position:       absolute;
+    display:        block;
+    top:            50%;
+    left:           50%;
+    margin-left:    -27px;
+    margin-top:     -27px;
+    pointer-events: none;
+
+    svg {
+      display: block;
+      width:   54px;
+      height:  54px;
+    }
+  }
+
+  .dz-error .dz-error-message {
+    display: block;
+  }
+
+  .dz-error {
+    .dz-error-message {
+      display: block;
+    }
+
+    &:hover .dz-error-message {
+      opacity:        1;
+      pointer-events: auto;
+    }
+  }
+
+  .dz-error-message {
+    background:     $color-red;
+    border-radius:  $global-border-radius;
+    color:          $color-white;
+    display:        none;
+    font-size:      .81rem;
+    line-height:    1.5;
+    left:           -10px;
+    padding:        .63em 1em;
+    pointer-events: none;
+    position:       absolute;
+    top:            130px;
+    width:          140px;
+    z-index:        1000;
+  }
+
+  .dz-error-message:after {
+    content:       '';
+    position:      absolute;
+    top:           -6px;
+    left:          64px;
+    width:         0;
+    height:        0;
+    border-left:   6px solid transparent;
+    border-right:  6px solid transparent;
+    border-bottom: 6px solid $color-red;
+  }
+
+  // Processing
+  .dz-processing .dz-progress {
+    opacity:    1;
+    transition: all $global-transition-duration $global-transition-timing;
+  }
+
+  .dz-complete .dz-progress {
+    opacity:    0;
+    transition: opacity $global-transition-duration $global-transition-timing;
+  }
+}

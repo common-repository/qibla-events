@@ -1,0 +1,8 @@
+//
+// Typography utils
+//
+
+// High Light text.
+.u-highlight-text {
+  @include highlight-text;
+}

@@ -1,0 +1,17 @@
+//
+// Settings Admin Colors
+//
+$color-black: #000;
+// Gray is the WordPress color.
+$color-gray: #ddd;
+$color-gray--light: #eee;
+$color-white: #fff;
+$color-green: #9ccc65;
+
+// Primary Framework Color
+$color-primary: #0073aa;
+$color-primary--dark: darken($color-primary, 15%);
+// Text
+$color-text: #555d66;
+// Border
+$color-border: $color-gray;

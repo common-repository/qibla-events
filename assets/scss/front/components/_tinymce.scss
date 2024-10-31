@@ -1,0 +1,40 @@
+//
+// TinyMce Component
+//
+.wp-editor-wrap {
+  // Button
+  .mce-btn {
+    &:hover {
+      border-color: transparent;
+    }
+
+    button {
+      &:hover {
+        // Remove the background color used for buttons.
+        background-color: transparentize($color-black, .9);
+        border-color:     transparent;
+      }
+    }
+  }
+
+  // When the field is invalid.
+  .is-invalid & {
+    // panel
+    .mce-panel {
+      // Or will not be overridden.
+      // scss-lint:disable ImportantRule
+      border: 0 !important;
+
+      .mce-btn-group {
+        white-space: normal;
+      }
+    }
+  }
+
+  // panel
+  .mce-panel {
+    .mce-btn-group div:first-child {
+      white-space: normal;
+    }
+  }
+}

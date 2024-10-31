@@ -1,0 +1,381 @@
+//
+// Nav Components
+//
+.dlnav-main {
+  @include enumerate-props($typography_nav-main);
+  font-size: 1rem;
+  position:  relative;
+  z-index:   9999;
+
+  a {
+    @include anchor-text((color:$color-font-body));
+  }
+
+  &__list-items {
+    @extend .u-no-list-style;
+    @extend .u-cf;
+
+    > .menu-item {
+      float: left;
+    }
+
+    // The parent Menu item
+    > .menu-item-has-children {
+      // Sub-menu Icon.
+      > a::after {
+        content: '\f110';
+      }
+    }
+
+    //> .current-menu-ancestor,
+    //> .menu-item:hover,
+    //> .current-menu-parent,
+    //> .current-menu-item {
+    //  &:after {
+    //    @include enumerate-props(map-get($boxmodel_nav-main, 'current-item'));
+    //    bottom:   0;
+    //    content:  '';
+    //    display:  block;
+    //    left:     0;
+    //    position: absolute;
+    //    right:    0;
+    //  }
+    //}
+
+    .menu-item {
+      position: relative;
+    }
+
+    // Parent menu item.
+    .menu-item-has-children {
+      // Sub-menu Icon.
+      a::after {
+        font-family: Lineawesome;
+        margin-left: .5em;
+        position:    relative;
+        bottom:      1px;
+      }
+    }
+
+    a {
+      // Explicitly set, the designer don't like the rules of usability.
+      border-bottom:   0;
+      display:         inline-block;
+      padding:         1em;
+      text-decoration: none;
+    }
+  }
+
+  // Sub-menu
+  // @note  Border radius is needed on both sub-menu container and anchor element.
+  //        For some reason on hover state the only border radius is overwritten and seems on header--light
+  //        the radius is not visible if not set to sub-menu.
+  .sub-menu {
+    @extend .u-no-list-style;
+    border-radius: .29em;
+    box-shadow:    $global-box_shadow;
+    max-width:     360px;
+    min-width:     200px;
+    position:      absolute;
+    z-index:       20;
+
+    > .menu-item:only-child > a {
+      border-radius: $global-border-radius;
+    }
+    > .menu-item:first-child > a {
+      border-top-left-radius:  $global-border-radius;
+      border-top-right-radius: $global-border-radius;
+    }
+    > .menu-item:last-child > a {
+      border-bottom-left-radius:  $global-border-radius;
+      border-bottom-right-radius: $global-border-radius;
+    }
+
+    > .menu-item:hover .sub-menu {
+      left: 100%;
+      top:  0;
+    }
+
+    .menu-item a {
+      @include enumerate-props(map-get($typography_nav-main_submenu, 'link'));
+      background: $color-white;
+      display:    block;
+    }
+
+    // Parent menu item.
+    > .menu-item-has-children > a::after {
+      content:        '\f112';
+      vertical-align: middle;
+    }
+
+    .current-menu-ancestor > a,
+    > .menu-item:hover > a,
+    > .current-menu-item > a {
+      @include enumerate-props($typography_nav-item_hightlight);
+    }
+  }
+
+  // User avatar.
+  .avatar {
+    border-radius: 50%;
+    bottom:        .13rem;
+    margin-left:   .63em;
+    position:      relative;
+
+    & + a {
+      padding-left: .7em;
+    }
+  }
+}
+
+//
+// No nav btn
+//
+#dlnav-main--no-nav {
+  // Set the color for the button within the navigation to white.
+  // Because the color selector for the links within the navigation is more specific than this.
+  color: $color-white;
+}
+
+//
+// Desktop Version
+//
+.dlnav-main:not(.dlnav-main--mobile) {
+
+  // Open the DIRECT CHILD sub-menu. We have more than 2 Depth.
+  .menu-item:hover {
+    > .sub-menu {
+      @extend .unscreen-reader-text;
+    }
+  }
+
+  // The submenu.
+  .sub-menu {
+    @extend .screen-reader-text;
+    border: 1px solid $color-border;
+
+    .menu-item a {
+      padding: .4em 1.5em;
+    }
+
+    .menu-item:first-child a {
+      padding-top: 1.3em;
+    }
+    .menu-item:last-child a {
+      padding-bottom: 1.3em;
+    }
+  }
+
+  .dlnav-main {
+    // Positioning the first level sub-menu.
+    // Position absolute is set by default.
+    &__list-items > .menu-item > .sub-menu {
+      // Hack the nav-main script to prevent the first sub-menu to change the position.
+      // By default the menu was set to stay on left and changed later to be centered.
+      // I have not changed the script 'cause can be useful for some changes by the users.
+      // scss-lint:disable ImportantRule
+      left:      50% !important;
+      transform: translateX(-50%);
+
+      .is-winIE & {
+        overflow: visible;
+      }
+    }
+
+    // The arrow of the sub-menu.
+    // @note Use pixel here for a more precision. This is not an element tha can help to navigate
+    // the site or consume data.
+    &__list-items > .menu-item > .sub-menu > .menu-item:first-child > a:first-child::before {
+      background:    $color-white;
+      border:        1px solid $color-border;
+      border-bottom: 0;
+      border-right:  0;
+      content:       '';
+      height:        15px;
+      left:          0;
+      margin:        0 auto;
+      position:      absolute;
+      right:         0;
+      top:           -9px;
+      transform:     rotate(45deg);
+      width:         15px;
+    }
+  }
+}
+
+//
+// Mobile Device
+//
+.is-mobile .dlheader .dlnav-main {
+  // Hide the header main nav, it's not necessary and used only on desktop
+  // for responsive purpose.
+  @extend .screen-reader-text;
+}
+
+//
+// Mobile Nav
+//
+.dlnav-main--mobile {
+  background-color: $color-body-background;
+  bottom:           0;
+  left:             0;
+  overflow-y:       auto;
+  position:         fixed;
+  right:            0;
+  top:              0;
+  transform:        translateX(-256px);
+  transition:       transform 375ms linear;
+  width:            256px;
+  z-index:          9999;
+
+  .dlnav-main {
+    background-color: $color-white;
+    flex-grow:        1;
+    -ms-flex:         1 0 auto;
+
+    // The items within the list
+    &__list-items {
+
+      > .menu-item {
+        // Reset the default float.
+        float: none;
+      }
+
+      // The parent Menu item
+      > .menu-item-has-children {
+        > a::after {
+          float: right;
+        }
+      }
+
+      .menu-item {
+        &:nth-child(n+2) {
+          border-top: 1px solid lighten($color-border, 15%);
+        }
+
+        &:hover > .sub-menu {
+          @extend .unscreen-reader-text;
+        }
+      }
+
+      a {
+        border-radius: 0;
+        // Overwrite the base padding for the navigation items.
+        // In mobile navigation items at every level have the same padding.
+        padding:       1em;
+        width:         100%;
+      }
+    }
+  }
+
+  &.dlnav-main--open {
+    // This is like the global box shadow except for the axis.
+    box-shadow: 6px 0 10px transparentize($color-black, .8);
+    //transform:  translateX(0);
+    z-index:    9999;
+
+    // Moved here due to the sticky header.
+    // See 20894c4
+    ~ #dlpage-wrapper {
+      z-index: 1;
+    }
+  }
+
+  // The submenu.
+  .sub-menu {
+    border-top: 1px solid lighten($color-border, 15%);
+    box-shadow: none;
+    display:    none;
+    min-width:  100%;
+    // Override the default absolute position, here we need to keep everything normal.
+    // scss-lint:disable ImportantRule
+    position:   static !important;
+    width:      100%;
+  }
+
+  // Hide the user avatar on mobile nav.
+  .avatar {
+    display: none;
+  }
+}
+
+//
+// Hamburger Menu
+//
+.dlheader--mobile {
+  .hamburger {
+    padding: $padding-header-vertical 1.15rem;
+
+    &:hover {
+      // As of the toggler is a button for accessibility reasons, we must be sure that all of the
+      // buttons styles are overridden.
+      // scss-lint:disable ImportantRule
+      background-color: transparent !important;
+    }
+  }
+}
+
+//
+// Skins
+//
+.dlheader--skin {
+  // Transparent
+  &-transparent {
+    .hamburger-inner,
+    .hamburger-inner:after,
+    .hamburger-inner:before {
+      background-color: $color-white;
+    }
+  }
+}
+
+@include admin-bar-margin('.dlnav-main--mobile');
+
+//
+// MEDIA QUERIES
+//
+@media only screen and (min-width: 64em) {
+
+  .dlnav-main {
+    flex-grow: 1;
+    -ms-flex:  1 0 auto;
+  }
+
+  .dlnav-main:not(.dlnav-main--mobile) {
+
+    .dlnav-main__list-items {
+      align-items: center;
+      display:     flex;
+      float:       right;
+
+      // Parent menu item.
+      .menu-item-has-children {
+        // Sub-menu Icon.
+        a::after {
+          font-size: .75rem;
+        }
+      }
+
+      // Item Buttontn Style
+      .menu-item--btn {
+        a {
+          @include btn(false);
+          @include btn--tiny;
+          @include btn--ghost;
+          border-width: 2px;
+          // Use the same font size of the menu items.
+          font-size:    1rem;
+          padding:      .19rem 1.07rem;
+
+          // Change based on skin.
+          .dlheader--skin-transparent & {
+            @include btn--white;
+            background-color: transparent;
+            color:            $color-white;
+          }
+        }
+      }
+    }
+  }
+
+}

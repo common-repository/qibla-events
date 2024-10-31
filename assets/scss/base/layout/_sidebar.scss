@@ -1,0 +1,83 @@
+//
+// Sidebar Layout
+//
+.dlsidebar {
+
+  // General List
+  ul {
+    @extend .u-no-list-style;
+
+    ul {
+      margin-left: 1em;
+    }
+  }
+
+  // General Widget
+  &__widget {
+    &__title {
+      flex:        1 0 100%;
+      //font-size:   1rem;
+      //font-weight: $font-weight--bold;
+    }
+  }
+}
+
+//
+// Main Sidebars
+//
+.dlwrapper .dlsidebar {
+  flex:       1 0 100%;
+  margin-top: $global-vertical-margin;
+  order:      3;
+
+  &__widget {
+    // Main Sidebar List
+    li {
+      // Needed to able to override other plugins property.
+      // scss-lint:disable ImportantRule
+      padding: .55em 0 !important;
+
+      ul li:last-child,
+      ol li:last-child {
+        padding-bottom: 0;
+      }
+    }
+
+    // Nested Ul's
+    // Include .children and .sub-menu.
+    li ul {
+      padding-top: .55em;
+    }
+
+    ul li + li,
+    ol li + li,
+    li ul li:first-child {
+      border-top: 1px solid lighten($color-gray, 48%);
+    }
+  }
+
+  // Main Sidebar Consecutive Widgets
+  &__widget + .dlsidebar__widget {
+    margin-top: $global-vertical-margin;
+  }
+}
+
+@media only screen and (min-width: map-get($breakpoints, 'nm')) {
+
+  //
+  // Main Sidebar
+  //
+  .dlwrapper .dlsidebar {
+    // Remove the small devices sidebar margin.
+    margin-top:   0;
+    padding-left: $global-horizontal-padding;
+  }
+
+  // This is the main sidebar within the main wrapper.
+  .dlwrapper > .dlcontainer--flex > .dlsidebar {
+    -ms-flex:   1 0 35%;
+    flex-basis: 35%;
+    max-width:  35%;
+  }
+
+}

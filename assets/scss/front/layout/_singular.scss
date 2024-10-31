@@ -1,0 +1,356 @@
+//
+// Layout Singular
+//
+.single-post,
+.page {
+  // The main article.
+  .dlpost > .dlarticle {
+
+    > .dlarticle {
+      // The Header
+      &__header {
+        // The Thumbnail
+        .dlthumbnail {
+          margin-bottom: $global-vertical-margin;
+          // The image must have his original width within the singular post.
+          // Generally speaking is needed by the single post post type
+          // the same behavior must be applicable to all post types.
+          &__image {
+            display: block;
+            margin:  0 auto;
+            width:   auto;
+          }
+        }
+      }
+
+      // The main content
+      &__content {
+        // Prevent content floated issues.
+        // Generally useful when post images are aligned by using wp core classes.
+        @extend .u-cf;
+      }
+    }
+  }
+}
+
+.single,
+.page {
+  // The main article.
+  .dlpost > .dlarticle {
+
+    > .dlarticle {
+      // The main content
+      &__content > p {
+        font-size: 1.1rem;
+      }
+    }
+  }
+}
+
+//
+// Single Post Layout
+//
+.single-post {
+  #dlcontent > .dlcontainer {
+    max-width: $max-width-single-post-container;
+  }
+
+  // Up the wall post.
+  // Jumbo-tron has an additional padding bottom to put the content vertically spaced.
+  // For the value, refer to the _jumbotron.scss file.
+  .dlpost {
+    margin: 0 auto;
+
+    .dlarticle {
+      // Meta data.
+      &__meta,
+      .post-categories {
+        font-size: 1.4rem;
+      }
+    }
+  }
+}
+
+// Article variants
+.single-post .dlpost .dlarticle {
+  // Text only Variant
+  &--text-only .dlarticle__title {
+    // Remove the loop padding top.
+    // @see _article-variants.scss for more info.
+    padding-top: 0;
+  }
+}
+
+//
+// Layout Single Listings
+//
+.dl-is-singular-listings,
+.single-listings {
+
+  // This is the header.
+  // The listings post type is a little bit different than other singles templates.
+  // We moved the header from the article to outside the main and row. Due to the layout.
+  .dlpost > .dlarticle {
+    margin: 0;
+    > .dlarticle {
+      // Header
+      &__header {
+        margin-bottom: 1em;
+        padding:       .5em 0;
+
+        .dllisting-terms {
+          margin: 1em 0;
+        }
+
+        // Title.
+        .dlarticle__title {
+          font-size:     1.3rem;
+          margin-bottom: .8em;
+        }
+
+        // The Rating.
+        .star-rating {
+          display:        inline-block;
+          vertical-align: middle;
+        }
+      }
+
+      &__content {
+        // Assign the margin top to the content
+        // Since the map in single listing may moved into the <main> element
+        // we need to separate it from the map it self.
+        margin: 1em 0;
+      }
+    }
+  }
+
+  // The edit post link.
+  .dllisting-edit-link {
+    bottom:   $global-vertical-margin / 2;
+    position: fixed;
+    right:    $global-horizontal-margin / 2;
+    z-index:  100;
+
+    // The link
+    &__link {
+      @include btn;
+      @include btn--small;
+    }
+  }
+
+  //
+  // Layout Main Section
+  //
+  // Some section are wrapped by a table, this is the case of Amenities.
+  // So, you may see some strange rules or rules that may get confused.
+  //
+  .dllisting-main-section {
+    position: relative;
+    z-index:  2;
+
+    .dlcontainer {
+      padding: $global-vertical-padding 0;
+
+      // Create the full width background even with sidebar.
+      // We want to keep this section within the article in single listings.
+      //&::after {
+      //  background-color: transparentize($color-white, .6);
+      //  bottom:           0;
+      //  content:          '';
+      //  left:             -9999px;
+      //  position:         absolute;
+      //  right:            -9999px;
+      //  top:              0;
+      //  z-index:          -1;
+      //}
+    }
+
+    // Zebra effect, see above .dlcontainer::after.
+    &:nth-child(2n+2) .dlcontainer::after {
+      background-color: $color-white;
+    }
+
+    &__header,
+    &__title {
+      // Despite the table, we want the header and title as block.
+      display: block;
+    }
+
+    &__title {
+      font-size:      1.13rem;
+      line-height:    1;
+      margin:         0 0 1.5em;
+      padding-bottom: 1rem;
+      padding-top:    0;
+      text-align:     left;
+    }
+
+    // The Terms list.
+    .dlterms-list {
+      @extend .u-no-list-style;
+
+      &__item {
+        line-height: 1;
+        padding:     0 0 1em;
+      }
+
+      i {
+        color:        $color-primary;
+        display:      inline-block;
+        font-size:    1.2rem;
+        margin-right: .13rem;
+        min-width:    1.25em;
+        text-align:   center;
+      }
+
+      i,
+      span {
+        vertical-align: middle;
+      }
+    }
+
+    &__content {
+      border-collapse: collapse;
+
+      tr,
+      td {
+        // Remove the table borders.
+        border:  0;
+        display: block;
+      }
+    }
+  }
+
+  //ss
+  // Listings Meta Component
+  //
+  .dllisting-meta {
+    @include enumerate-props($typography_listings-meta);
+    @extend .u-no-list-style;
+    @include flexboxtweener;
+    display:   flex;
+    flex-wrap: wrap;
+
+    &-icon::before {
+      vertical-align: middle;
+    }
+
+    // Items
+    &__item {
+      // Override margin in .no-list-style mixin
+      // scss-lint:disable ImportantRule
+      margin-bottom: .47em !important;
+      // Use the padding here to able to customize the single item.
+      padding:       0 .94em;
+
+      &:only-child {
+        // Used to keep the frame of the parent container.
+        margin:         0;
+        padding-bottom: map-get($boxmodel_boxed-widget, 'padding');
+      }
+
+      // The list style is 1,2,2...,2,1.
+      // This is why the use of the *-child selectors.
+      &:first-child,
+      &:last-child,
+      &:nth-child(2n+3) {
+        flex-grow: 1;
+        -ms-flex:  1 0 auto;
+      }
+      &:nth-child(2n+3) {
+        text-align: right;
+      }
+    }
+
+    &__item--open-hours {
+      // Useful for responsive.
+      flex:           1 0 100%;
+      -ms-flex:       1 0 auto;
+      margin-bottom:  0;
+      padding-bottom: .47em;
+      padding-top:    .47em;
+      position:       relative;
+      // Override the above rule &:nth-child(2n+3)
+      // scss-lint:disable ImportantRule
+      text-align:     left !important;
+
+      &::before {
+        border-top: 1px solid $color-border;
+        content:    '';
+        left:       0;
+        position:   absolute;
+        right:      0;
+        top:        0;
+      }
+    }
+
+    // Icons
+    &-icon {
+      @include enumerate-props(map-get($typography_listings-meta, 'icon'));
+      margin-right: .35em;
+    }
+  }
+}
+
+// Remove the margin bottom if there is only the title.
+// Subtitle field is optional and we may not need the margin-bottom.
+.dllisting__header .dlcontainer .dllisting__title:only-child {
+  margin-bottom: 0;
+}
+
+//
+// MEDIA QUERIES
+//
+@media only screen and (min-width: map-get($breakpoints, 'md')) {
+
+  //
+  // Layout Single Listings
+  //
+  .dl-is-singular-listings,
+  .single-listings {
+    .dllisting-main-section {
+
+      &__title {
+        margin: 0;
+      }
+
+      // The Terms list.
+      .dlterms-list {
+        &__item {
+          &:nth-child(2n+1) {
+            padding-right: 2em;
+          }
+        }
+      }
+
+      tr {
+        // Restore the default display value.
+        display: table-row;
+      }
+      td {
+        // Restore the default display value.
+        display: table-cell;
+      }
+    }
+
+    //
+    // Has sidebar Main section
+    //
+    &.dl-has-sidebar .dllisting-main-section {
+      // Consider the following elements such as they are within the main even if not.
+      // To have a better idea see the graphic layout.
+      &__content {
+        @include flexboxtweener((-ms-flex: 1 0 auto));
+        display:         flex;
+        flex:            1 0 100%;
+        justify-content: space-between;
+      }
+
+      .dlterms-list {
+        // This is for IE10 that doesn't flex the table.
+        float: right;
+      }
+    }
+  }
+
+}

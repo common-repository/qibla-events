@@ -1,0 +1,18 @@
+//
+// Listing Package Screen
+//
+.wp-admin.post-type-listing_package {
+  #preview-action {
+    .preview.button {
+      width: 100%;
+    }
+  }
+
+  #misc-publishing-actions {
+    .misc-pub-curtime,
+    .misc-pub-visibility {
+      display: none;
+    }
+  }
+}
+

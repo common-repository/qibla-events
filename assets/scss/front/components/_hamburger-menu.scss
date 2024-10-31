@@ -1,0 +1,132 @@
+//
+// Hamburger Menu
+//
+.hamburger {
+  align-self:                 stretch;
+  cursor:                     pointer;
+  display:                    inline-block;
+  // For Alignment in mobile nav.
+  // scss-lint:disable ImportantRule
+  line-height:                0 !important;
+  padding:                    $hamburger-padding-y $hamburger-padding-x;
+  transition-property:        opacity, filter;
+  transition-duration:        $hamburger-hover-transition-duration;
+  transition-timing-function: $hamburger-hover-transition-timing-function;
+
+  // Normalize (<button>)
+  font:                       inherit;
+  color:                      inherit;
+  text-transform:             none;
+  background-color:           transparent;
+  border:                     0;
+  margin:                     0;
+  overflow:                   visible;
+
+  &:hover {
+    @if $hamburger-hover-use-filter == true {
+      filter:  $hamburger-hover-filter;
+    } @else {
+      opacity: $hamburger-hover-opacity;
+    }
+  }
+
+  &:focus {
+    box-shadow: none;
+    outline:    none;
+  }
+}
+
+.hamburger-box {
+  display:  inline-block;
+  height:   $hamburger-layer-height * 3 + $hamburger-layer-spacing * 2;
+  position: relative;
+  width:    $hamburger-layer-width;
+}
+
+.hamburger-inner {
+  display:    block;
+  margin-top: $hamburger-layer-height / -2;
+  top:        50%;
+
+  &,
+  &::before,
+  &::after {
+    background-color:           $hamburger-layer-color;
+    border-radius:              $hamburger-layer-border-radius;
+    height:                     $hamburger-layer-height;
+    position:                   absolute;
+    transition-duration:        .15s;
+    transition-property:        transform;
+    transition-timing-function: ease;
+    width:                      $hamburger-layer-width;
+  }
+
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+  }
+
+  &::before {
+    top: ($hamburger-layer-spacing + $hamburger-layer-height) * -1;
+  }
+
+  &::after {
+    bottom: ($hamburger-layer-spacing + $hamburger-layer-height) * -1;
+  }
+}
+
+//
+// Slider Style
+//
+.hamburger--slider {
+  .hamburger-inner {
+    top: $hamburger-layer-height / 2;
+
+    &::before {
+      top:                        $hamburger-layer-height + $hamburger-layer-spacing;
+      transition-duration:        .2s;
+      transition-property:        transform, opacity;
+      transition-timing-function: ease;
+    }
+
+    &::after {
+      top: ($hamburger-layer-height * 2) + ($hamburger-layer-spacing * 2);
+    }
+  }
+
+  &.is-active {
+    .hamburger-inner {
+      $y-offset: $hamburger-layer-spacing + $hamburger-layer-height;
+
+      transform: translate3d(0, $y-offset, 0) rotate(45deg);
+
+      &::before {
+        opacity:   0;
+        transform: rotate(-45deg) translate3d($hamburger-layer-width / -7, $hamburger-layer-spacing * -1, 0);
+      }
+
+      &::after {
+        transform: translate3d(0, $y-offset * -2, 0) rotate(-90deg);
+      }
+    }
+  }
+}
+
+//
+// States
+//
+// When the mobile menu is open.
+.dlu-nav-mobile-open .hamburger {
+  position:   relative;
+  z-index:    9999;
+  // 256px for menu + 10 pixel space.
+  left:       266px;
+  transition: left 175ms linear;
+
+  &-inner,
+  &-inner::before,
+  &-inner::after {
+    background-color: $color-white;
+  }
+}

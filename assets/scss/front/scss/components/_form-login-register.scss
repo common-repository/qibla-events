@@ -1,0 +1,167 @@
+//
+// Login Register Form Component
+//
+.dllogin-register-form {
+  // Submit
+  input[type="submit"] {
+    display: block;
+    width:   100%;
+  }
+
+  #qibla_login_form-remember + label {
+    font-weight: $font-weight;
+  }
+
+  .dllogin-form:only-child {
+    flex: 1 0 100%;
+  }
+}
+
+//
+// Form within the Modal
+//
+.dlmodal {
+
+  &--login-register {
+    // Padding applied to the login-register-form element.
+    // scss-lint:disable ImportantRule
+    padding: 0 !important;
+  }
+
+  .dllogin-register-form {
+    padding:         $global-padding;
+    // Because of the social login.
+    padding-bottom:  1.5em;
+
+    // The forms.
+    form {
+      width: 100%;
+    }
+
+    // Fields
+    .dl-field:first-of-type {
+      margin-top: 0;
+    }
+
+    .dl-field:last-of-type {
+      margin-bottom: 0;
+    }
+
+    // Link Labels
+    &__labels-wrapper {
+      @include flexboxtweener;
+      display:         flex;
+      justify-content: space-between;
+      margin:          0;
+      text-align:      center;
+    }
+
+    // Lost Password Container
+    &__lost-password-wrapper {
+      float:  right;
+      margin: 0;
+    }
+
+    &__signup-link,
+    &__signin-link,
+    &__lostpassword-link,
+    &__go-back {
+      border-bottom:   0;
+      cursor:          pointer;
+      display:         inline-block;
+      text-decoration: none;
+    }
+
+    &__signup-link,
+    &__signin-link,
+    &__lostpassword-link {
+      color: $color-gray;
+      width: 100%;
+
+      .u-highlight-text {
+        @include anchor-text;
+      }
+    }
+
+    &__signup-link,
+    &__signin-link {
+      margin: 1.61em 0 0;
+    }
+
+    &__go-back {
+      margin-top: $global-vertical-margin;
+    }
+
+    // Grouped Forms
+    .dllogin-form,
+    .dlregister-form,
+    .dllostpassword-form {
+      width: 100%;
+
+      &__title {
+        margin-bottom: 0;
+        text-align:    center;
+      }
+    }
+
+    // Lost PasswordForm
+    .dllostpassword-form {
+      // The form title.
+      &__title {
+        // Should be the same of the labels links but the title have a greater font size
+        // and the em unit generate more margin than needed.
+        margin: 0 0 2.75rem;
+      }
+    }
+  }
+}
+
+//
+// MEDIA QUERIES
+//
+@media only screen and (min-width: map-get($breakpoints, 'sm')) {
+
+  //
+  // Safari
+  //
+  .is-safari .dlmodal {
+    .dllogin-register-form {
+      // Safari have problems to render the height correctly if set to 100%.
+      // scss-lint:disable ImportantRule
+      height: auto !important;
+    }
+  }
+
+}
+
+@media only screen and (min-width: map-get($breakpoints, 'lg')) {
+
+  //
+  // WooCommerce My Account
+  //
+  .woocommerce-account .woocommerce {
+
+    // Login Register Form Wrapper
+    .dllogin-register-form {
+      display:         flex;
+      justify-content: space-between;
+    }
+
+    // Login & Register Form
+    .dllogin-form,
+    .dlregister-form {
+      flex-basis: 48%;
+    }
+
+    // Register
+    .dlregister-form {
+      // Submit field
+      .dlfield--submit p {
+        // Little hack to make the form equal height to the login one.
+        // If you remove the "Password will be emailed to you." notice you can remove the margins.
+        margin: 1.405em 0;
+      }
+    }
+  }
+
+}

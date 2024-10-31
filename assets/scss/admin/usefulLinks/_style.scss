@@ -1,0 +1,80 @@
+//
+// UsefulLinks
+//
+#useful-link-container {
+  display:         flex;
+  flex:            0 1 100%;
+  flex-direction:  row;
+  flex-wrap:       wrap;
+  justify-content: flex-start;
+  padding:         0;
+  position:        relative;
+  width:           100%;
+
+  .doc-box {
+    display: block;
+    flex:    none;
+    margin:  0 1rem 1rem 0;
+    padding: 1em 0;
+    width:   100%;
+    &:nth-child(even) {
+      margin-right: 0;
+    }
+    .header {
+      padding: 0 1rem;
+    }
+    // Inside
+    .inside {
+      padding: 0 1rem 1rem;
+
+      p {
+        font-size: 20px;
+        margin:    0;
+        padding:   0 1rem;
+      }
+    }
+  }
+
+  .ul-title {
+    display:   inline-block;
+    font-size: 24px;
+  }
+
+  .ul-button {
+    display:     inline-block;
+    float:       right;
+    font-size:   1.5em;
+    height:      38px;
+    line-height: 2.3rem;
+    // Override margin
+    // scss-lint:disable ImportantRule
+    margin:      1em 0 !important;
+    padding:     0 2rem;
+  }
+
+  .ul-image {
+    background-position: center center;
+    background-repeat:   no-repeat;
+    background-size:     contain;
+    float:               left;
+    height:              160px;
+    padding:             10px;
+    width:               40%;
+    // Right
+    &.right {
+      float: right;
+    }
+  }
+}
+
+//
+// MEDIA QUERIES
+//
+@media only screen and (min-width: 1200px) {
+  // Doc box
+  #useful-link-container {
+    .doc-box {
+      width: 49%;
+    }
+  }
+}

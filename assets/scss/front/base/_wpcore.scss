@@ -1,0 +1,192 @@
+//
+// Wp Core
+//
+// noinspection CssUnusedSymbol
+.alignnone {
+  //margin: 5px 20px 20px 0;
+  margin: 0;
+}
+
+// noinspection CssUnusedSymbol,CssUnusedSymbol
+.aligncenter,
+div.aligncenter {
+  display: block;
+  margin:  5px auto;
+}
+
+// noinspection CssUnusedSymbol
+.alignright {
+  float:  right;
+  margin: 5px 0 20px 20px;
+}
+
+// noinspection CssUnusedSymbol
+.alignleft {
+  float:  left;
+  margin: 5px 20px 20px 0;
+}
+
+// noinspection CssUnusedSymbol
+a img.alignright {
+  float:  right;
+  margin: 5px 0 20px 20px;
+}
+
+// noinspection CssUnusedSymbol
+a img.alignnone {
+  margin: 5px 20px 20px 0;
+}
+
+// noinspection CssUnusedSymbol
+a img.alignleft {
+  float:  left;
+  margin: 5px 20px 20px 0;
+}
+
+// noinspection CssUnusedSymbol
+a img.aligncenter {
+  display:      block;
+  margin-left:  auto;
+  margin-right: auto
+}
+
+// noinspection CssUnusedSymbol
+.wp-caption {
+  background: $color-white;
+  border:     1px solid $color-border;
+  box-shadow: $global-box-shadow;
+  max-width:  96%; //  Image does not overflow the content area 
+  padding:    5px 3px 10px;
+  text-align: center;
+
+  // noinspection CssUnusedSymbol
+  .wp-caption-text {
+    font-size:   .9rem;
+    line-height: 1;
+    margin:      0;
+    padding:     9px 4px 0;
+  }
+}
+
+// noinspection CssUnusedSymbol,CssUnusedSymbol
+.wp-caption.alignnone {
+  margin: 5px 20px 20px 0;
+}
+
+// noinspection CssUnusedSymbol,CssUnusedSymbol
+.wp-caption.alignleft {
+  margin: 5px 20px 20px 0;
+}
+
+// noinspection CssUnusedSymbol,CssUnusedSymbol
+.wp-caption.alignright {
+  margin: 5px 0 20px 20px;
+}
+
+.wp-caption img {
+  border:    0 none;
+  height:    auto;
+  margin:    0;
+  max-width: 98.5%;
+  padding:   0;
+  width:     auto;
+}
+
+.gallery-caption {
+  margin: 4px 0;
+}
+
+//
+// Gallery Short-code
+// @since Wp 3.9
+//
+.gallery {
+  @extend .u-cf;
+
+  &-item {
+    & + .gallery-item {
+      margin-top: .63em;
+
+      a {
+        // Anchor that is a wrapper for an image doesn't need border bottom.
+        border-bottom: 0;
+        display:       block;
+      }
+    }
+
+    img {
+      max-width: 100%;
+    }
+  }
+}
+
+//
+// MEDIA QUERIES
+//
+@media only screen and (min-width: map-get($breakpoints, 'md')) {
+
+  //
+  // Gallery Shortcode
+  // @since Wp 3.9
+  //
+  .gallery {
+    &-item {
+      float:   left;
+      margin:  0;
+      padding: .375em;
+
+      & + .gallery-item {
+        margin-top: 0;
+      }
+    }
+
+    &-columns-1 .gallery-item {
+      float: none;
+      width: 100%;
+    }
+
+    &-columns-2 .gallery-item {
+      width: 50%
+    }
+
+    &-columns-3 .gallery-item {
+      width: 33.3333%
+    }
+
+    &-columns-4 .gallery-item {
+      width: 25%
+    }
+
+    &-columns-5 .gallery-item {
+      width: 20%
+    }
+
+    &-columns-6 .gallery-item {
+      width: 16.6667%
+    }
+
+    &-columns-7 .gallery-item {
+      width: 14.2857%
+    }
+
+    &-columns-8 .gallery-item {
+      width: 12.5%
+    }
+
+    &-columns-9 .gallery-item {
+      width: 11.1111%
+    }
+
+    &-columns-2 .gallery-item:nth-child(2n+1),
+    &-columns-3 .gallery-item:nth-child(3n+1),
+    &-columns-4 .gallery-item:nth-child(4n+1),
+    &-columns-5 .gallery-item:nth-child(5n+1),
+    &-columns-6 .gallery-item:nth-child(6n+1),
+    &-columns-7 .gallery-item:nth-child(7n+1),
+    &-columns-8 .gallery-item:nth-child(8n+1),
+    &-columns-9 .gallery-item:nth-child(9n+1) {
+      clear: left;
+    }
+  }
+
+}

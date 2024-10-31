@@ -1,0 +1,103 @@
+//
+// Stars
+//
+.stars,
+.star-rating {
+  @include font-smoothing;
+}
+
+.stars {
+  a {
+    // Remove the default border.
+    border:          0;
+    display:         inline-block;
+    height:          1em;
+    position:        relative;
+    text-decoration: none;
+    text-indent:     -999em;
+    width:           1em;
+
+    &:before {
+      content:     '\e021';
+      display:     block;
+      font-family: WooCommerce;
+      height:      1em;
+      left:        0;
+      line-height: 1;
+      position:    absolute;
+      text-indent: 0;
+      top:         0;
+      width:       1em;
+    }
+
+    &:focus,
+    &:active {
+      border:  0;
+      outline: none;
+    }
+
+    &:hover ~ a:before {
+      content: '\e021';
+    }
+  }
+
+  &:hover {
+    a &:before {
+      content: '\e020';
+    }
+  }
+
+  &.selected a.active {
+    &:before {
+      content: '\e020';
+    }
+
+    ~ a:before {
+      content: '\e021';
+    }
+  }
+
+  a:not(.active) {
+    &:before {
+      content: '\e020';
+    }
+  }
+}
+
+//
+// Star ratings
+//
+.star-rating {
+  font-family: 'star';
+  //font-weight: $font-weight--light;
+  height:      1.3em;
+  overflow:    hidden;
+  position:    relative;
+  text-align:  left;
+  white-space: nowrap;
+  width:       5.4em;
+
+  &:before {
+    content:  "\73\73\73\73\73";
+    float:    left;
+    left:     0;
+    position: absolute;
+    top:      0;
+  }
+
+  span {
+    float:       left;
+    left:        0;
+    overflow:    hidden;
+    padding-top: 1.5em;
+    position:    absolute;
+    top:         0;
+  }
+
+  span:before {
+    content:  "\53\53\53\53\53";
+    left:     0;
+    position: absolute;
+    top:      0;
+  }
+}

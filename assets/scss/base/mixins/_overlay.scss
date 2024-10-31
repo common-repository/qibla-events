@@ -1,0 +1,50 @@
+//
+// Overlay Mixin
+//
+
+//
+// Overlay
+//
+@mixin dloverlay($bg-color: $color-background-overlay, $pseudoEl: '::before') {
+  position: relative;
+
+  &#{$pseudoEl} {
+    background: $bg-color;
+    bottom:     0;
+    content:    '';
+    display:    inline-block;
+    left:       0;
+    position:   absolute;
+    right:      0;
+    top:        0;
+  }
+}
+
+//
+// Overlay Before - Overlay Wrapper
+//
+@mixin dloverlay--before($bg-color: $color-background-overlay) {
+  @include dloverlay($bg-color);
+}
+
+//
+// Overlay After - Overlay Wrapper
+//
+@mixin dloverlay--after($bg-color: $color-background-overlay) {
+  @include dloverlay($bg-color, '::after');
+}
+
+//
+// Overlay Gradient After
+//
+@mixin dloverlay-gradient--after($bg-color: $color-black) {
+  &::after {
+    background: linear-gradient(0deg, $bg-color, transparent 55%);
+    bottom:     0;
+    content:    '';
+    left:       0;
+    position:   absolute;
+    right:      0;
+    top:        0;
+  }
+}

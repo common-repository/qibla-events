@@ -1,0 +1,43 @@
+//
+// Typography Settings
+//
+
+// Font Family
+$font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif !default;
+
+// Weights
+$font-weight--light: 300;
+$font-weight: 400;
+$font-weight--bold: 700;
+$font-weight--black: 900;
+
+// Font Sizes
+$font-size: 1rem; // 16px
+$font-size--small: .88rem; // 14px
+$font-size--big: 2rem; // 32px
+
+// Global line Height
+$global-line-height: 1.85;
+
+//
+// Navigation
+//
+$typography_nav-item: (
+  link: (
+    color: $color-gray--light
+  )
+);
+
+$typography_nav-item_hightlight: (
+  color: $color-primary
+);
+
+//
+// Listings Meta
+//
+$typography_listings-meta: (
+  font-size: .8rem,
+  icon: (
+    font-size: 1rem
+  )
+);

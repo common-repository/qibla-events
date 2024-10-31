@@ -1,0 +1,33 @@
+//
+// Mixins Header
+//
+@mixin header-skin($name: 'light') {
+  // Default styles for 'light' skin.
+  $backgroundColor: $color-white;
+  $color: $color-font-body;
+
+  // Transparent Skin.
+  @if 'transparent' == $name {
+    $backgroundColor: transparent;
+    $color: $color-white;
+  }
+
+  background: $backgroundColor;
+
+  &,
+  a {
+    color: $color;
+  }
+
+  @content;
+}
+
+@mixin header-fixed {
+  // Needed to overwrite the other header modifiers. The --dark modifier is an example.
+  // scss-lint:disable ImportantRule
+  position: fixed !important;
+  top:      0;
+  width:    100%;
+  z-index:  9999;
+  @content
+}

@@ -1,0 +1,27 @@
+//
+// Components Wishlist
+//
+
+.dlwishlist-adder-wrapper {
+  .dlwishlist-adder {
+    border:    0;
+    cursor:    pointer;
+
+    &::before {
+      content:     '\f237';
+      display:     inline-block;
+      font-family: Lineawesome;
+      transition:  all $global-transition-duration $global-transition-timing;
+    }
+
+    &.is-stored::before,
+    &:hover::before {
+      content: '\f236';
+    }
+
+    // Status
+    &.is-running {
+      pointer-events: none;
+    }
+  }
+}

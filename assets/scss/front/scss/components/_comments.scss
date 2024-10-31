@@ -1,0 +1,372 @@
+//
+// Comments Component
+//
+.dlcomments {
+  margin: $global-vertical-margin 0;
+
+  ul,
+  ol {
+    // In small devices 10 depth are too much.
+    @extend .u-no-list-style;
+  }
+
+  // The single product
+  .single-product & {
+    // Remove the margin bottom from the single product,
+    // the product have a different container layout.
+    margin-bottom: 0;
+  }
+
+  &__title {
+    border-bottom: 1px solid $color-border;
+    border-left:   0;
+    border-right:  0;
+    font-size:     $font-size;
+    padding:       $global-vertical-padding / 2 0;
+  }
+
+  // The Comment
+  .comment {
+    border-bottom: 1px solid $color-border;
+    padding:       ($global-vertical-margin / 2) 0;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+
+    .children {
+      background-color: transparentize($color-white, .9);
+      margin-top:       $global-vertical-margin;
+    }
+  }
+
+  // Comment container.
+  .comment-body {
+    @extend .u-cf;
+  }
+
+  // Grouped Author and Comment Thumbnail.
+  // These two classes containing the same elements but are used
+  // within different templates and context.
+  .comment-thumbnail,
+  .comment-author {
+    line-height: 1.4;
+
+    img {
+      margin: 0 .63em .63em 0;
+    }
+  }
+
+  // Thumbnail.
+  .comment-thumbnail {
+
+    img {
+      display:        inline-block;
+      vertical-align: middle;
+    }
+  }
+
+  // Author
+  .comment-author {
+    display:        inline;
+    font-weight:    $font-weight--bold;
+    max-width:      4em;
+    text-align:     center;
+    text-transform: capitalize;
+  }
+
+  // The avatar
+  .avatar {
+    @include avatar;
+    margin: 0 0 .63em;
+  }
+
+  // Says
+  .says {
+    @extend .screen-reader-text;
+  }
+
+  // Meta Data
+  .comment-metadata {
+    color:     lighten($color-gray, 25%);
+    font-size: $font-size--small;
+
+    a {
+      @include anchor-text((color: lighten($color-gray, 25%)));
+    }
+  }
+
+  // Reply
+  .comment-reply-link {
+    @extend .dlbtn;
+    @extend .dlbtn--tiny;
+    padding: .09rem .77rem;
+  }
+
+  // The content
+  .comment-content {
+    @extend .u-cf;
+    // Because of the floated avatar.
+    overflow: hidden;
+  }
+
+  // Commenter status.
+  .verified {
+    background-color: $color-green;
+    border-radius:    $global-border-radius;
+    color:            $color-white;
+    font-size:        .88rem;
+    font-weight:      normal;
+    padding:          .09rem .77rem;
+  }
+}
+
+//
+// Comments Respond
+//
+.comment-respond {
+  margin-top: $global-vertical-margin;
+
+  // Only for Listings and Single post.
+  // WooCommerce reviews are within a container apart.
+  .dl-is-singular-listings &,
+  .single-listings &,
+  .single-post & {
+    @include enumerate-props($boxmodel_boxed-widget);
+    padding: $global-padding / 2;
+  }
+
+  // Comment Notes and Logged in message.
+  .comment-notes,
+  .logged-in-as {
+    color:     $color-gray--light;
+    font-size: .88rem;
+  }
+
+  // The Form.
+  .comment-form {
+    .logged-in-as {
+      a {
+        @include anchor-text((color:$color-gray--light));
+      }
+    }
+
+    // The submit button
+    .form-submit {
+      margin-bottom: 0;
+      text-align:    right;
+
+      // Submit
+      .submit {
+        width: 100%;
+      }
+    }
+  }
+
+  // The title of the section
+  .comment-reply-title {
+    margin-bottom: 0;
+
+    small {
+      display:   block;
+      font-size: $font-size;
+    }
+  }
+
+  // Rating
+  .stars {
+    font-size: 1.1rem;
+  }
+}
+
+//
+// Reviews
+//
+.dlreview {
+  // Title
+  &__title {
+    @include font-smoothing;
+    font-size:  1.25rem;
+    font-style: italic;
+    margin:     0 0 .53em;
+
+    &::before {
+      content: '\201C';
+    }
+
+    &::after {
+      content: '\201D';
+    }
+  }
+}
+
+//
+// MEDIA QUERIES
+//
+@media only screen and (min-width: map-get($breakpoints, 'sm')) {
+
+  //
+  // Comments Component
+  //
+  .dlcomments {
+    // Rating
+    .star-rating {
+      margin: 0 .23em .63em 0;
+    }
+
+    // Meta
+    &__meta {
+      align-items: center;
+      display:     flex;
+    }
+  }
+
+  // Comment Respond
+  .comment-respond {
+    // Comment form {
+    .comment-form {
+      // The submit button
+      .form-submit {
+        // Submit
+        .submit {
+          // Reset the submit button width.
+          width: auto;
+        }
+      }
+    }
+  }
+
+}
+
+@media only screen and (min-width: map-get($breakpoints, 'md')) {
+
+  //
+  // Comments Component
+  //
+  .dlcomments {
+    ul,
+    ol {
+      // Reset the default browser/normalize style.
+      // In small devices 10 depth are too much.
+      @include default-list-style;
+    }
+
+    // Only the directly descendants because comment's articles may have lists.
+    > ul,
+    > ol,
+    .children {
+      @include no-list-style;
+    }
+
+    // Children elements. The replies
+    .comment .children {
+      // Reset the small devices background color.
+      background-color: transparent;
+      margin-left:      3em;
+    }
+  }
+
+}
+
+@media only screen and (min-width: map-get($breakpoints, 'lg')) {
+
+  //
+  // Comments Component
+  //
+  // In Lg the comments get the columns, where on the left we add the thumbnail and author name,
+  // and on the right the content of the comment.
+  //
+  .dlcomments {
+    // Rating
+    .star-rating {
+      display:       inline-block;
+      margin-bottom: 0;
+    }
+
+    // Thumbnail.
+    .comment-thumbnail {
+      float:        left;
+      margin:       0;
+      margin-right: $global-horizontal-margin;
+      text-align:   center;
+
+      img {
+        // Reset the style for the comments.
+        float:  none;
+        margin: 0 0 .63em;
+      }
+    }
+
+    // Author
+    .comment-author {
+      display: block;
+      margin:  0;
+
+      &.vcard {
+        float:        left;
+        margin-right: $global-horizontal-margin;
+        text-align:   center;
+      }
+    }
+  }
+
+  //
+  // Reviews
+  //
+  .dlreview {
+    // Title
+    &__title {
+      margin-bottom: .23em;
+    }
+
+    // The Content
+    &__content {
+      margin-top: 1.25em;
+    }
+  }
+
+}
+
+@media only screen and (min-width: map-get($breakpoints, 'nm')) {
+
+  //
+  // Reviews
+  //
+  .comment-respond {
+
+    // Only for Listings and Single post.
+    // WooCommerce reviews are within a container apart.
+    .dl-is-singular-listings &,
+    .single-listings &,
+    .single-post & {
+      padding: 1.88em;
+    }
+
+    // The standard comment form.
+    .comment-form {
+      // The email and Name fields.
+      .comment-form-author,
+      .comment-form-email {
+        width: 48%;
+      }
+
+      // The email Field.
+      .comment-form-email {
+        float: right;
+      }
+
+      // The Name Field.
+      .comment-form-author {
+        float: left;
+      }
+
+      // Reset the element after the floated.
+      .form-submit,
+      .comment-form-url,
+      .comment-form-title {
+        clear: both;
+      }
+    }
+  }
+
+}

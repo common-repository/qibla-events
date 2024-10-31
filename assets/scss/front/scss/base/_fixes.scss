@@ -1,0 +1,88 @@
+//
+// Fixes
+//
+
+// Explicitly remove the margin top from h1 and figure because of normalize.
+h1,
+figure {
+  margin-top: 0;
+}
+
+// Fix issue with wp-editor that add <br /> element within the span for buttons.
+// @see assets/scss/components/_buttons.scss
+.dlbtn[data-icon-type] br {
+  display: none;
+}
+
+// Don't add margin for pagination inside the single post.
+// For some reason the display: inline-block cause margin between the items.
+main article .dlpagination__item + .dlpagination__item {
+  margin-left: 0;
+}
+
+// Fix issue in safari when an element is animated the text suddenly appear bold.
+.is-safari .dlarticle--overlay,
+.is-safari .dlarticle--square .dlarticle__title {
+  @include font-smoothing;
+}
+
+// Contact Form 7.
+// The styles has been deregister by the Framework.
+.wpcf7 {
+
+  // Invalid Inputs
+  .wpcf7-not-valid {
+    @include invalid-input;
+  }
+
+  // This is the alert for all status.
+  [role="alert"] {
+    @include alert-message;
+
+    &.wpcf7-not-valid-tip {
+      @include alert-message--invalid;
+    }
+  }
+
+  .screen-reader-response {
+    @extend .screen-reader-text;
+  }
+
+  .wpcf7-validation-errors,
+  .wpcf7-mail-sent-ok {
+    @extend .dlalert;
+  }
+
+  .wpcf7-validation-errors {
+    @extend .dlalert--error;
+  }
+
+  .wpcf7-mail-sent-ok {
+    @extend .dlalert--success;
+  }
+
+  .wpcf7-display-none {
+    display: none;
+  }
+}
+
+//
+// IE10 Input
+//
+.is-winIE {
+  @include input-element-list {
+    min-height: 45px;
+  }
+}
+
+//
+// Owl Carousel and Flexbox Grid
+//
+// @see https://github.com/OwlCarousel2/OwlCarousel2/issues/1401
+// @see https://github.com/OwlCarousel2/OwlCarousel2/issues/1005
+//
+// It's an old issue, where the owl-carousel create problem within a flexbox container column.
+//
+.col {
+  min-width: 0;
+}

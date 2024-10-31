@@ -1,0 +1,40 @@
+//
+// Listings Toolbar Component
+//
+.dllistings-toolbar {
+  @include flexboxtweener((-ms-flex-align:center));
+  align-items:     center;
+  display:         flex;
+  justify-content: space-between;
+  margin:          1em 0;
+  padding:         0;
+}
+
+//
+// Form filter Map variants
+//
+.dl-is-listings-archive {
+  // Map variant
+  &--with-map .dllistings-toolbar {
+    padding-left:  1rem;
+    padding-right: 1rem;
+  }
+}
+
+//
+// MEDIA QUERIES
+//
+@media only screen and (min-width: 64em) {
+
+  //
+  // Form filter Map variants
+  //
+  .dl-is-listings-archive {
+    // Map variant
+    &--with-map .dllistings-toolbar {
+      padding-left:  1rem;
+      padding-right: 1rem;
+    }
+  }
+
+}

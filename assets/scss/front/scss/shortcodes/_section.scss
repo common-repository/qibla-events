@@ -1,0 +1,125 @@
+//
+// Section Shortcode
+//
+.dlsc-section {
+  padding: $global-vertical-padding 0 $dlsc-section-padding-bottom;
+
+  // Header
+  &__header {
+    margin-bottom: 2em;
+  }
+
+  // Title and Subtitle
+  &__title,
+  &__subtitle {
+    text-align: center;
+  }
+
+  // Title
+  &__title {
+    line-height:    1.2;
+    margin:         0;
+    text-transform: uppercase;
+  }
+
+  // Subtitle
+  &__subtitle {
+    color:         lighten($color-gray, 18%);
+    font-size:     1.13rem;
+    line-height:   1.5;
+    margin-bottom: 0;
+  }
+
+  // Content
+  &__content {
+    text-align: center;
+  }
+
+  // The link
+  &__link-wrapper {
+    margin:     0;
+    text-align: center;
+  }
+
+  &__content + &__link-wrapper {
+    margin-top: convert_unit_to_rem($global-vertical-margin);
+  }
+
+  &__link {
+    @include btn-arrow;
+    width: 100%;
+  }
+
+  &__link + &__link {
+    margin-top: $global-horizontal-margin / 2;
+  }
+
+  // The button link
+  .dlbtn::before {
+    margin-left:  0;
+    margin-right: 0;
+  }
+
+  .dlbtn--ghost {
+    border-color: lighten($color-gray, 55%);
+  }
+}
+
+// Has Background Modifier
+.dlsc-section--has-background-image {
+  @include dloverlay--before;
+
+  .dlsc-section {
+
+    // Title and Subtitle
+    &__title,
+    &__subtitle {
+      color: $color-white;
+    }
+
+    // The Content
+    &__content {
+      color: $color-white;
+    }
+  }
+
+  // The link button
+  .dlbtn--ghost {
+    border-color: $color-white;
+    color:        $color-white;
+  }
+}
+
+//
+// MEDIA QUERIES
+//
+@media only screen and (min-width: map-get($breakpoints, 'md')) {
+
+  .dlsc-section {
+    &__link {
+      width: auto;
+    }
+
+    &__link + &__link {
+      margin-left: $global-horizontal-margin / 2;
+      margin-top:  0;
+    }
+  }
+
+}
+
+// 1080px.
+@media only screen and (min-width: 67.5em) {
+
+  //
+  // Section Shortcode
+  //
+  .dlsc-section {
+    // Add again the padding for the section only.
+    .dlcontainer {
+      padding-left:  $padding-container;
+      padding-right: $padding-container;
+    }
+  }
+
+}

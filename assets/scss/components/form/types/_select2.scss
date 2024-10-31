@@ -1,0 +1,19 @@
+//
+// Select2 Component
+//
+.dlselect2 {
+  // Wide Variant
+  &--wide + .select2 {
+    display:       block;
+    margin-bottom: 1.25em;
+  }
+}
+
+// Select2
+// Add it only within the admin.
+.wp-admin .select2-container {
+  // Move the select2 dropdown z-index up to 100001
+  // Put the select above the visual composer modal.
+  // scss-lint:disable ImportantRule
+  z-index: 100001 !important;
+}

@@ -1,0 +1,52 @@
+//
+// Mixins Nav Search
+//
+@mixin search-wrapper {
+  overflow-y: scroll;
+  max-height: 300px;
+}
+
+@mixin menu-item {
+  @include enumerate-props(map-get($boxmodel_nav-item, 'link'));
+  @include enumerate-props(map-get($typography_nav-item, 'link'));
+  @include flexboxtweener((-ms-flex-align: center));
+  align-items:   center;
+  // Explicitly set. Not necessary here.
+  border-bottom: 0;
+  display:       flex;
+  padding:       .75em 1em;
+  text-align:    left;
+
+  &:hover {
+    @include enumerate-props($typography_nav-item_hightlight);
+    cursor: pointer;
+  }
+}
+
+@mixin menu-item-icon {
+  font-size:    1.25em;
+  margin-right: .63em;
+}
+
+@mixin menu-item-taxonomy {
+  color:          $color-gray--light;
+  // Otherwise the text will be centered.
+  // scss-lint:disable VendorPrefix
+  -ms-flex:       1 auto;
+  flex-grow:      1;
+  float:          right;
+  font-size:      .73rem;
+  font-weight:    $font-weight--light;
+  text-align:     right;
+  text-transform: capitalize;
+}
+
+@mixin menu-item-content {
+  flex-grow:   1;
+  flex-shrink: 1;
+  max-width:   77%;
+}
+
+@mixin menu-item-selected {
+  color: $color-primary;
+}

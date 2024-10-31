@@ -1,0 +1,18 @@
+//
+// Mixins Social Login
+//
+@mixin social-login-provider($provider, $icon: false) {
+  // Get the color associated to the provider.
+  $color-provider: map-get($color-socials, $provider);
+
+  background-color: $color-provider;
+  &:hover {
+    background-color: darken($color-provider, $color-dark-module);
+  }
+
+  @if ($icon) {
+    &::before {
+      content: $icon;
+    }
+  }
+}

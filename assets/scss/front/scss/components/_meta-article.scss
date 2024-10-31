@@ -1,0 +1,33 @@
+//
+// Meta Article
+//
+// Shared Rules between post types.
+//
+.dlarticle__meta {
+
+  &-list {
+    @extend .u-no-list-style;
+  }
+
+  &-item {
+    display: inline;
+  }
+
+  // Items separator
+  &-item + &-item::before {
+    content: '\2022';
+  }
+
+  &-link {
+    @include anchor-text;
+    color: lighten($color-gray, $color-light-module);
+  }
+}
+
+// Single post
+.single-post .dljumbotron--has-background-image .dlarticle__meta {
+  // Items separator
+  &-item + .dlarticle__meta-item::before {
+    color: $color-white;
+  }
+}

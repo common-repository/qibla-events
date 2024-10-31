@@ -1,0 +1,23 @@
+//
+// Main Layout
+//
+main {
+  -ms-flex:  1 0 100%;
+  flex:      1 0 100%;
+  max-width: 100%;
+}
+
+//
+// MEDIA QUERIES
+//
+@media only screen and (min-width: map-get($breakpoints, 'nm')) {
+
+  .dl-has-sidebar main {
+    flex-basis: 65%;
+    max-width:  65%;
+    // Start from 2, so we can move the sidebar left and right depend by the options.
+    // Also, this give us a way to use two sidebars.
+    order:      2;
+  }
+
+}

@@ -1,0 +1,51 @@
+//
+// Grid Mixin
+//
+@mixin make-default() {
+  & {
+    flex-basis: 0;
+    flex-grow:  1;
+    -ms-flex:   1 0 auto;
+    max-width:  100%;
+    padding:    $col-gutter;
+  }
+}
+
+@mixin make-column($columns) {
+  @for $number from 1 through $columns {
+    &-#{$number} {
+      flex:  none;
+      //width: (100 / $columns * $number)#{'%'};
+      width: unquote('#{100 / $columns * $number}%');
+    }
+  }
+}
+
+@mixin make-offset($columns) {
+  @for $number from 1 through $columns {
+    &-offset-#{$number} {
+      //margin-left: (100 / $columns * $number)#{'%'};
+      margin-left: unquote('#{100 / $columns * $number}%');
+    }
+  }
+}
+
+@mixin make-grid-column($breakpoint, $columns) {
+  .col--#{$breakpoint} {
+    @include make-default();
+    @include make-column($columns);
+    @include make-offset($columns)
+  }
+}
+
+@mixin init($breakpoints, $columns) {
+  @each $breakpoint, $width in $breakpoints {
+    @if ($width == 0) {
+      @include make-grid-column($breakpoint, $columns);
+    } @else {
+      @media (min-width: $width) {
+        @include make-grid-column($breakpoint, $columns);
+      }
+    }
+  }
+}

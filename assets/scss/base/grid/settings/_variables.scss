@@ -1,0 +1,24 @@
+//
+// Grid Variables
+//
+// Grid breakpoints
+$breakpoints: (
+  xs : 0,
+  sm : 34em, // 544px
+  md : 48em, // 768px
+  lg : 62em, // 992px
+  nm : 64em, // 1024px
+  xl : 75em, // 1200px
+  xxl: 120em // 1920px
+) !default;
+
+// Container
+$padding-container: 1.15em !default;
+
+// Columns
+$cols: 12 !default;
+$col-margins: 0 0 1.15em 0 !default;
+// Gutter
+$col-gutter: 0 .56em !default;
+// Row
+$row-margins: 0 -#{nth($col-gutter, 2)} !default;

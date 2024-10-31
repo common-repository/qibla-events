@@ -1,0 +1,140 @@
+//
+// Shortcode Listing Package
+//
+.dlsc-listing-packages {
+
+  // Article
+  .dlarticle {
+    @include article-col-3;
+
+    // Type label
+    &__type-label {
+      display:        block;
+      text-transform: uppercase;
+    }
+
+    // Header
+    &__header {
+      background-color: $color-gray--extra-light;
+      padding:          1.2rem 1.2rem 4.2rem;
+    }
+
+    // Sub title
+    &__subtitle {
+      font-size:   1.2rem;
+      font-weight: $font-weight;
+      padding:     0 1.5em;
+    }
+
+    // Price
+    // Keep the units for box-model in rem.
+    &__package-price {
+      display:     inline-block;
+      font-size:   5.5rem;
+      font-weight: $font-weight--bold;
+      line-height: 1;
+      margin:      1.9rem 0 1rem;
+    }
+
+    .woocommerce-Price-amount {
+      position: relative;
+
+      .decimal {
+        font-size:      1.33rem;
+        vertical-align: super;
+
+        // For when the currency is on the right.
+        &:not(:last-child) {
+          position:       absolute;
+          right:          0;
+          top:            1.33rem;
+          vertical-align: text-top;
+        }
+      }
+
+      .woocommerce-Price-currencySymbol {
+        font-size:   3.6rem;
+        margin-left: .08rem;
+      }
+    }
+
+    // Link to the package.
+    &__link {
+      @include btn;
+      display: block;
+      margin:  $global-margin / 2;
+    }
+
+    // Package fields
+    .dlpackage-fields {
+      @include no-list-style;
+
+      &__item {
+        @include flexboxtweener;
+        align-items:     center;
+        color:           $color-gray--light;
+        display:         flex;
+        justify-content: center;
+        font-size:       1rem;
+        padding:         .63em;
+      }
+
+      &__item:nth-child(even) {
+        background-color: $color-gray--extra-light;
+      }
+
+      &__item > span {
+        width:       65%;
+        display:     flex;
+        align-items: center;
+        margin:      0 auto;
+      }
+
+      i {
+        color:        $color-primary;
+        font-weight:  $font-weight--bold;
+        margin-right: .63em;
+      }
+    }
+
+    // Featured Modifier
+    &--is-featured {
+      @include article-translateY;
+
+      .dlarticle {
+        // Grouped
+        &__header,
+        &__subtitle {
+          color: $color-white;
+        }
+
+        // Header
+        &__header {
+          background-color: $color-primary;
+
+          // Tweak the icon.
+          &::before {
+            left: 1em;
+            top:  1em;
+          }
+        }
+      }
+
+      .dlarticle-card-box {
+        @include article-active;
+      }
+    }
+  }
+
+  // Remove the arrow from the cardbox.
+  .dlarticle-card-box {
+    display:         flex;
+    flex-direction:  column;
+    justify-content: space-between;
+
+    &::before,
+    &::after {
+      content: none;
+    }
+  }
+}

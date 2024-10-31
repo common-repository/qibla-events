@@ -1,0 +1,62 @@
+//
+// Mixins Grid
+//
+
+// Add support to IE10
+// FlexboxTweener spec class added via modernizr
+@mixin flexboxtweener($rules:false) {
+  .flexboxtweener & {
+    display:       -ms-flexbox;
+    -ms-flex-pack: justify;
+    -ms-flex-wrap: wrap;
+
+    @if false != $rules {
+      @include enumerate-props($rules);
+    }
+  }
+}
+
+// Flexboxes
+@mixin flexbox-start() {
+  @include flexboxtweener((-ms-flex-pack:start));
+  display:         flex;
+  flex-wrap:       wrap;
+  justify-content: flex-start;
+}
+
+//
+// Columns
+//
+@mixin article-col-2() {
+  @extend .col;
+  @extend .col--md-6;
+}
+
+@mixin article-col-3() {
+  @include article-col-2;
+  @extend .col--lg-4;
+}
+
+@mixin article-col-4() {
+  @include article-col-2;
+  @extend .col--lg-3;
+}
+
+@mixin article-col-sidebar() {
+  @include article-col-2;
+}
+
+//
+// For Mixin internal usage.
+// Don't use in production.
+// See: http://stackoverflow.com/questions/15748937/how-to-define-a-dynamic-mixin-or-function-name-in-sass
+//
+.-article-col-2 {
+  @include article-col-2;
+}
+.-article-col-3 {
+  @include article-col-2;
+}
+.-article-col-4 {
+  @include article-col-4;
+}

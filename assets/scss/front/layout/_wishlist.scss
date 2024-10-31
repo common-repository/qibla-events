@@ -1,0 +1,14 @@
+//
+// Wishlist Layout
+//
+.woocommerce-MyAccount-content {
+  .dlarticle {
+    @include article-col-3;
+  }
+
+  .dl-has-sidebar & {
+    .dlarticle {
+      @include article-col-sidebar;
+    }
+  }
+}

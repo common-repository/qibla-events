@@ -1,0 +1,16 @@
+//
+// Photo Swipe
+//
+.pswp {
+
+  &__button {
+    // Reset the theme buttons styles.
+    // scss-lint:disable ImportantRule
+    background-color: transparent !important;
+    border-color:     transparent !important;
+  }
+
+  &__caption__center {
+    text-align: center;
+  }
+}

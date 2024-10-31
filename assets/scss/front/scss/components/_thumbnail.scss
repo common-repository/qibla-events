@@ -1,0 +1,10 @@
+//
+// Thumbnail Component
+//
+.dlthumbnail {
+
+  // Set the content of the link as block because of the image within it.
+  &__link {
+    display: inline-block;
+  }
+}

@@ -1,0 +1,145 @@
+//
+// Single Listings Share And WishList
+//
+.dlactions {
+  position: relative;
+  // Lists
+  .dlactions-lists {
+    background: $color-white;
+    border:     1px solid $color-border;
+    display:    flex;
+    flex-wrap:  wrap;
+    list-style: none;
+    margin:     0;
+    padding:    0;
+
+    // Item
+    &__item {
+      -ms-flex:   1 0 auto;
+      flex-grow:  1;
+      text-align: center;
+
+      &--share {
+        border-right: 1px solid $color-border;
+      }
+
+      // Item icon and text
+      > a,
+      .dlwishlist-adder-wrapper a {
+        display:   block;
+        font-size: 1rem;
+        padding:   .8em 0;
+      }
+
+      // WishList Adder
+      .dlwishlist-adder-wrapper {
+        position: relative;
+        right:    auto;
+        top:      auto;
+
+        // Item icon and text
+        > * {
+          // Override font size
+          // scss-lint:disable ImportantRule
+          font-size: 1rem !important;
+        }
+
+        .dlwishlist-adder::before {
+          color: $color-primary;
+        }
+
+      }
+
+      // Share link
+      .dlshare {
+        border-bottom: 0;
+        cursor:        pointer;
+        // Icon
+        &::before {
+          content:     '\f2f7';
+          display:     inline-block;
+          font-family: Lineawesome;
+          transition:  all $global-transition-duration $global-transition-timing;
+        }
+        // Hover
+        &:hover::before {
+          transform: scale(1.3);
+        }
+      }
+    }
+  }
+}
+
+// Actions
+.dllisting-location + .dlactions {
+  border-radius: .19em;
+  box-shadow:    $global-box_shadow;
+
+  > .dlactions-lists {
+    border-top: 0;
+  }
+}
+
+//
+// Hide Actions
+//
+.dlactions {
+  .dlshare-popup {
+    display: none;
+    padding: .2rem .8rem;
+  }
+}
+
+//
+// Social Popup
+//
+.dlshare-wrapper-popup {
+  background-color: transparentize($color-black, $color-transparentize-module);
+  bottom:           0;
+  display:          none;
+  left:             0;
+  overflow:         scroll;
+  position:         fixed;
+  right:            0;
+  top:              0;
+  z-index:          99999;
+
+  .dlshare-popup {
+    border-radius: .4em;
+    box-shadow:    $global-box_shadow;
+    left:          0;
+    margin:        0 auto;
+    max-width:     460px;
+    padding:       2rem;
+    position:      fixed;
+    right:         0;
+    text-align:    center;
+    top:           40%;
+    width:         100%;
+    z-index:       10;
+
+    .heateor_sss_sharing_container > ul {
+      display: table;
+      // Override Margin
+      // scss-lint:disable ImportantRule
+      margin:  0 auto !important;
+    }
+  }
+}
+
+.dlshare-popup {
+  .heateor_sss_sharing_container ul li {
+    // Override Margin Right
+    // scss-lint:disable ImportantRule
+    margin-right: .3rem !important;
+  }
+}
+
+.dlshare-close {
+  border-bottom: 0;
+  color:         $color-white;
+  cursor:        pointer;
+  position:      absolute;
+  right:         10px;
+  top:           10px;
+}

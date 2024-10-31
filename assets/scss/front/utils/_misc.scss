@@ -1,0 +1,13 @@
+//
+// Utils Miscellaneous
+//
+.dldocument-blocked {
+  overflow: hidden;
+}
+
+// Hide element.
+.is-hidden {
+  // Must override other rules.
+  // scss-lint:disable ImportantRule
+  display: none !important;
+}

@@ -1,0 +1,105 @@
+//
+// Components Social Login
+//
+// Extra style for https://wordpress.org/plugins/wordpress-social-login/
+//
+.wp-social-login-widget {
+
+  // Title.
+  .wp-social-login-connect-with {
+    @include screen-reader-text;
+  }
+
+  // Social List
+  .wp-social-login-provider-list {
+    // Override the plugin style.
+    // scss-lint:disable ImportantRule
+    padding: 0 !important;
+    width:   100%;
+
+    // Providers
+    .wp-social-login-provider {
+      align-items:     center;
+      border-radius:   $global-border-radius;
+      color:           $color-white;
+      display:         flex;
+      justify-content: center;
+      padding:         .35em 1.1em;
+      transition:      $global-transition-duration $global-transition-timing;
+
+      // The icons.
+      &::before {
+        font-family:  Fontawesome;
+        // Keep the unit in rem, strictly related with the font.
+        margin-right: .63rem;
+      }
+
+      &,
+      &:hover {
+        // Override the base anchor styles.
+        border-bottom: 0;
+      }
+
+      & + .wp-social-login-provider {
+        margin-top: .63em;
+      }
+    }
+
+    // Provider Socials
+    .wp-social-login-provider-facebook {
+      @include social-login-provider('facebook', '\f230');
+    }
+    .wp-social-login-provider-google {
+      @include social-login-provider('google', '\f0d5');
+    }
+    .wp-social-login-provider-twitter {
+      @include social-login-provider('twitter', '\f099');
+    }
+  }
+}
+
+// Within comments form
+.dlcomments {
+  // Social List
+  .wp-social-login-provider-list {
+    margin-bottom: .63em;
+  }
+}
+
+//
+// Within The login / register modal
+//
+.dlmodal--login-register {
+
+  .wp-social-login-widget {
+    background-color: $color-gray--extra-light;
+    padding:          $global-padding;
+  }
+}
+
+//
+// MEDIA QUERIES
+//
+
+@media only screen and (min-width: map-get($breakpoints, 'lg')) {
+
+  // Within comments form
+  .woocommerce-account .woocommerce,
+  .dlcomments {
+    // Social List
+    .wp-social-login-provider-list {
+      display:         flex;
+      justify-content: space-between;
+
+      .wp-social-login-provider {
+        flex-basis: 33%;
+
+        & + .wp-social-login-provider {
+          // This remove the margin top for .wp-social-login-provider + .wp-social-login-provider.
+          margin-top: 0;
+        }
+      }
+    }
+  }
+
+}

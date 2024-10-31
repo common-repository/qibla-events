@@ -1,0 +1,56 @@
+//
+// Admin Metaboxes
+//
+.dl-metabox-table,
+.dl-metabox-tabs,
+.dl-metabox-fieldset {
+
+  * {
+    box-sizing: border-box;
+  }
+
+  // Field.
+  .dl-field {
+
+    &__label {
+      width: 25%;
+    }
+
+    label {
+      font-weight: 600;
+    }
+
+    &__description {
+      color:         darken($color-gray, 25%);
+      font-style:    italic;
+      margin-bottom: 0;
+    }
+  }
+}
+
+.dl-metabox-table {
+  // Override the table.widefat.
+  // scss-lint:disable ImportantRule
+  border:          0 !important;
+  border-collapse: collapse;
+
+  .dl-field + .dl-field {
+    border-top: 1px solid $color-border;
+  }
+}
+
+// Optimize the side sortables.
+#side-sortables {
+
+  .dl-field__label,
+  .dl-field__type {
+    display: block;
+    width:   100%;
+  }
+
+  .dl-field__type {
+    padding-top: 0;
+  }
+}
+
+

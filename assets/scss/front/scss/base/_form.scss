@@ -1,0 +1,64 @@
+//
+// Base Form Styles
+//
+.dlform {
+  // The alert
+  .dlalert {
+    @include alert-message;
+    margin-bottom: $global-vertical-margin / 2;
+  }
+
+  // Field
+  .dl-field {
+    margin: $global-vertical-margin / 2 0;
+
+    // Label
+    // Directly descendant because of checkboxes.
+    > label {
+      line-height: 1;
+    }
+
+    // Input description.
+    &__description {
+      color:     $color-gray--light;
+      font-size: $font-size--small;
+    }
+
+    &__invalid-description {
+      color:     $color-red;
+      font-size: $font-size--small;
+    }
+  }
+
+  // Field Status
+  .is-required {
+    // Add marker to the label.
+    label::after {
+      content:     '\002A';
+      color:       $color-red;
+      display:     inline-block;
+      margin-left: .23em;
+    }
+  }
+
+  .is-invalid {
+    // Types
+    @include input-element-list(
+          (
+            'input[type="checkbox"]',
+            'input[type="radio"]',
+            '.select2-selection',
+            '.wp-editor-container'
+          )
+    ) {
+      @include invalid-input;
+    }
+  }
+}
+
+// Invalid Form Type. File specific input type.
+// Only for non js. We use Dropzone when js is enabled.
+.dlu-no-js .dlform .dl-field--file.is-invalid,
+.is-invalid .dropzone {
+  @include invalid-input;
+}

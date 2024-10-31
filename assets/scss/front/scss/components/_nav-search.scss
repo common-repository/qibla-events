@@ -1,0 +1,147 @@
+//
+// Navigation Search Component & Autocomplete
+//
+.autocomplete-suggestions,
+.dlnav-search {
+  background-color: $color-white;
+  border-radius:    0 0 $global-border-radius $global-border-radius;
+  box-shadow:       $global-box_shadow;
+  font-size:        $font-size--small;
+}
+
+// Navigation
+.dlnav-search {
+  @include search-wrapper;
+  // Use display none because of it's position is not useful for non js and graphic agents.
+  // It's a search, so we don't need that.
+  display:  none;
+  left:     0;
+  position: absolute;
+  right:    0;
+  // This is not related in any way with other elements, so you can decrease the value but
+  // I suggest to stay in the limit of 100.
+  // 9990 to stay below the main navigation. see _nav-main.scss.
+  z-index:  9990;
+
+  .dlnav-search {
+    // The nav list
+    &__list-items {
+      @extend .u-no-list-style;
+
+      // The list items.
+      // @note Don't move outside or the links color will not be correctly.
+      .menu-item {
+        a {
+          @include menu-item;
+        }
+
+        &:first-child a {
+          border-top: 0;
+        }
+      }
+
+      // The Icon.
+      .menu-item a > i {
+        @include menu-item-icon;
+      }
+
+      // The content
+      &__title-item {
+        @include menu-item-content;
+      }
+
+      // Term Item Taxonomy Name.
+      .menu-item__term-tax-name {
+        @include menu-item-taxonomy;
+      }
+    }
+  }
+}
+
+// Autocomplete
+.autocomplete-suggestions {
+  @include search-wrapper;
+  // Make it to the right like the search navigation.
+  right: 0;
+
+  // Single Suggestion.
+  .autocomplete-suggestion {
+    @include menu-item;
+
+    &:first-child {
+      border-top: 0;
+    }
+
+    // The content of the suggestion
+    .suggestion__content {
+      @include menu-item-content;
+    }
+
+    // The selected suggestion.
+    &.autocomplete-selected {
+      @include menu-item-selected;
+    }
+
+    // The Icon.
+    i {
+      @include menu-item-icon;
+    }
+  }
+
+  // Group & Category
+  .suggestion-taxonomy,
+  .autocomplete-group {
+    @include menu-item-taxonomy;
+  }
+
+  // Group
+  .autocomplete-group {
+    padding: .75em 1em .23em;
+
+    + .autocomplete-suggestion {
+      border-top: 0;
+    }
+  }
+
+  // No suggestions.
+  .autocomplete-no-suggestion {
+    padding: .75em 1em;
+  }
+}
+
+//
+// Search is open
+//
+.dlnav-search--is-open {
+
+  .dlnav-search {
+    // List Items
+    &__list-items {
+      // Like the autocomplete we set the item as active.
+      .is-selected a {
+        @include menu-item-selected;
+      }
+    }
+  }
+}
+
+//
+// MEDIA QUERIES
+//
+@media only screen and (max-width: map-get($breakpoints, 'nm')) {
+
+  //
+  // Header Search
+  //
+  .dlheader .dlsearch {
+    .autocomplete-suggestions,
+    .dlnav-search {
+      left:   auto;
+      margin: 0 auto;
+      // Prevent autocomplete to override the rule.
+      // scss-lint:disable ImportantRule
+      width:  100vw !important;
+    }
+  }
+
+}

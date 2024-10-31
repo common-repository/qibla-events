@@ -1,0 +1,26 @@
+// Btn
+@mixin btn($responsive: true) {}
+
+// Tiny
+@mixin btn--tiny {}
+
+// Small
+@mixin btn--small {}
+
+// Medium
+@mixin btn--medium {}
+
+// Wide
+@mixin btn--wide {}
+
+// Gray
+@mixin btn--gray {}
+
+// White
+@mixin btn--white {}
+
+// Ghost
+@mixin btn--ghost {}
+
+// Arrow
+@mixin btn-arrow($allowWide: false) {}

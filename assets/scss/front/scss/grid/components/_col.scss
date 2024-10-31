@@ -1,0 +1,14 @@
+//
+// Col Grid Component
+//
+.col {
+  flex:    0 0 100%;
+  -ms-flex: 0 0 auto;
+  margin:  $col-margins;
+  //max-width: 100%;
+  padding: $col-gutter;
+
+  @include variant(no-gutters) {
+    padding: 0;
+  }
+}

@@ -1,0 +1,27 @@
+//
+// Visual Composer Fields
+//
+.wpb_el_type {
+
+  // Radio
+  &_qibla_radio {
+    input {
+      // Override the .vc_properties_list input selector
+      // scss-lint:disable ImportantRule
+      width: auto !important;
+    }
+
+    input + label {
+      margin-left: .63rem;
+    }
+  }
+
+  // Icon List
+  &_qibla_icon {
+    select {
+      // Override the .vc_properties_list input selector
+      // scss-lint:disable ImportantRule
+      width: auto !important;
+    }
+  }
+}

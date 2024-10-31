@@ -1,0 +1,81 @@
+//
+// Mixins Article
+//
+
+// The Article Icon
+@mixin article-icon {
+  display:       block;
+  font-size:     1.8rem;
+  font-weight:   $font-weight;
+  line-height:   1;
+  margin-bottom: .3em;
+  text-align:    center;
+}
+
+//
+// Article Square
+//
+// - Title
+// - Header
+//
+
+// Square Title
+@mixin article-square-title {
+  @include flexboxtweener((-ms-flex-pack:center, -ms-flex-align:center));
+  align-items:     center;
+  bottom:          0;
+  color:           $color-white;
+  display:         flex;
+  font-size:       1rem;
+  justify-content: center;
+  left:            0;
+  margin:          0 auto;
+  position:        absolute;
+  right:           0;
+  top:             0;
+  word-break:      break-all;
+
+  &::before,
+  &::after {
+    border-bottom:  1px solid $color-white;
+    content:        '';
+    // Needed by IE10.
+    display:        block;
+    max-width:      20%;
+    position:       relative;
+    top:            3px;
+    vertical-align: middle;
+    width:          100%;
+  }
+
+  &::before {
+    margin-right: .63rem;
+  }
+  &::after {
+    margin-left: .63rem;
+  }
+}
+
+@mixin article-square-header {
+  border:     1px solid $color-border;
+  box-shadow: $global-box_shadow;
+  position:   relative;
+}
+
+//
+// Article Card
+//
+// - Active
+// - TranslateY
+//
+
+// Active status
+@mixin article-active {
+  border-color: $color-primary;
+  box-shadow:   0 0 30px transparentize($color-black, .9);
+}
+
+// TranslateY
+@mixin article-translateY {
+  transform: translateY(-.36em);
+}

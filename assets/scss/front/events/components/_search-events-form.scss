@@ -1,0 +1,37 @@
+//
+// Search Form
+//
+
+.dlsearch--dates {
+  .dlsearch__input-wrapper {
+    input[type="search"] {
+      border:     1px solid #d3d5d6;
+      height:     auto;
+      min-height: 45px;
+      padding:    .7rem;
+    }
+    .select2-container--qibla {
+      border:     1px solid #d3d5d6;
+      color:      #959497;
+      min-height: 45px;
+    }
+  }
+}
+
+@media only screen and (min-width: map-get($breakpoints, 'nm')) {
+
+  .dlsearch--dates {
+    #search_events_form {
+      .dlsearch__form-fields {
+        display:      flex;
+        flex-grow:    1;
+        margin-right: 0.63em;
+      }
+    }
+    .dlsearch__input-wrapper {
+      flex-basis: 50%;
+      width:      50%;
+    }
+  }
+
+}

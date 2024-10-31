@@ -1,0 +1,58 @@
+//
+// Panel Settings
+//
+.dm-settings-table {
+  border-collapse: collapse;
+  width:           100%;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .dl-field__label,
+  .dl-field__type {
+    border-bottom: 1px solid $color-border;
+    padding:       1.5em 2em;
+  }
+
+  // Remove styles from the last table row columns.
+  .dl-field:last-child .dl-field__label,
+  .dl-field:last-child .dl-field__type {
+    border-bottom: 0;
+  }
+
+  // Label Fields
+  // The tag container may be td or th.
+  .dl-field__label {
+    font-weight:    normal;
+    text-align:     left;
+    vertical-align: top;
+    width:          35%;
+
+    label {
+      font-weight: 600;
+    }
+  }
+
+  .dl-field__label .dl-field__description {
+    color:      $color-border--wp; // This is the default color used in WordPress.
+    font-style: italic;
+    margin:     2px 0 .8em; // From Wordpress.
+  }
+
+  // Fields Types
+  .dl-field__type {
+    > textarea,
+    > input[type="password"],
+    > input[type="url"],
+    > input[type="text"] {
+      width: 100%;
+    }
+  }
+
+  .dl-field--typography {
+    .select2-container--default:nth-of-type(n+3) {
+      margin: 0 .63em;
+    }
+  }
+}

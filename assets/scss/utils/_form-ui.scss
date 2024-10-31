@@ -1,0 +1,11 @@
+//
+// Form UI Utils
+//
+
+%focus-outline {
+  // Must be in this way.
+  // scss-lint:disable ImportantRule
+  border:     1px dotted $color-border !important;
+  box-shadow: none !important;
+  outline:    none !important;
+}

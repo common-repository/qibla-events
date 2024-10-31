@@ -1,0 +1,45 @@
+//
+// Utils Functions
+//
+
+//
+// Append State Selector
+//
+// Append any kind of selector to each element within a list.
+//
+// @return The newly selectors list.
+//
+@function append_state_selector($selectors: (), $state: '') {
+  // @todo Add extra check of whitelist selectors.
+  // Append the state if needed.
+  @if '' != $state and 0 < length($selectors) {
+    $new: $selectors;
+    $selectors: ();
+
+    @each $s in $new {
+      $sel: '#{$s}:#{$state}';
+      $selectors: append($selectors, $sel, comma);
+    }
+  }
+
+  @return $selectors
+}
+
+//
+// Strip Unit
+//
+// @since 1.0.0
+//
+@function strip_unit($num) {
+  @return $num / ($num * 0 + 1);
+}
+
+//
+// Convert Unit to Rem
+//
+// @since 1.0.0
+//
+@function convert_unit_to_rem($num) {
+  $value: strip_unit($num);
+  @return #{$value}rem;
+}

@@ -1,0 +1,9 @@
+<wpml-config>
+    <admin-texts>
+        <key name="qibla_opt-search">
+            <key name="placeholder"/>
+            <key name="geocoded_placeholder"/>
+            <key name="submit_label"/>
+        </key>
+    </admin-texts>
+</wpml-config>

@@ -1,0 +1,78 @@
+//
+// Colors Settings
+//
+
+// Modules
+$color-light-module: 7%;
+$color-dark-module: 7%;
+$color-desaturate-module: 7%;
+$color-transparentize-module: .2;
+
+// Base
+$color-black: #000;
+$color-gray: #414042; // This is the base gray from which start darkening or lighting.
+$color-gray--light: lighten($color-gray, 33%);
+$color-gray--extra-light: lighten(desaturate($color-gray, 1.5385), 70.5882);
+$color-white: #fff;
+$color-primary: #f26522 !default;
+$color-primary--dark: darken($color-primary, $color-dark-module);
+
+// Footer Background
+$color-background-footer: #f47922;
+$color-background-colophon: #f26522;
+
+// Colors
+$color-red: #ed1c24;
+$color-green: #689f38;
+$color-blue: #528fbd;
+$color-yellow: #ffb400;
+
+// Color Dark
+$color-red--dark: darken($color-red, $color-dark-module);
+
+// Body
+$color-body-background: $color-gray--extra-light !default;
+
+// Elements.
+$color-selected-text: (
+  background: $color-primary,
+  color: $color-white
+) !default;
+
+// Alerts
+$color-alert--error: $color-red;
+$color-alert--info: $color-blue;
+$color-alert--success: $color-green;
+$color-alert--warning: $color-yellow;
+$color-alert-background--error: #ebccd1;
+$color-alert-background--info: #bce8f1;
+$color-alert-background--success: #d6e9c6;
+$color-alert-background--warning: #faebcc;
+
+// Elements
+$color-font-body: $color-gray;
+$color-border: #c1c3c5;
+
+// Background Colors
+$color-background: #f1f1f1;
+$color-background-overlay: rgba(0, 0, 0, .4);
+
+// Form
+$color-label: $color-gray;
+$color-input-border: lighten($color-border, $color-light-module);
+$color-input-border--focus: $color-primary;
+$color-input-border--invalid: $color-red;
+$color-input-placeholder: $color-gray;
+$color-input-alert--invalid: $color-primary;
+$color-input-background: $color-border;
+$color-input-background--disabled: desaturate($color-input-background, $color-desaturate-module);
+$color-input-background--invalid: #fff8e5;
+$color-input-background--hover: $color-primary;
+$color-input-background--selected: $color-primary;
+
+// Socials
+$color-socials: (
+ facebook: #3b5998,
+ google: #ea4335,
+ twitter: #1da1f2
+);

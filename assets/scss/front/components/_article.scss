@@ -1,0 +1,449 @@
+//
+// Component Generic Layout
+//
+.dlarticle {
+  // The thumbnail
+  .dlthumbnail img {
+    width: 100%;
+  }
+
+  &__content {
+    // Explicitly set the color to prevent override by other elements.
+    color: $color-font-body;
+    // Remove the margin bottom from the latest paragraph.
+    // Remove the margin only for the directly descendants.
+    > p:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // The read more link
+  &__more-link,
+  .more-link {
+    // Inline block because of the border bottom.
+    display:    inline-block;
+    margin-top: .63em;
+    text-align: center;
+  }
+}
+
+//
+// Component Listings Article
+//
+.dlarticle--listings {
+
+  .dlarticle {
+    // The meta
+    &__meta {
+      @include enumerate-props($typography_listings-meta);
+    }
+  }
+
+  .dlsubtitle + .dlarticle__meta {
+    padding-left:  2.75rem;
+    padding-right: 2.75rem;
+  }
+}
+
+//
+// Components Article Variants
+//
+.dlarticle--card,
+.dlarticle--square,
+.dlarticle--text-only {
+
+  .dlarticle {
+    // The title
+    &__title {
+      font-size:   1.1rem;
+      line-height: 1.3;
+
+      .star-rating {
+        font-size: .78rem;
+      }
+    }
+
+    // Icon
+    &__icon {
+      @include article-icon;
+    }
+  }
+
+  // The subtitle
+  .dlsubtitle {
+    color:     $color-gray;
+    font-size: 1rem;
+    margin:    0;
+  }
+}
+
+.dlarticle--overlay,
+.dlarticle--square {
+
+  .dlthumbnail {
+    @include dloverlay--before(rgba(0, 0, 0, .2));
+    &::before {
+      opacity:    0;
+      transition: opacity 400ms $global-transition-timing;
+    }
+
+    // Post thumbnail.
+    // For the --square variant we have also border radius applied to .dlthumbnail container and header.
+    &__image {
+      border-radius: $global-border-radius;
+    }
+  }
+
+  &.sticky .dlarticle-card-box,
+  &:hover .dlthumbnail {
+    &::before {
+      opacity: 1;
+    }
+  }
+}
+
+//  Arrow Element
+.dlarticle--square .dlarticle__header,
+.dlarticle--card .dlarticle-card-box {
+
+  &::before,
+  &::after {
+    bottom:         0;
+    opacity:        0;
+    // Temporary disable the pointer event.
+    // Will be replaced with a real html element.
+    pointer-events: none;
+    position:       absolute;
+    right:          0;
+    transition:     opacity $global-transition-duration $global-transition-timing;
+  }
+
+  &:hover {
+    &::before,
+    &::after {
+      opacity: 1;
+    }
+  }
+
+  &::before {
+    bottom:      .19em;
+    color:       $color-white;
+    // la-long-arrow-right.
+    content:     '\f277';
+    font-family: LineAwesome, sans-serif;
+    font-size:   1.6em;
+    line-height: 1;
+    right:       .13em;
+    z-index:     2;
+  }
+
+  &::after {
+    border:              1.75em solid transparent;
+    border-bottom-color: $color-primary;
+    border-right-color:  $color-primary;
+    content:             '';
+  }
+}
+
+// Sticky Variant
+.dlarticle--overlay.sticky {
+  position: relative;
+
+  &::before {
+    @include font-smoothing;
+    background-color:       $color-primary;
+    border-top-left-radius: $global-border-radius;
+    color:                  $color-white;
+    content:                '\f150';
+    font-family:            Lineawesome;
+    font-size:              1.8rem;
+    left:                   .33em;
+    line-height:            1;
+    padding:                .13em;
+    position:               absolute;
+    top:                    0;
+    z-index:                10;
+  }
+
+  .dlarticle-card-box {
+    // Always show the arrow element for sticky posts.
+    &::before,
+    &::after {
+      opacity: 1;
+    }
+  }
+}
+
+// Article Overlay Variant
+.dlarticle--overlay {
+
+  .dlarticle {
+    // Header
+    &__header {
+      position: relative;
+    }
+  }
+
+  // Thumbnail
+  .dlthumbnail {
+    @include dloverlay-gradient--after;
+  }
+
+  // Thumbnail + Title
+  // Apply the position only if the post has the thumbnail.
+  // @note use the sibling selector because of the product post that have stars between thumbnail and title.
+  .dlthumbnail ~ .dlarticle__title {
+    bottom:   0;
+    color:    $color-white;
+    left:     0;
+    position: absolute;
+    right:    0;
+    // Put the title above the header gradient.
+    z-index:  2;
+  }
+}
+
+// Article Card Variant
+.dlarticle--card {
+  line-height: 1.5;
+  text-align:  center;
+
+  .dlarticle {
+    // Header
+    &__header {
+      // The star rating.
+      .star-rating {
+        float:  none;
+        margin: .63em auto;
+      }
+    }
+
+    // Title
+    &__title {
+      margin:  0;
+      // Keep it related to the root.
+      padding: 1.75rem 1.15rem 1rem;
+    }
+
+    // @note This is related with the rule below &__subtitle + .dlarticle__meta.
+    &__link .dlsubtitle:only-child {
+      padding-bottom: .75rem;
+    }
+
+    // The Meta
+    &__meta {
+      color:   lighten($color-gray, 16.8627);
+      padding: 1.15rem 1.15rem 1rem;
+    }
+
+    // Title Link
+    &__link {
+      // Explicitly set because of some articles are wrapped by an anchor tag.
+      border-bottom:   0;
+      text-decoration: none;
+    }
+
+    // The Content
+    &__content {
+      padding: 0 1.75rem 2em;
+    }
+  }
+
+  // Subtitle
+  .dlsubtitle {
+    @include enumerate-props(map-get($boxmodel_article--card, 'subtitle'));
+
+    // @note This is related with the rule above &__link &__subtitle:only-child.
+    & + .dlarticle__meta {
+      padding-top: 0;
+    }
+  }
+
+  .dlarticle-card-box {
+    @include enumerate-props($boxmodel_article--card);
+    border:        1px solid $color-border;
+    border-radius: $global-border-radius;
+    box-shadow:    $global-box_shadow;
+    // Force all cards to have the same height.
+    // Related to the use of the flex property.
+    // There is an Hack withih _fixes.scss for safari.
+    height:        100%;
+    position:      relative;
+
+    // Cards without thumbnail keep own height.
+    &:not(.dlarticle--text-only) .dlarticle-card-box {
+      height: 100%;
+    }
+  }
+}
+
+// Article Square Variant
+.dlarticle--square {
+
+  .dlarticle {
+
+    &__header {
+      @include article-square-header;
+    }
+
+    &__link {
+      display: block;
+    }
+
+    // - @note: max-width and word are used to prevent title to go outside of the content.
+    &__title {
+      @include article-square-title;
+    }
+
+    &__title-label {
+      line-height: 1;
+    }
+  }
+
+  .dlarticle__header,
+  .dlthumbnail {
+    // Both header and thumbnail container must have the border box because of the box-shadow and image overflow.
+    border-radius: $global-border-radius;
+  }
+
+  .dlthumbnail {
+    @include dloverlay--after(rgba(0, 0, 0, .3));
+    // This remove possible margins added within the layout context.
+    // See for example the _singular.scss thumbnail.
+    // scss-lint:disable ImportantRule
+    margin: 0 !important;
+  }
+
+  .dlarticle__header > .dlarticle__link {
+    // Explicitly set because of some elements are wrapped by an anchor tag.
+    border-bottom: 0;
+  }
+}
+
+// Only Text Variant
+.dlarticle--text-only {
+  .dlarticle {
+    // The title
+    &__title {
+      padding-bottom: 0;
+      padding-top:    1.75rem;
+    }
+
+    // The Meta
+    // We add the header element because of another rule will override this.
+    // Se above &__header + .dlarticle__meta
+    &__header + .dlarticle__meta {
+      padding-top: 0;
+    }
+  }
+}
+
+.dlarticle--text-only .dlarticle__link:hover .dlarticle__title {
+  color: $color-primary;
+}
+
+// Article Has Product Variant
+.dlarticle--has-product {
+
+  .dlarticle {
+    // The Title
+    &__title {
+      padding-bottom: 1.7em;
+    }
+  }
+
+  // The Subtitle
+  .dlsubtitle {
+    padding-top: 0;
+  }
+
+  // The price of the product.
+  .dlproduct-price {
+    background:    $color-primary;
+    border-radius: .12em;
+    bottom:        1em;
+    color:         $color-white;
+    display:       inline-block;
+    font-weight:   $font-weight--light;
+    margin:        0;
+    padding:       .2em .93em;
+    position:      relative;
+  }
+}
+
+// Featured Post
+.dlarticle--is-featured {
+  // Featured Icon
+  // Use the header since the element is used for arrow.
+  .dlarticle__header {
+    &::before {
+      @include font-smoothing;
+      color:       $color-white;
+      content:     '\f0e7';
+      font-family: Fontawesome;
+      font-size:   1.3rem;
+      left:        .6em;
+      line-height: 1;
+      position:    absolute;
+      top:         .43em;
+      z-index:     2;
+    }
+
+    &::after {
+      border:            1.75em solid transparent;
+      border-left-color: $color-primary;
+      border-top-color:  $color-primary;
+      content:           '';
+      left:              0;
+      position:          absolute;
+      top:               0;
+    }
+  }
+
+  // Don't allow shortcode posts to show the featured badge.
+  .dlsc-posts & {
+    .dlarticle__header {
+      &::before,
+      &::after {
+        content: '';
+        display: none;
+      }
+    }
+  }
+}
+
+// Grouped Variants
+.dlarticle--square .dlarticle__header,
+.dlarticle--square .dlarticle__header:hover,
+.dlarticle--card,
+.dlarticle--card:hover,
+.dlarticle--overlay,
+.dlarticle--overlay:hover {
+  transition: all $global-transition-duration $global-transition-timing;
+}
+
+.dlarticle--square .dlarticle__header:hover,
+.dlarticle--card .dlarticle-card-box:hover {
+  @include article-active;
+}
+
+.dlarticle--square .dlarticle__header:hover,
+.dlarticle--card:hover {
+  @include article-translateY;
+}
+
+//
+// MEDIA QUERIES
+//
+@media only screen and (min-width: map-get($breakpoints, 'lg')) {
+
+  .dlarticle--square {
+    .dlarticle {
+      // The Title
+      &__title {
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+}

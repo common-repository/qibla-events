@@ -1,0 +1,391 @@
+//
+// Widgets
+//
+// - Text
+// - Calendar
+// - Search
+// - Tag Cloud
+// - Widget Rss
+// - Dl Contact Form 7
+//
+// WooCommerce Widgets
+//
+// - WooCommerce Shopping Cart
+// - WooCommerce Search Products
+// - WooCommerce Layered Nav Widget
+// - WooCommerce Rating Filter
+// - WooCommerce Product Categories
+// - WooCommerce Recent Reviews
+// - WooCommerce Top Rated Products
+// - Price Filter
+//
+
+//
+// Text Widget
+//
+.textwidget {
+
+  .wp-caption {
+    // Reset the margins added by WordPress to the wp-caption.
+    margin:        0;
+    margin-bottom: 1em;
+    // Set to 100% of the width.
+    // Override the base wp-caption max-width.
+    max-width:     100%;
+  }
+
+  .wp-caption-text {
+    padding: 0;
+  }
+
+  p:last-child {
+    // Remove the margin bottom from the last paragraph.
+    margin-bottom: 0;
+  }
+}
+
+//
+// WP Calendar
+//
+.widget_calendar {
+  table {
+    border-collapse: collapse;
+    font-size:       .78rem;
+    width:           100%;
+
+    caption {
+      font-size: 1rem;
+    }
+
+    thead,
+    tbody {
+      td + td {
+        border-left: 1px solid lighten($color-border, 16%);
+      }
+
+      th,
+      td {
+        border:     0;
+        text-align: center;
+      }
+
+      th {
+        color:     lighten($color-gray, 37%);
+        font-size: .78rem;
+      }
+
+      td {
+        color:  lighten(desaturate($color-gray, 1.5385), 24.7059);
+        height: 2.4rem;
+        width:  2.4rem;
+
+        a {
+          @include anchor-text(false, (color:$color-primary));
+          // Don't show the border bottom for links within the table.
+          border-bottom: 0;
+          font-weight:   $font-weight--black;
+        }
+      }
+    }
+
+    tbody {
+      border: 1px solid lighten($color-border, 16%);
+
+      tr {
+        border-top: 1px solid lighten($color-border, 16%);
+      }
+    }
+
+    tfoot {
+      #next {
+        text-align: right;
+      }
+    }
+  }
+}
+
+//
+// Search
+// - It is inline style
+//
+.widget_search {
+  @include flexboxtweener;
+  display:   flex;
+  flex-wrap: wrap;
+
+  // The form
+  .search-form {
+
+    label {
+      flex-grow: 1;
+      -ms-flex:  1 0 auto;
+      margin:    0;
+    }
+  }
+
+  .search-submit {
+    @extend .dlbtn--small;
+    border-bottom-left-radius: 0;
+    border-top-left-radius:    0;
+    margin:                    0;
+  }
+}
+
+//
+// Tag Cloud
+//
+.widget_tag_cloud {
+  line-height: 1.5;
+}
+
+//
+// Widget Rss
+//
+.widget_rss {
+
+  .rssSummary {
+    // As of the summary is within a div and not a p tag.
+    line-height: $global-line-height;
+    margin:      $global-vertical-margin / 2;
+  }
+}
+
+//
+// Dl Contact Form 7
+//
+.widget_dlcontact_form_7 {
+
+  label {
+    display:       block;
+    font-weight:   $font-weight--bold;
+    // Reset the default margin.
+    margin-bottom: 0;
+    width:         100%;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+  }
+
+  input[type="radio"],
+  input[type="checkbox"] {
+    width: auto;
+  }
+}
+
+//
+// WooCommerce Shopping Cart
+//
+.woocommerce.widget_shopping_cart {
+  @include enumerate-props($boxmodel_boxed-widget);
+
+  ul.cart_list li {
+    @include flexboxtweener;
+    align-items:    center;
+    display:        flex;
+    padding-bottom: .63em !important;
+    padding-left:   0 !important;
+    padding-top:    .63em !important;
+
+    &:first-child {
+      padding-top: 0 !important;
+    }
+
+    &,
+    a {
+      @include flexboxtweener;
+      align-items:     center;
+      display:         flex;
+      justify-content: space-between;
+    }
+
+    a {
+      border:      0 !important;
+      float:       left;
+      font-weight: $font-weight;
+
+      img {
+        float:  left !important;
+        margin: 0 .63em 0 0 !important;
+      }
+    }
+
+    .quantity {
+      display:    block;
+      flex-grow:  1;
+      float:      right;
+      text-align: right;
+    }
+
+    .remove {
+      justify-content: center !important;
+      position:        static !important;
+
+      + a {
+        padding-left: .4em;
+      }
+    }
+  }
+
+  .total {
+    @include flexboxtweener;
+    border-top:      1px solid $color-border !important;
+    display:         flex;
+    justify-content: space-between;
+    margin:          .63em 0 !important;
+    padding:         .63em 0 !important;
+
+    strong {
+      text-transform: uppercase;
+    }
+  }
+
+  .buttons {
+    @include flexboxtweener;
+    display:         flex;
+    justify-content: space-between;
+    margin-bottom:   0;
+
+    &::before,
+    &::after {
+      display: none;
+    }
+
+    a {
+      font-size:  $font-size !important;
+      margin:     0;
+      // The original button padding.
+      // scss-lint:disable ImportantRule
+      padding:    .74rem 1.25rem !important;
+      text-align: center;
+      width:      48%;
+
+      &[class="button wc-forward"] {
+        background:   transparent !important;
+        border-color: $color-gray--light !important;
+        color:        $color-gray--light !important;
+        white-space:  normal;
+
+        &:hover {
+          background:   $color-primary !important;
+          border-color: $color-primary !important;
+          color:        $color-white !important;
+        }
+      }
+    }
+  }
+}
+
+//
+// WooCommerce Search Products
+//
+.woocommerce.widget_product_search {
+  @include flexboxtweener;
+  display:   flex;
+  flex-wrap: wrap;
+
+  form {
+    @include flexboxtweener;
+    display: flex;
+    width:   100%;
+
+    #woocommerce-product-search-field {
+      border-radius:             0;
+      border-bottom-left-radius: $global-border-radius;
+      border-top-left-radius:    $global-border-radius;
+      height:                    100%;
+      margin:                    0;
+    }
+
+    input[type="search"] {
+      border-bottom-right-radius: 0;
+      border-top-right-radius:    0;
+      flex-grow:                  1;
+      -ms-flex:                   1 0 auto;
+      width:                      auto;
+    }
+
+    input[type="submit"] {
+      @include btn--small;
+      border-bottom-left-radius: 0;
+      border-top-left-radius:    0;
+      margin:                    0;
+    }
+  }
+}
+
+//
+// WooCommerce Layered Nav Widget
+//
+.woocommerce.widget_layered_nav_filters {
+  ul {
+    @include flexboxtweener((-ms-flex-pack:start));
+    display:   flex;
+    flex-wrap: wrap;
+  }
+
+  li.chosen {
+    border:  0 !important;
+    float:   none !important;
+    padding: 0 !important;
+
+    a {
+      background-color: $color-primary;
+      border-radius:    $global-border-radius;
+      color:            $color-white;
+      display:          block;
+      font-size:        $font-size--small;
+      line-height:      1;
+      margin:           .3em;
+      padding:          .43em;
+
+      &:hover {
+        background-color: $color-primary--dark;
+        color:            $color-white;
+      }
+    }
+  }
+}
+
+//
+// WooCommerce Rating Filter
+//
+.woocommerce.widget_rating_filter {
+  .star-rating {
+    margin-right: .63em;
+  }
+}
+
+//
+// WooCommerce Product Categories
+//
+.woocommerce.widget_product_categories {
+}
+
+//
+// WooCoommerce Price Filter
+//
+.woocommerce.widget_price_filter {
+
+  // Filter range
+  .ui-slider .ui-slider-range,
+  .ui-slider .ui-slider-handle {
+    background-color: $color-primary;
+  }
+
+  .price_slider_wrapper .ui-widget-content {
+    background-color: darken($color-primary--dark, $color-dark-module);
+  }
+
+  // The submit button
+  button[type="submit"] {
+    // Override the default button font-weight.
+    // scss-lint:disable ImportantRule
+    font-weight: $font-weight !important;
+    // The small padding button.
+    // scss-lint:disable ImportantRule
+    padding:     .29rem 1.57rem !important
+  }
+}
+

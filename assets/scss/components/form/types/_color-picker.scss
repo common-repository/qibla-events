@@ -1,0 +1,25 @@
+//
+// Color Picker
+//
+.wp-picker-container {
+
+  .wp-color-result {
+    height: 24px;
+  }
+
+  .wp-picker-input-wrap input:focus {
+    margin: 0;
+  }
+
+  // Remove Focus from elements and add border instead.
+  .wp-picker-input-wrap input:focus,
+  .wp-color-result:focus {
+    @extend %focus-outline;
+  }
+
+  // Picker Holder - The container for the Iris.
+  .wp-picker-holder {
+    position: absolute;
+    z-index: 100002 !important;
+  }
+}

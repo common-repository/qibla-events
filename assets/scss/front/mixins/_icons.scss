@@ -1,0 +1,30 @@
+//
+// Mixins Icons
+//
+
+// Icon Arrow
+@mixin -icon-pseudoelement($el, $icon) {
+  &::#{$el} {
+    content:     '#{$icon}';
+    display:     block;
+    font-family: Lineawesome;
+    line-height: 1;
+  }
+}
+
+// Left Arrow
+@mixin icon-angle--left {
+  @include -icon-pseudoelement('before', '\f111')
+}
+// Right Arrow
+@mixin icon-angle--right {
+  @include -icon-pseudoelement('after', '\f112');
+}
+// Arrow Up
+@mixin icon-angle--up {
+  @include -icon-pseudoelement('before', '\f113');
+}
+// Arrow Down
+@mixin icon-angle--down {
+  @include -icon-pseudoelement('after', '\f110');
+}

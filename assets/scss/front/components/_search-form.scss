@@ -1,0 +1,509 @@
+//
+// Search Form Component
+//
+// This is the custom implementation of the search form.
+// For the base WordPress search form refer to _wp-search.scss file.
+//
+.dlsearch {
+  margin: 1.8em 0;
+
+  // The Form.
+  &__form {
+    background-color: transparentize($color-white, .9);
+    border-radius:    $global-border-radius;
+    padding:          $global-padding / 2;
+    padding-bottom:   ($global-padding / 2) - .2;
+
+    &-submit {
+      @extend .dlbtn;
+      @extend .dlbtn--small;
+      font-size:  1rem;
+      margin-top: $global-vertical-margin / 2;
+      text-align: center;
+      width:      100%;
+
+      i {
+        @include reflect-element;
+        bottom:    -3px;
+        font-size: 1.5rem;
+        // Needed even by the search within the header.
+        position:  relative;
+        right:     .23em;
+      }
+
+      // Reset the Button style. We have an icon associated to the submit input
+      // we need a container to add pseudo-elements like ::before and ::after.
+      // The container will be styled like a button.
+      // scss-lint:disable ImportantRule
+      &-input {
+        background: none !important;
+        border:     0 !important;
+        padding:    0 !important;
+      }
+    }
+  }
+
+  &__input-wrapper {
+    margin:   0 0 4px;
+    position: relative;
+
+    input {
+      border-radius: 0;
+    }
+  }
+
+  .hint,
+  input[name="s"],
+  input[name="geocoded"],
+  .select2-container--qibla .select2-selection--single {
+    border-radius: 0;
+    font-size:     .9rem;
+    height:        100%;
+  }
+
+  input[name="s"],
+  input[name="geocoded"],
+  .select2-container--qibla .select2-selection--single {
+    padding: .70rem;
+  }
+
+  // Geolocator trigger.
+  .dlgeolocalization-trigger,
+  .is-geocoded ~ .svgloader {
+    position:  absolute;
+    right:     .65em;
+    top:       50%;
+    transform: translateY(-50%);
+  }
+
+  .dlgeolocalization-trigger {
+    color:     lighten($color-gray--light, $color-light-module);
+    cursor:    pointer;
+    font-size: 1.5rem;
+
+    &:hover {
+      color: $color-gray;
+    }
+  }
+
+  // Use Autocomplete
+  .use-autocomplete {
+    position: relative;
+    z-index:  2;
+  }
+
+  // Autocomplete Hint.
+  .hint {
+    @include flexboxtweener((-ms-flex-align:center));
+    align-items:    center;
+    background:     $color-white;
+    // Border: To match the height of the input.
+    border:         1px solid transparent;
+    bottom:         0;
+    color:          $color-gray--light;
+    display:        flex;
+    height:         100%;
+    left:           0;
+    outline-offset: -2px;
+    padding:        $padding-input;
+    position:       absolute;
+    right:          0;
+    top:            0;
+    z-index:        1;
+  }
+}
+
+//
+// Simple Search
+//
+.dlsearch--simple {
+  .dlsearch__input-wrapper,
+  .dlsearch__input {
+    width: 100%;
+  }
+
+  .hint,
+  input[name="s"] {
+    border-radius: $global-border-radius;
+  }
+}
+
+//
+// Geocode Search
+//
+.dlsearch--geocoded {
+
+  .hint,
+  input[name="s"] {
+    border-top-left-radius:  $global-border-radius;
+    border-top-right-radius: $global-border-radius;
+  }
+
+  .hint,
+  input[name="s"] {
+    border-top-left-radius:  $global-border-radius;
+    border-top-right-radius: $global-border-radius;
+  }
+
+  input[name="geocoded"] {
+    border-bottom-left-radius:  $global-border-radius;
+    border-bottom-right-radius: $global-border-radius;
+  }
+}
+
+//
+// Combo Search
+//
+.dlsearch--combo {
+
+  .hint,
+  input[name="s"] {
+    border-top-left-radius:  $global-border-radius;
+    border-top-right-radius: $global-border-radius;
+  }
+
+  .select2-container--open {
+    .select2-selection--single {
+      // Must override the base behavior.
+      // scss-lint:disable ImportantRule
+      //border: 1px solid $color-primary !important;
+    }
+  }
+
+  .select2-container--qibla .select2-selection--single {
+    border-bottom-left-radius:  $global-border-radius;
+    border-bottom-right-radius: $global-border-radius;
+  }
+}
+
+//
+// Header Search Form
+//
+// Most of the rules override the default ones.
+//
+.dlheader {
+
+  // Base search style
+  .dlsearch {
+    margin: 0;
+
+    // The search form
+    &__form {
+      // Remove basic style for the search within the header.
+      background:         transparent;
+      display:            flex;
+      flex-direction:     row-reverse;
+      -ms-flex-direction: row-reverse;
+      justify-content:    space-between;
+      margin:             0;
+      padding:            0;
+
+      // Input Search Field
+      input[type="search"] {
+        background:    transparent;
+        border:        0;
+        border-radius: 0;
+        box-shadow:    none;
+        color:         lighten($color-gray, 37%);
+        // This override the default height set because of safari issues with flexbox.
+        // We don't need that in header search.
+        // scss-lint:disable ImportantRule
+        height:        100% !important;
+        margin:        0;
+        outline:       0;
+        padding:       0;
+        // Let iOS to able to open the keyboard.
+        width:         1px;
+      }
+
+      // Submit wrapper
+      &-submit {
+        @include flexboxtweener((-ms-flex-align:center));
+        align-items: center;
+        background:  transparent;
+        border:      0;
+        color:       $color-font-body;
+        display:     flex;
+        padding:     0;
+      }
+
+      // Submit wrapper created by js.
+      .dlsearch-submit-wrapper {
+        align-items: center;
+        display:     flex;
+      }
+
+      // Open and Close icons.
+      i {
+        bottom:    0;
+        font-size: 1.8rem;
+        margin:    0;
+        right:     0;
+
+        &:hover {
+          @include enumerate-props($typography_nav-item_hightlight);
+        }
+      }
+
+      // Submit Input
+      &-submit-input {
+        @extend .screen-reader-text;
+      }
+    }
+
+    // Search input wrapper
+    &__input-wrapper {
+      margin: 0;
+
+      // Fix safari input height issue
+      .is-desktop.is-safari & {
+        flex-direction: column;
+      }
+    }
+
+    // Form opened
+    &__form--open input[type="search"] {
+      // Override the padding inline style that is add by the js header-search.
+      // scss-lint:disable ImportantRule
+      padding: $padding-input !important;
+
+      // Fix safari input height issue.
+      .is-desktop.is-safari & {
+        flex: 1 0 100%;
+      }
+    }
+
+    // Submit
+    &__form-submit {
+      span {
+        // Hide the submit text.
+        @extend .screen-reader-text;
+      }
+    }
+  }
+
+  // Header Skin Light variant
+  // @note Add the dl-is-listings-archive selector here because we haven't a filter to apply the --skin-light
+  // to the header within the archive listings. The skin is applied only on terms and singular posts.
+  .dl-is-listings-archive & .dlsearch,
+  &--skin-light .dlsearch {
+    &__form {
+      &-submit {
+        color: lighten($color-gray, 10%);
+      }
+    }
+  }
+}
+
+//
+// Desktop And Mobile Device Header
+//
+.is-mobile .dlheader .dlsearch,
+.is-desktop .dlheader .dlsearch {
+  // The form close button icon.
+  &__form-close {
+    @include flexboxtweener((-ms-flex-align:center));
+    align-items: center;
+    cursor:      pointer;
+    display:     flex;
+    position:    absolute;
+    top:         0;
+    // Above the autocomplete search hint element.
+    z-index:     3;
+  }
+}
+
+//
+// Mobile Header
+//
+.dlheader--mobile .dlsearch {
+  @include flexboxtweener((-ms-flex-align:center));
+  align-content:  center;
+  align-items:    center;
+  display:        flex;
+  padding-bottom: $padding-header-vertical;
+  padding-top:    $padding-header-vertical;
+
+  &__form {
+    // The icon
+    &-submit {
+      // Remove the basic top margin.
+      margin-top: 0;
+    }
+
+    // Input Search
+    input[type="search"] {
+      // I know I should not use line-height for box model but that fuckin iPad.
+      line-height: 2.3;
+    }
+
+    .dlsearch-submit-wrapper {
+      i {
+        // This is the same for hamburgers.
+        // Change both.
+        padding-left:  1.15rem;
+        padding-right: 1.5rem;
+      }
+    }
+  }
+}
+
+//
+// Safari
+//
+.is-safari {
+  // A little stupid fix for safari.
+  .dlsearch [type="search"] {
+    height: 3.31rem;
+  }
+}
+
+//
+// MEDIA QUERIES
+//
+@media only screen and (min-width: map-get($breakpoints, 'nm')) {
+
+  //
+  // Search
+  //
+  .dlsearch__input-wrapper {
+    margin-bottom: 0;
+  }
+
+  .dlsearch--combo {
+    .dlsearch__input-wrapper:nth-child(2) .dlsearch__input {
+      border-right-width: 0;
+    }
+    input[name="geocoded"] {
+      border-left-width:  0;
+      border-right-width: 0;
+    }
+  }
+  .dlsearch--geocoded {
+    .dlsearch__input-wrapper:first-of-type .dlsearch__input {
+      border-right-width: 0;
+    }
+  }
+
+  //
+  // Header Search
+  //
+  .dlheader .dlsearch {
+    // The submit
+    &__form-submit {
+      padding: 0 0 0 ($global-horizontal-padding / 2);
+    }
+  }
+
+  //
+  // Search
+  //
+  .dlsearch {
+    // Form
+    &__form {
+      @include flexboxtweener;
+      display:         flex;
+      justify-content: space-between;
+
+      input[type="search"] {
+        height: 100%;
+      }
+
+      &-submit {
+        // Remove the margin added on small devices.
+        margin-top: 0;
+        width:      auto;
+      }
+    }
+
+    // Fields Wrapper
+    &__form-fields {
+      @include flexboxtweener;
+      display:   flex;
+      flex-grow: 1;
+      -ms-flex:  1 0 auto;
+    }
+
+    .hint,
+    input[name="s"] {
+      // Set to 0 and then override.
+      // scss-lint:disable PropertySortOrder
+      border-radius:             0;
+      border-bottom-left-radius: $global-border-radius;
+      border-top-left-radius:    $global-border-radius;
+    }
+
+    input[name="geocoded"] {
+      // Set to 0 and then override.
+      // scss-lint:disable PropertySortOrder
+      border-radius: 0;
+    }
+
+    select {
+      height: 54px;
+      width:  100%;
+    }
+  }
+
+  //
+  // Geocoded and Combo Search
+  //
+  .dlsearch--geocoded,
+  .dlsearch--combo {
+    // Form
+    .dlsearch__form {
+      .dlsearch__form-fields {
+        margin-right: .63em;
+      }
+    }
+  }
+
+  //
+  // Simple Search
+  //
+  .dlsearch--simple {
+    .hint,
+    input[name="s"] {
+      border-bottom-right-radius: 0;
+      border-top-right-radius:    0;
+    }
+  }
+
+  //
+  // Geocoded Search
+  //
+  .dlsearch--geocoded {
+    .dlsearch__input-wrapper {
+      flex-basis: 50%;
+      width:      50%;
+    }
+
+    input[name="geocoded"] {
+      border-bottom-right-radius: $global-border-radius;
+      border-top-right-radius:    $global-border-radius;
+    }
+
+  }
+
+  //
+  // Combo Search
+  //
+  .dlsearch--combo {
+    .dlsearch__input-wrapper {
+      flex-basis: 34%;
+      width:      34%;
+    }
+
+    .select2-container--qibla .select2-selection--single {
+      border-radius: 0;
+      border:        1px solid #d3d5d6;
+      color:         #959497;
+      min-height:    45px;
+    }
+
+    .select2-container--qibla .select2-selection--single {
+      border-bottom-right-radius: $global-border-radius;
+      border-top-right-radius:    $global-border-radius;
+    }
+  }
+}

@@ -1,0 +1,47 @@
+//
+// WordPress Base Search Form Component
+//
+// The base search form is correlated to the custom _search-form.scss.
+// I keep them separate to able to stylize in future.
+// Since never know how the components must be stylized. :/
+//
+.search-form {
+  @include flexboxtweener((-ms-flex-align:center,-ms-flex: 1 0 auto));
+  align-items:     center;
+  display:         flex;
+  flex:            1 0 100%;
+  justify-content: space-between;
+
+  // Grouped Selectors
+  label,
+  .search-field {
+    border-bottom-left-radius: $global-border-radius;
+    border-top-left-radius:    $global-border-radius;
+    height:                    100%;
+    margin:                    0;
+  }
+
+  // The label
+  label {
+    flex-grow: 1;
+    -ms-flex:  1 0 auto;
+  }
+
+  // Search Input
+  .search-field {
+    border-bottom-right-radius: 0;
+    border-top-right-radius:    0;
+  }
+
+  // Safari workaround.
+  .is-safari & input[type="search"] {
+    height: 3.07rem;
+  }
+
+  // Submit
+  .search-submit {
+    @extend .dlbtn--small;
+    border-bottom-left-radius: 0;
+    border-top-left-radius:    0;
+  }
+}

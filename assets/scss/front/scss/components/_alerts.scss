@@ -1,0 +1,22 @@
+//
+// Alerts Components
+//
+.dlalert {
+  @include alert;
+
+  &--info {
+    @include alert--info;
+  }
+
+  &--success {
+    @include alert--success;
+  }
+
+  &--warning {
+    @include alert--warning;
+  }
+
+  &--error {
+    @include alert--error;
+  }
+}

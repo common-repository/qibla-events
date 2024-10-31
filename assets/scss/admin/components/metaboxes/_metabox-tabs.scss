@@ -1,0 +1,148 @@
+//
+// Meta Box Tabs
+//
+.dlui-metabox-tabs {
+  .inside {
+             // Override the #poststuff .inside selector.
+             // scss-lint:disable ImportantRule
+    margin:  0 !important;
+    padding: 0;
+  }
+}
+
+// Tabs
+.dl-metabox-tabs {
+  @extend .u-cf;
+
+  &__tab {
+    box-sizing: border-box;
+    float:      left;
+    width:      80%;
+  }
+
+  &__tab-description {
+    font-style: italic;
+    margin:     0 0 1rem;
+    padding:    1em 1em 0;
+  }
+
+  // Tab Open/Close.
+  .dltab-opened {
+    display: block;
+  }
+
+  .dltab-closed {
+    display: none;
+  }
+
+  // Fields.
+  .dl-field {
+    @extend .u-cf;
+
+    label {
+      font-weight:  initial;
+      margin-right: 1rem;
+    }
+
+    &__description {
+      margin-top: 2px; // see the .widfat td p WordPress value.
+    }
+  }
+
+  .dl-field__label,
+  .dl-field__type {
+    padding: 1.5em 1em;
+  }
+
+  .dl-field__label {
+    float: left;
+    width: 45%;
+  }
+
+  .dl-field__type {
+    float: right;
+    width: 55%;
+
+    textarea {
+      max-width: 100%;
+      width:     100%;
+    }
+  }
+
+  .dl-field + .dl-field {
+    border-top: 1px solid $color-border;
+  }
+}
+
+// Tabs Navigation.
+.dl-metabox-tabsnav {
+  border-right: 1px solid #eee;
+  box-sizing:   border-box;
+  float:        left;
+  line-height:  1em;
+  margin:       0;
+  position:     relative;
+  width:        20%;
+
+  &__item {
+    display:  block;
+    margin:   0;
+    padding:  0;
+    position: relative;
+  }
+
+  &__link {
+    background-color: $color-white;
+    border-bottom:    1px solid $color-gray;
+    border-left:      4px solid transparent;
+    box-shadow:       none;
+    color:            $color-text;
+    display:          block;
+    line-height:      20px;
+    margin:           0;
+    padding:          10px;
+    text-decoration:  none;
+
+                      // Used for icons.
+    i {
+      font-size:      1rem;
+      margin-right:   .63em;
+      text-align:     center;
+      vertical-align: text-bottom;
+      width:          18px;
+    }
+
+    &:hover {
+      background-color:  $color-gray--light;
+      border-left-color: $color-primary;
+      transition:        .15s color ease-in-out, .15s background-color ease-in-out, .15s border-color ease-in-out;
+    }
+
+    &:focus {
+                  // Override the a:focus style.
+                  // scss-lint:disable ImportantRule
+      box-shadow: none !important;
+    }
+  }
+
+  .dlu-active {
+    background-color:  $color-gray--light;
+    border-left-color: $color-primary;
+    color:             $color-primary;
+    position:          relative;
+  }
+}
+
+//
+// Fields
+//
+.dl-metabox-tabs {
+
+  #gallery {
+    .dl-field--media_image .dl-field__label,
+    .dl-field--media_image .dl-field__type {
+      float: none;
+      width: 100%;
+    }
+  }
+}

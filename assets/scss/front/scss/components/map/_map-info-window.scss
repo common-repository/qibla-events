@@ -1,0 +1,79 @@
+//
+// Map Info Window Component
+//
+.dlmap-info-window {
+  border-radius: $global-border-radius;
+  box-shadow:    $global-box_shadow;
+  font-family:   $font-family;
+  width:         235px;
+
+  &::after {
+    background: $color-white;
+    box-shadow: $global-box_shadow;
+    content:    '';
+    display:    block;
+    height:     20px;
+    left:       50%;
+    position:   absolute;
+    top:        100%;
+    transform:  translateX(-50%) translateY(-50%) rotate(-45deg);
+    width:      20px;
+    z-index:    -1;
+  }
+
+  // Meta and Thumbnail
+  &__meta,
+  &__thumbnail {
+    border-radius: $global-border-radius;
+  }
+
+  // Meta Data
+  &__meta {
+    @include enumerate-props($typography_listings-meta);
+    @extend .u-no-list-style;
+    background-color:        $color-white;
+    border-top-left-radius:  0;
+    border-top-right-radius: 0;
+    color:                   $color-gray;
+    padding:                 .63em;
+
+    .la {
+      @include enumerate-props(map-get($typography_listings-meta, 'icon'));
+      color:        $color-gray--light;
+      margin-right: .35em;
+    }
+  }
+}
+
+.dlmap-info-window--default {
+  text-align: center;
+
+  .dlmap-info-window {
+    // Header
+    &__header {
+      @include dloverlay-gradient--after;
+      position: relative;
+    }
+
+    // Header Thumbnail
+    &__thumbnail {
+      width: 100%;
+    }
+
+    // Header Title
+    &__title {
+      bottom:        0;
+      color:         $color-white;
+      font-size:     1rem;
+      font-weight:   $font-weight--bold;
+      left:          0;
+      line-height:   1.5;
+      margin-bottom: 0;
+      padding:       1.75rem 1.15rem 1rem;
+      position:      absolute;
+      right:         0;
+      // Put the title above the gradient overlay.
+      z-index:       2;
+    }
+  }
+}

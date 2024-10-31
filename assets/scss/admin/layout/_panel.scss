@@ -1,0 +1,285 @@
+$color-border--wp: #a6a6a6;
+$padding-nav-link: 1em 3em 1em 4em;
+
+//
+// Layout Panel
+//
+.dm-panel {
+  margin-top:    2em;
+  max-width:     1200px;
+  // Additional padding right for coherency with #wpcontent element.
+  padding-right: 20px;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  &__header {
+    padding:    4em 1em;
+    text-align: center;
+  }
+
+  &__title {
+    color:          $color-white;
+    line-height:    1;
+    margin:         0 0 .5em;
+    text-transform: capitalize;
+  }
+
+  &__credits {
+    color:       $color-white;
+    display:     block;
+    line-height: 1;
+    margin-top:  10px;
+    a {
+      color: $color-white;
+    }
+  }
+}
+
+//
+// Wrapper
+//
+.dm-panel__wrapper {
+  display: flex;
+}
+
+//
+// Panel Content
+//
+.dm-panel__content {
+  background:  $color-white;
+  border:      1px solid $color-border;
+  border-left: 0;
+  order:       2;
+  // Because we are set the navigation items to relative
+  // due to able to align the icons and the links labels.
+  // We must assign a higher z-index to prevent navigation style to overlap the content.
+  position:    relative;
+  width:       100%;
+  z-index:     2;
+
+  // Move the submit button to the right of the content panel.
+  .dl-field--file,
+  .dl-field--submit {
+    text-align: right;
+  }
+}
+
+//
+// Panel Navigation
+//
+.dm-panel__nav {
+  background-color: $color-primary;
+  border-right:     0;
+  min-width:        200px;
+  order:            1;
+
+  // Panel Navigation List Items
+  &-list {
+    font-size: .88rem;
+    margin:    0;
+    padding:   0;
+  }
+
+  // Sub-menu Navigation
+  &-submenu {
+    // We want to extend.
+    // scss-lint:disable ExtendDirective
+    @extend %screen-reader-text;
+
+    .dm-panel__nav-item {
+      background-color: darken($color-primary, 10%);
+    }
+  }
+
+  // Navigation Item
+  &-item {
+    margin: 0;
+
+    &:hover {
+      // Because of the sub-menu.
+      position: relative;
+    }
+
+    // Remove the rules to the last child item.
+    &:last-child .dm-panel__nav-link {
+      border-bottom: 0;
+
+      &:hover,
+      &--current {
+        box-shadow: none;
+      }
+    }
+  }
+
+  // Open Sub-menu if current menu item.
+  &-item:hover > &-submenu,
+  &-item--current > &-submenu {
+    // We want to extend.
+    // scss-lint:disable ExtendDirective
+    @extend %unscreen-reader-text;
+  }
+
+  // Extra rules for Sub Menus.
+  &-item:not(&-item--current):hover > &-submenu {
+    clip:     auto;
+    left:     100%;
+    // Override the default unscreen-reader-text rule.
+    // scss-lint:disable ImportantRule
+    position: absolute !important;
+    top:      0;
+    z-index:  1000;
+  }
+  &-item:not(&-item--current):hover > &-submenu &-link {
+    padding-left: nth($padding-nav-link, 2);
+  }
+  &-item:not(&-item--current):hover > &-submenu &-link:hover {
+    // Override the default background color for nav links.
+    background: $color-primary;
+    color:      $color-white;
+  }
+
+  // Panel Navigation Item link
+  &-link {
+    border-bottom:   1px solid darken($color-primary, 5%);
+    color:           $color-white;
+    display:         block;
+    padding:         $padding-nav-link;
+    // Set to relative to able to move the icons on left.
+    // keep aligned the links labels.
+    position:        relative;
+    text-decoration: none;
+    text-transform:  capitalize;
+
+    &:hover,
+    &:active,
+    &:focus,
+    &--current {
+      background-color: $color-white;
+      color:            $color-primary--dark;
+    }
+
+    // Remove the outline on focus.
+    &:focus {
+      // We want to extend.
+      // scss-lint:disable ExtendDirective
+      @extend %focus-outline;
+    }
+
+    &:focus,
+    &:active {
+      // Conflict with the %focus-outline placeholder.
+      // scss-lint:disable ImportantRule
+      border:        none !important;
+      border-bottom: 1px solid darken($color-primary, 5%) !important;
+    }
+
+    // Menu Item Icon
+    .la {
+      align-items:     center;
+      background:      transparentize($color-primary--dark, .8);
+      bottom:          0;
+      display:         flex;
+      font-size:       1.3rem;
+      justify-content: center;
+      left:            0;
+      position:        absolute;
+      top:             0;
+      width:           45px;
+    }
+  }
+}
+
+//
+// Form
+// @todo Move it to type component style?
+//
+.dm-panel__content form {
+  display:   flex;
+  flex-wrap: wrap;
+  height:    100%;
+
+  // Form Submit
+  .field-submit {
+    align-self: flex-end;
+    border-top: 1px solid $color-border;
+    flex-grow:  1;
+    margin:     0;
+    padding:    1em;
+    text-align: right;
+
+    input[type="submit"] {
+      background-color: $color-primary;
+      border:           0;
+      box-shadow:       none;
+      color:            $color-white;
+      cursor:           pointer;
+      font-size:        .88rem;
+      height:           auto !important;
+      line-height:      1 !important;
+      padding:          1em 1.5em !important;
+      text-shadow:      none;
+      transition:       all 150ms linear;
+
+      &:hover {
+        background-color: $color-primary--dark;
+      }
+    }
+  }
+
+  input:not([type="submit"]):not([type="button"]),
+  select,
+  textarea {
+    transition: border 80ms ease-in-out;
+  }
+
+  // Focus State
+  input[type="submit"]:focus,
+  input[type="button"]:focus {
+    // We want to extend.
+    // scss-lint:disable ExtendDirective
+    @extend %focus-outline;
+  }
+
+  input:not([type="submit"]):not([type="button"]):focus,
+  select:focus,
+  textarea:focus,
+  .wp-color-result.wp-picker-open {
+    border: 1px solid $color-primary;
+  }
+
+  // Color Picker
+  .wp-picker-container {
+    vertical-align: middle;
+
+    .wp-color-result {
+      margin: 0;
+    }
+  }
+
+  // Select2
+  .select2-container + .wp-picker-container {
+    margin-top: 1.25em;
+  }
+}
+
+//
+// Form Fields
+// Specific for the typography fields.
+//
+.dl-field--typography .dlselect2:not(.dlselect2--wide) + .wp-picker-container,
+.dlselect2:not(.dlselect2--wide) + .dlselect2:not(.dlselect2--wide) {
+  margin-left: .63em;
+}
+
+//
+// Sidebar
+//
+.dm-panel__sidebar {
+  background:   $color-primary--dark;
+  // Borders are related with the .dm-panel__content
+  border:       1px solid $color-border;
+  border-right: 0;
+  color:        $color-white;
+}

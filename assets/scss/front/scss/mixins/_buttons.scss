@@ -1,0 +1,113 @@
+//
+// Buttons Mixins
+//
+
+// Btn
+@mixin btn($responsive: true) {
+  @include enumerate-props($typography_btn);
+  background-color: $color-primary;
+  border:           1px solid $color-primary;
+  border-radius:    $global-border-radius;
+  color:            $color-white;
+  cursor:           pointer;
+  display:          inline-block;
+  font-size:        1rem;
+  font-weight:      $font-weight--bold;
+  padding:          .94rem 1.25rem;
+
+  &:hover {
+    background-color: $color-primary--dark;
+    border-color:     $color-primary--dark;
+    color:            $color-white;
+    transition:       all $global-transition-duration $global-transition-timing;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  @if true == $responsive {
+    @media only screen and (min-width: map-get($breakpoints, 'md')) {
+      padding-left:  2.75rem;
+      padding-right: 2.75rem;
+    }
+  }
+}
+
+// Tiny
+@mixin btn--tiny {
+  font-size: .81rem;
+  padding:   .39rem 1.27rem;
+}
+
+// Small
+@mixin btn--small {
+  font-size: .88rem;
+  padding:   .69rem 1.97rem;
+}
+
+// Medium
+@mixin btn--medium {
+  font-size: 1.25rem;
+  padding:   1.38rem 3.94rem;
+}
+
+// Wide
+@mixin btn--wide {
+  width: 100%;
+}
+
+// Gray
+@mixin btn--gray {
+  background-color: $color-gray--light;
+  border-color:     $color-gray--light;
+  color:            $color-white;
+
+  &:hover {
+    background-color: $color-primary;
+    border-color:     $color-primary;
+    color:            $color-white;
+  }
+}
+
+// White
+@mixin btn--white {
+  background-color: $color-white;
+  border-color:     $color-border;
+  color:            $color-font-body;
+
+  &:hover,
+  &:focus {
+    background-color: $color-primary;
+    border-color:     $color-primary;
+    color:            $color-white;
+  }
+}
+
+// Ghost
+@mixin btn--ghost {
+  background-color: transparent;
+  color:            $color-primary;
+
+  &:hover,
+  &:hover.dlbtn--gray {
+    background-color: $color-primary;
+    border-color:     $color-primary;
+    color:            $color-white;
+  }
+
+  &.dlbtn--gray {
+    color: $color-gray--light;
+  }
+}
+
+// Arrow
+@mixin btn-arrow($allowWide: false) {
+  text-align: center;
+
+  @media only screen and (min-width: map-get($breakpoints, 'md')) {
+    @if true == $allowWide {
+      padding: 1em 5.5em;
+    }
+  }
+}

@@ -1,0 +1,87 @@
+.select2-selection--single {
+  background-color: $color-white;
+  border:           1px solid $color-input-border;
+  border-radius:    $global-border-radius;
+  height:           auto;
+  line-height:      $global-line-height;
+  // Based on a basis calculation.
+  // Just to be sure that in case of an empty value the element don't collapse.
+  // Es. on woocommerce checkout.
+  min-height:       45px;
+  padding:          $padding-input;
+  // Extra padding to the right because of the icon.
+  padding-right:    nth($padding-input, 2) * 2;
+  width:            100%;
+
+  &:focus {
+    outline: none;
+  }
+
+  .select2-selection__rendered {
+    @include enumerate-props(map-get($typography_nav-item, 'link'));
+    padding: 0;
+  }
+
+  .select2-selection__clear {
+    cursor:      pointer;
+    float:       right;
+    font-weight: $font-weight--bold;
+  }
+
+  .select2-selection__placeholder {
+    color: $color-font-body;
+  }
+
+  .select2-selection__arrow {
+    // Needed by the arrow ::before.
+    height:   100%;
+    position: absolute;
+    // Related with the container padding.
+    right:    nth($padding-input, 2);
+    top:      1px;
+    width:    20px;
+
+    b::before {
+      @include flexboxtweener((-ms-flex-pack:center, -ms-flex-align:center));
+      align-items:     center;
+      color:           $color-border;
+      content:         '\f110';
+      display:         flex;
+      font-family:     LineAwesome, sans-serif;
+      height:          100%;
+      justify-content: center;
+    }
+  }
+
+  &[dir="rtl"] {
+    .select2-selection--single {
+      .select2-selection__clear {
+        float: left;
+      }
+
+      .select2-selection__arrow {
+        left:  1px;
+        right: auto;
+      }
+    }
+  }
+
+  &.select2-container--disabled {
+    .select2-selection--single {
+      background-color: $color-input-background--disabled;
+      cursor:           pointer;
+
+      .select2-selection__clear {
+        display: none;
+      }
+    }
+  }
+
+  &.select2-container--above.select2-container--open .select2-selection--single {
+    border-top: 0;
+  }
+
+  &.select2-container--below.select2-container--open .select2-selection--single {
+    border-bottom: 0;
+  }
+}

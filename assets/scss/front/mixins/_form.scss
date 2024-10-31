@@ -1,0 +1,126 @@
+//
+// Mixins Form
+//
+
+// Input Elements List
+@mixin input-element-list($additionals: (), $state: '') {
+  // Initialize the selectors list.
+  $selectors: (
+                'textarea',
+                'input[type="text"]',
+                'input[type="number"]',
+                'input[type="password"]',
+                'input[type="url"]',
+                'input[type="email"]',
+                'input[type="search"]',
+                'input[type="tel"]'
+              );
+
+  // Include additional selectors.
+  @if 0 != length($additionals) {
+    $selectors: join($additionals, $selectors, comma);
+  }
+
+  // Set the State for the selectors.
+  $selectors: append_state_selector($selectors, $state);
+
+  #{$selectors} {
+    @content;
+  }
+}
+
+// Buttons Input Elements
+
+@mixin button-element-list($state: '') {
+  // Initialize the selectors list.
+  $selectors: ('button', 'input[type="reset"]', 'input[type="submit"]');
+  // Set the state if needed.
+  $selectors: append_state_selector($selectors, $state);
+
+  #{$selectors} {
+    @content;
+  }
+}
+
+// Alert Messages
+@mixin alert-message {
+  // Set explicitly the font weight because of some inputs may be inside the label
+  // Label element is stylized differently.
+  font-weight: $font-weight;
+}
+
+// Alert Messages Invalid Form.
+// Generally the label below the input.
+@mixin alert-message--invalid {
+  color:      $color-input-alert--invalid;
+  display:    inline-block;
+  margin-top: .88em;
+}
+
+// Invalid Input Style.
+// :invalid
+@mixin invalid-input {
+  background-color: $color-input-background--invalid;
+  border:           1px solid $color-input-border--invalid;
+  box-shadow:       0 0 .1em $color-primary;
+}
+
+// Multi-check flex style.
+@mixin multicheck-list-flex($columns: 3) {
+
+  .multicheck-list {
+    position: relative;
+
+    &__item {
+      flex:          1 0 100%;
+      -ms-flex:      1 0 auto;
+      margin-left:   0;
+      margin-bottom: 1.25em;
+
+      input[type="checkbox"] {
+        position: absolute;
+      }
+
+      label {
+        font-size:      .88rem;
+        line-height:    1.2;
+        margin-left:    1.6em;
+        padding-right:  .4rem;
+        vertical-align: top;
+      }
+    }
+  }
+
+  // When the columns are greater than 3, we want to add an extra step
+  // From one column to $columns
+  @if 3 < $columns {
+    @media only screen and (min-width: map-get($breakpoints, 'sm')) {
+      $flex-item-width: 100% / round($columns / 2);
+
+      .multicheck-list {
+        @include flexbox-start;
+
+        &__item {
+          flex:     0 0 $flex-item-width;
+          -ms-flex: 0 0 $flex-item-width;
+        }
+      }
+
+    }
+  }
+
+  @media only screen and (min-width: map-get($breakpoints, 'md')) {
+    // Set the width of the columns for the checkboxes and label element.
+    $flex-item-width: 100% / $columns;
+
+    // Multi-check filters fields
+    .multicheck-list {
+      @include flexbox-start;
+
+      &__item {
+        flex:     0 0 $flex-item-width;
+        -ms-flex: 0 0 $flex-item-width;
+      }
+    }
+  }
+}

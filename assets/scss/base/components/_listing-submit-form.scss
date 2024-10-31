@@ -1,0 +1,86 @@
+//
+// Listing Submit Form
+//
+.dlform--listing {
+  // Fields
+  // Multi-check Field
+  @include multicheck-list-flex(4);
+
+  .dlalert + & {
+    margin-top: $global-vertical-margin;
+  }
+
+  // Basic field.
+  .dl-field {
+    // Label
+    > label {
+      margin-bottom: 1rem;
+    }
+  }
+
+  // Dropzone Field
+  .dl-field--file {
+    // The post thumbnail image.
+    #qibla_listing_form-thumbnail ~ .dz-image-preview {
+      // We cannot now if the image will be exactly the resolution we need,
+      // so make it centered just in case.
+      margin-left:  auto;
+      margin-right: auto;
+
+      .dz-details {
+        @include flexboxtweener;
+        align-content:   center;
+        align-items:     center;
+        bottom:          0;
+        display:         flex;
+        flex-direction:  column;
+        justify-content: center;
+      }
+    }
+  }
+
+  // Submit Field
+  .dl-field--submit {
+    align-items: center;
+    display:     flex;
+
+    input[type="submit"] {
+      display: block;
+      width:   100%;
+    }
+  }
+}
+
+@media only screen and (min-width: map-get($breakpoints, 'md')) {
+
+  .dlform--listing {
+    // Social Fields in column
+    .dl-field--in-column {
+      float:      left;
+      margin-top: 0;
+      width:      48%;
+
+      &:nth-child(2n+2) {
+        float: right;
+      }
+    }
+
+    // Class used to identify that element that clear the previous floated ones.
+    .dl-field--clear-in-column {
+      clear: both;
+    }
+
+    // Submit Field
+    .dl-field--submit {
+      // Clear the floated socials fields.
+      clear:           both;
+      display:         flex;
+      justify-content: flex-end;
+
+      input[type="submit"] {
+        width: auto;
+      }
+    }
+  }
+
+}

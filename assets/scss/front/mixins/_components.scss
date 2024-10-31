@@ -1,0 +1,28 @@
+//
+// Components Mixins
+//
+
+// Avatar Mixin
+@mixin avatar() {
+  border:        .35em solid $color-white;
+  border-radius: 50%;
+  box-shadow:    $global-box_shadow;
+}
+
+// Ajax Loader
+@mixin ajax-loader {
+  -webkit-animation: none !important;
+  -o-animation:      none !important;
+  animation:         none !important;
+  background:        url('../svg/loader.svg') no-repeat center center !important;
+  color:             $color-primary;
+  background-size:   cover;
+  content:           '';
+  height:            32px;
+  left:              0;
+  margin:            0 auto;
+  right:             0;
+  top:               50%;
+  transform:         translateY(-50%);
+  width:             42px;
+}

@@ -1,0 +1,147 @@
+//
+// Components Filters Toggler
+//
+.dltoggler {
+  background-color: $color-white;
+  border:           1px solid $color-border;
+  color:            $color-gray;
+  display:          block;
+  font-size:        1rem;
+  font-weight:      400;
+  line-height:      1.2;
+  min-height:       33px;
+  padding:          .45rem .69rem;
+  position:         relative;
+
+  //@extend .dlbtn;
+  //background-color: lighten($color-gray--light, 35%);
+  //border:           1px solid $color-border;
+  //color:            $color-gray;
+
+  // The icon associated to the filter btn.
+  i {
+    display:     inline-block;
+    font-size:   20px;
+    line-height: 22px;
+    margin:      0 auto;
+  }
+
+  &:hover,
+  &:active {
+    background-color: $color-white !important;
+    border:           1px solid $color-primary !important;
+    color:            $color-primary !important;
+  }
+
+}
+
+#dllistings_filter_toggler.dllistings-toggler--active {
+  left: $global-horizontal-margin;
+}
+
+#dllistings_map_toggler.dllistings-toggler--active {
+  right: $global-horizontal-margin;
+}
+
+//
+// Togglers No Map Variant
+//
+.dl-is-listings-archive--no-map {
+  .dltoggler {
+    @include btn--tiny;
+  }
+}
+
+//
+// MEDIA QUERIES
+//
+
+@media only screen and (max-width: 63.94em) {
+
+  .dlform-filter__hidden-fields {
+    background: $color-white;
+    bottom:     0;
+    height:     100%;
+    left:       0;
+    margin-top: 32px;
+    padding:    1rem;
+    position:   absolute;
+    right:      0;
+    top:        80px;
+    width:      100%;
+    z-index:    9999;
+  }
+
+  //
+  // Togglers No Map Variant
+  //
+  .dl-is-listings-archive--with-map {
+    .dltogglers .dltoggler--map-open,
+    .dltogglers .dltoggler-map {
+      @include flexboxtweener;
+      border-radius:   100px !important;
+      bottom:          2rem;
+      box-shadow:      0 1px 1px $color-border;
+      display:         flex !important;;
+      height:          40px;
+      justify-content: space-between;
+      padding:         .45rem 0;
+      position:        fixed !important;
+      right:           9%;
+      text-align:      center;
+      width:           40px;
+      // Below the filters form.
+      z-index:         9897;
+
+      &:hover {
+        // Override Border color.
+        // scss-lint:disable ImportantRule
+        border-color: $color-primary !important;
+      }
+
+      // Label
+      span {
+        @include screen-reader-text;
+      }
+    }
+  }
+
+  //.dl-is-listings-archive--with-map {
+  //  .dltogglers {
+  //    @include flexboxtweener;
+  //    bottom:          0;
+  //    display:         flex;
+  //    justify-content: space-between;
+  //    left:            0;
+  //    position:        fixed;
+  //    right:           0;
+  //    // Below the filters form.
+  //    z-index:         9897;
+  //  }
+  //
+  //  .dltoggler {
+  //    // Remove the btn border radius.
+  //    border-radius: 0;
+  //    flex-basis:    50%;
+  //    -ms-flex:      1 0 auto;
+  //    padding:       1rem;
+  //    text-align:    center;
+  //  }
+  //}
+
+}
+
+@media only screen and (min-width: 64em) {
+
+  .dltogglers {
+    clear:   none;
+    display: flex;
+    float:   right;
+    margin:  0;
+  }
+
+  .dltoggler {
+    @include btn--tiny;
+  }
+
+}

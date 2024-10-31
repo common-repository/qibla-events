@@ -1,0 +1,31 @@
+//
+// Select2 Dates
+//
+.dlform-filter .dl-field--select {
+  position: relative;
+}
+
+.select2-container {
+  .select2-results__option {
+    .select2-results__option-heading {
+      display:       block;
+      font-size:     1.2rem;
+      line-height:   1rem;
+      margin-bottom: .2rem;
+      width:         100%;
+    }
+  }
+}
+
+// All Dates option.
+.select2-container ul#select2-qibla_dates_filter-results .select2-results__option {
+  border:  0;
+  color:   $color-primary;
+  padding: .5rem .5rem .8rem;
+}
+
+// Hide options group days in calendar dropdown.
+.select2-container ul#select2-qibla_dates_filter-results .select2-results__option[role="group"] {
+  @include screen-reader-text;
+  display: none;
+}

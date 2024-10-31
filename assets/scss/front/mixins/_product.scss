@@ -1,0 +1,53 @@
+//
+// Mixins Product
+//
+
+@mixin related-product {
+  @include article-col-4;
+
+  //
+  // MEDIA QUERIES
+  //
+  @media only screen and (min-width: map-get($breakpoints, 'lg')) {
+
+    // The button
+    .button {
+      padding: .63em 1em;
+    }
+
+    // Star Rating
+    .star-rating {
+      font-size: .82rem;
+    }
+
+    // The price
+    .price > .amount,
+    .price ins .amount {
+      font-size: 1.25rem;
+    }
+
+    .price del .amount {
+      font-size: .88rem;
+    }
+
+  }
+
+  @media only screen and (min-width: map-get($breakpoints, 'nm')) {
+
+    // The button
+    .button {
+      padding: .63em 1.5em;
+    }
+
+  }
+}
+
+@mixin product-columns($col: 3) {
+  // Base custom columns.
+  @extend .-article-col-#{$col};
+
+  // Inherit from the main article columns with sidebar.
+  .dl-has-sidebar & {
+    @include article-col-sidebar;
+  }
+}

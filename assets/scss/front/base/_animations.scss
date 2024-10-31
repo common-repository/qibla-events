@@ -1,0 +1,44 @@
+//
+// Animated https://github.com/daneden/animate.css/blob/master/animate.css
+//
+.animated {
+  animation-duration:  $global-transition-duration;
+  animation-fill-mode: both;
+}
+
+.fadeInUpSubMenu {
+  animation-name: fadeInUpSubMenu;
+}
+
+.fadeOutDownSubMenu {
+  animation-name: fadeOutDownSubMenu;
+}
+
+//
+// Main Sub-menu Animation.
+//
+// As of we have the sub-menu absoluted positioned, we need some tweak on animation.
+// Always set the -50% for the x axis in order to keep the sub-menu centered.
+// The class is applied via js within the nav-main.js only for first sub-menus.
+@keyframes fadeInUpSubMenu {
+  from {
+    opacity:   0;
+    transform: translate3d(-50%, 25%, 0);
+  }
+
+  to {
+    opacity:   1;
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes fadeOutDownSubMenu {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity:   0;
+    transform: translate3d(-50%, 25%, 0);
+  }
+}

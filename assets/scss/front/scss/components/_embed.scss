@@ -1,0 +1,38 @@
+//
+// Embeds Components
+//
+
+// @see http://www.wpstuffs.com/youtube-videos-responsive-wordpress/
+.dlembed--responsive {
+  height:         0;
+  overflow:       hidden;
+  padding-bottom: 56.25%;
+  padding-top:    30px;
+  position:       relative;
+
+  iframe,
+  object,
+  embed {
+    height:   100%;
+    left:     0;
+    position: absolute;
+    top:      0;
+    width:    100%;
+  }
+
+  img,
+  iframe,
+  object,
+  embed {
+    max-width: 100%;
+  }
+}
+
+//
+// Article Embed
+//
+.single .dlpost .dlarticle .dlembed + p,
+.page .dlpost .dlarticle .dlembed + p {
+  // Related with the _single-post.scss for the margin-top assigned to the __content.
+  margin-top: $global-vertical-margin;
+}

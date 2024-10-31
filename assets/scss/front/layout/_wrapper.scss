@@ -1,0 +1,65 @@
+//
+// Content Layout
+//
+.dlwrapper {
+  margin:   $global-vertical-margin 0;
+  position: relative;
+}
+
+//
+// The Page Wrapper
+//
+#dlpage-wrapper {
+  // Background color: The same of the body background color.
+  // Prevent elements within the wrapper to show the navigation below.
+  background-color: $color-body-background;
+  position:         relative;
+
+  body:not(.dl-is-listings-archive) & {
+    // Needed by multiple elements and devices.
+    // For example in single listings due to the header style
+    // archive listings due to the meta and select2 issues.
+    overflow-x: hidden;
+  }
+
+  > .dlheader--fixed + .dlwrapper {
+    // Override the default margin when header is in fixed state.
+    margin-top: ($global-vertical-margin + $height-header);
+  }
+}
+
+.dl-is-listings-archive #dlpage-wrapper {
+  .dlheader--fixed + .dlwrapper {
+    margin-top: $height-header;
+  }
+}
+
+.slideout-open {
+  &,
+  body,
+  #dlpage-wrapper {
+    overflow: hidden;
+  }
+}
+
+//
+// MEDIA QUERIES
+//
+// - at 1025px
+@media only screen and (min-width: 64.06em) {
+
+  #dlpage-wrapper {
+    > .dlheader--fixed + .dlwrapper {
+      // Override the default margin when header is in fixed state.
+      // scss-lint:disable ImportantRule
+      margin-top: ($global-vertical-margin + $height-header--large-device);
+    }
+  }
+
+  .dl-is-listings-archive #dlpage-wrapper {
+    > .dlheader--fixed + .dlwrapper {
+      margin-top: $height-header--large-device;
+    }
+  }
+
+}

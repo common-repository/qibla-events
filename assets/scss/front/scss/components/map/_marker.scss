@@ -1,0 +1,88 @@
+//
+// Map Marker Component
+//
+.dlmap-marker {
+
+  // Modifier added on listings filters pages on listing article element.
+  &--hover &__pin::after,
+  &--hover &__icon {
+    transition: $global-transition-duration $global-transition-timing;
+  }
+
+  // Hover Pin After
+  &--hover &__pin::after {
+    background: transparent;
+    color:      $color-white;
+  }
+
+  // Hover Icon
+  &--hover &__icon {
+    color: $color-white;
+  }
+
+  // Hover Pin Before
+  &--hover &__icon::before {
+    color: $color-white;
+  }
+
+  // Icon
+  &__icon {
+    @include flexboxtweener((-ms-flex-pack:center, -ms-flex-align:center));
+    align-items:     center;
+    bottom:          0;
+    color:           $color-primary;
+    // Override the icon lib property.
+    // scss-lint:disable ImportantRule
+    display:         flex !important;
+    justify-content: center;
+    left:            1px;
+    position:        absolute;
+    right:           4px;
+    top:             4px;
+    transform:       rotate(45deg);
+    z-index:         2;
+
+    &::before {
+      font-size: 1.2rem;
+    }
+  }
+
+  &__pin {
+    @include flexboxtweener((-ms-flex-pack:center,-ms-flex-align:center));
+    align-items:      center;
+    background-color: $color-primary;
+    border-radius:    50% 50% 50% 0;
+    display:          flex;
+    height:           50px;
+    justify-content:  center;
+    transform:        rotate(-45deg);
+    width:            50px;
+
+    &::after {
+      background:    $color-white;
+      border-radius: 50% 50% 50% 0;
+      content:       '';
+      // Needed by IE10.
+      display:       block;
+      height:        40px;
+      width:         40px;
+    }
+  }
+
+  // Marker Counter
+  &__counter {
+    @include flexboxtweener((-ms-flex-pack:center,-ms-flex-align:center));
+    align-items:     center;
+    bottom:          0;
+    color:           $color-primary;
+    display:         flex;
+    font-size:       1rem;
+    font-weight:     700;
+    justify-content: center;
+    left:            0;
+    position:        absolute;
+    right:           0;
+    top:             0;
+    transform:       rotate(45deg);
+  }
+}

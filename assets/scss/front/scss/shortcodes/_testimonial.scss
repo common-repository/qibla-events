@@ -1,0 +1,159 @@
+//
+// Testimonial Shortcode
+//
+.dlsc-testimonial {
+  // Put the testimonial up to 2em that is the header short-code section padding button.
+  bottom:        2em;
+  // Workaround.
+  margin-bottom: -2em;
+  position:      relative;
+
+  // The list
+  &__list {
+    @extend .u-no-list-style;
+  }
+
+  // The Item
+  &__item {
+    background-color: $color-white;
+    border:           1px solid $color-border;
+    border-radius:    $global-border-radius;
+    box-shadow:       $global-box_shadow;
+    // Keep the top for the section title.
+    margin-top:       $global-vertical-margin;
+    padding:          $global-padding;
+  }
+
+  // Header
+  &__header {
+    text-align: center;
+  }
+
+  // The title
+  &__title {
+    color:       $color-font-body;
+    font-size:   1.5rem;
+    line-height: 1;
+  }
+
+  // The avatar
+  &__thumbnail {
+    margin: 0 $global-horizontal-margin;
+
+    img {
+      @include avatar;
+      margin:    0 auto;
+      // Set the max width.
+      // This is only used because some times
+      // the importer doesn't download and set the correct cropped image.
+      // The Fw use the qibla-testimonial-loop that is: 128x128.
+      max-width: 128px;
+      // Needed because of the owl-carousel.
+      // scss-lint:disable ImportantRule
+      width:     auto !important;
+    }
+  }
+
+  // Rating
+  &__rating {
+    @extend .star-rating;
+    margin: ($global-vertical-margin / 2) auto;
+  }
+
+  // The content
+  &__content {
+    color:      $color-font-body;
+    font-size:  1.25rem;
+    font-style: italic;
+    margin:     0 auto;
+    max-width:  75%;
+    // Needed by the ::before icon content.
+    position:   relative;
+    text-align: center;
+    z-index:    2;
+
+    &::before {
+      color:       lighten($color-gray, 65%);
+      content:     '\201C';
+      //content:     '\f2d0';
+      //font-family: Lineawesome;
+      font-size:   12rem;
+      //font-size:   5rem;
+      // Keep it in rem.
+      left:        -2.2rem;
+      //left:        -2rem;
+      line-height: 0;
+      //line-height: 1;
+      position:    absolute;
+      top:         .32em;
+      // Keep it in rem.
+      //top:         -1.7rem;
+      // Below the text.
+      z-index:     -1;
+    }
+  }
+}
+
+// Slider Variant
+.dlsc-testimonial {
+
+  .owl-carousel {
+    .owl-dots {
+      // Override the owl-carouse rules.
+      // scss-lint:disable ImportantRule
+      margin-top: $global-vertical-margin !important;
+    }
+  }
+}
+
+//
+// MEDIA QUERIES
+//
+@media only screen and (min-width: map-get($breakpoints, 'md')) {
+
+  .dlsc-testimonial {
+
+    // The Item
+    &__item {
+      position: relative;
+    }
+
+    // Header
+    &__header {
+      @include flexboxtweener((-ms-flex-pack:center, -ms-flex-align:center, -ms-flex-direction:row-reverse));
+      align-items:     center;
+      display:         flex;
+      flex-direction:  row-reverse;
+      justify-content: center;
+      left:            0;
+      margin:          1em auto 0;
+      position:        absolute;
+      right:           0;
+      top:             -2.4em;
+      // Not necessary but owl-carousel make some glitch on slide change.
+      z-index:         1;
+    }
+
+    // Title
+    &__title {
+      margin: 0;
+    }
+
+    // The avatar
+    &__avatar {
+      bottom:   1em;
+      position: relative;
+    }
+
+    &__rating {
+      // Reset the small devices margin.
+      margin: 0;
+    }
+
+    // The content
+    &__content {
+      margin-top: 4.75em;
+    }
+  }
+
+}

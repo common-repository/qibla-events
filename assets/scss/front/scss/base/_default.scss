@@ -1,0 +1,358 @@
+//
+// Default Styles
+//
+
+// All
+* {
+  box-sizing: border-box;
+  margin-top: 0;
+  word-break: break-word;
+}
+
+//
+// Html
+//
+html {
+  @include enumerate-props($typography_body);
+  @include font-smoothing;
+  font-size:                   $font-size;
+  font-weight:                 $font-weight;
+  line-height:                 $global-line-height;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  text-rendering:              optimizeLegibility;
+  touch-action:                manipulation;
+}
+
+//
+// Body
+//
+body {
+  background-color: $color-body-background;
+}
+
+.dl-js body {
+  // If remove, pay attention to the header main menu, sub-menus create horizontal
+  // scroll bar due to their position.
+  overflow-x: hidden;
+}
+
+//
+// Anchor
+//
+a {
+  @include anchor-text;
+
+  // Remove the border bottom from the link directly descendant of figure.
+  // We have some images within the figure tag within the content.
+  // For example figure > a > img.
+  figure > &,
+  figure > &:hover {
+    border-bottom: 0;
+  }
+}
+
+//
+// Block-quote
+//
+blockquote {
+  font-size:   1.25rem;
+  font-style:  italic;
+  font-weight: $font-weight--light;
+}
+
+//
+// Definition list
+//
+dl {
+  dt {
+    font-weight: $font-weight--bold;
+  }
+
+  dd {
+    margin-left: $global-horizontal-margin;
+  }
+}
+
+//
+// Figure
+//
+figure {
+  // Reset the normalize margins.
+  margin: 0;
+}
+
+//
+// Form
+//
+label {
+  color:         $color-label;
+  cursor:        pointer;
+  display:       inline-block;
+  font-weight:   $font-weight--bold;
+  margin-bottom: $margin-label;
+
+  // Reset the input stile when it is inside the label tag.
+  // Some plugin may use this way like contact form 7.
+  // There are other issues but we care them within the properly elements.
+  input {
+    font-size:   $font-size;
+    font-weight: $font-weight;
+    margin-top:  $margin-label;
+  }
+}
+
+// Base Input style
+@include input-element-list {
+  -webkit-appearance: none;
+  border:             1px solid $color-input-border;
+  border-radius:      $global-border-radius;
+  max-width:          100%;
+  padding:            $padding-input;
+  width:              100%;
+
+  // Status
+  &:invalid:focus {
+    // It is the base but since other plugin may use different way to stylize invalid input,
+    // We had put the invalid input style within the utils/_form.scss.
+    @include invalid-input;
+  }
+}
+
+// On focus elements.
+@include input-element-list(('form *'), 'focus') {
+  box-shadow:     none;
+  outline:        thin dotted $color-primary;
+  outline-offset: initial;
+}
+
+@include input-element-list(('form *'), 'focus') {
+  border: 1px solid $color-input-border--focus;
+}
+
+@include input-element-list((), 'focus') {
+  box-shadow: 0 0 .3em transparentize($color-primary, .6);
+  outline:    none;
+}
+
+@include button-element-list('focus') {
+  box-shadow: 0 0 .1em $color-primary;
+  outline:    none;
+}
+
+textarea:empty {
+  // WorkAround to the textarea to not stylize it as invalid until have value.
+  background: $color-white;
+  border:     1px solid $color-border;
+  box-shadow: none;
+}
+
+@include button-element-list {
+  @extend .dlbtn;
+}
+
+::-webkit-input-placeholder {
+  color: $color-input-placeholder !important;
+}
+
+::-moz-placeholder {
+  color: $color-input-placeholder !important;
+}
+
+:-ms-input-placeholder {
+  color: $color-input-placeholder !important;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  -webkit-appearance: none;
+  border:             1px solid $color-border;
+  cursor:             pointer;
+  line-height:        1;
+  margin:             0;
+  vertical-align:     middle;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:checked {
+    border-color: $color-primary;
+
+    &::before {
+      opacity: 1;
+    }
+  }
+
+  &::before {
+    background-color: $color-primary;
+    color:            $color-white;
+    opacity:          0;
+    text-align:       center;
+  }
+}
+
+input[type="checkbox"] {
+  border-radius: $global-border-radius;
+
+  &::before {
+    content:     '\f17b';
+    font-family: Lineawesome;
+  }
+}
+
+input[type="radio"] {
+  align-items:     center;
+  border-radius:   50%;
+  display:         inline-flex;
+  height:          1.13em;
+  justify-content: center;
+  // Little hack.
+  line-height:     .9;
+  overflow:        hidden;
+  width:           1.13em;
+
+  &::before {
+    align-self: stretch;
+    content:    '\2022';
+    width:      100%;
+  }
+}
+
+// The Label
+label + [type="checkbox"],
+label + [type="radio"],
+[type="checkbox"] + label,
+[type="radio"] + label {
+  // Remove the default vertical margins.
+  margin-bottom:  0;
+  margin-top:     0;
+  vertical-align: middle;
+}
+
+[type="checkbox"] + label,
+[type="radio"] + label {
+  margin-left: .4em;
+}
+
+label + [type="checkbox"],
+label + [type="radio"] {
+  margin-left: .4em;
+}
+
+// Multi check-boxes
+.multicheck-list {
+  @extend .u-no-list-style;
+}
+
+// The required char.
+.required {
+  color: $color-primary;
+}
+
+//
+// Headings
+//
+@each $heading, $prop-list in $typography_headings {
+  @each $prop, $value in $prop-list {
+    #{$heading} {
+      #{$prop}: #{$value};
+    }
+  }
+}
+
+h1 {
+  font-size: 2.63rem; // 42px
+}
+
+h2 {
+  font-size: 2rem; // 32px
+}
+
+h3 {
+  font-size:   1.63rem; // 26px
+  line-height: 1.31; // 20.96px
+}
+
+h4 {
+  font-size:   1.5rem; // 24px
+  line-height: 1.31; // 20.96px
+}
+
+h5 {
+  font-size: 1.25rem; // 20px
+}
+
+h6 {
+  font-size: 1.13rem; // 18px
+}
+
+//
+// Img & Embeds
+//
+img,
+iframe {
+  max-width: 100%;
+}
+
+img {
+  height:         auto;
+  vertical-align: middle;
+}
+
+//
+// Mark
+//
+mark {
+  @include enumerate-props($color-selected-text);
+}
+
+::selection {
+  @include enumerate-props($color-selected-text);
+}
+
+::-moz-selection {
+  @include enumerate-props($color-selected-text);
+}
+
+//
+// Pre
+//
+pre {
+  background-color: rgba(0, 0, 0, 0.1);
+  padding:          2em;
+  white-space:      pre-wrap;
+  word-wrap:        break-word;
+}
+
+//
+// Select
+//
+select {
+  max-width: 100%;
+}
+
+//
+// Table
+//
+table {
+  border-collapse: collapse;
+  border-radius:   $global-border-radius;
+  border-spacing:  0;
+
+  a {
+    // Reset the border bottom for anchors.
+    border-bottom-color: transparent;
+  }
+
+  th,
+  td {
+    padding: $padding-cell;
+  }
+
+  // Tbody
+  tbody {
+    tr {
+      border-top: 1px solid $color-border;
+    }
+  }
+}

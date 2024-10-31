@@ -1,0 +1,323 @@
+//
+// Singular Events
+//
+.dl-is-singular-listings.single-events {
+
+  // Comments.
+  #dlmain #comments {
+    margin: 0;
+  }
+
+  // Article.
+  .dlpost > .dlarticle {
+
+    .dlarticle__content {
+      .dlactions,
+      .dlevent-ticket-wrapper {
+        box-shadow:    $global-box-shadow;
+        margin-bottom: 1rem;
+      }
+    }
+
+    > .dlarticle__header {
+      .dlsubtitle {
+        margin-bottom: .6rem;
+      }
+
+      .dlevents__times {
+        color:       $color-gray--light;
+        line-height: 1.2;
+      }
+    }
+  }
+
+  // Ticket button.
+  .event-ticket-button {
+    background:     $color-primary;
+    border:         1px solid $color-primary;
+    color:          $color-white;
+    display:        inline-block;
+    font-size:      1rem;
+    padding:        .94rem 1.25rem;
+    text-align:     center;
+    text-transform: uppercase;
+    width:          100%;
+  }
+
+  // Location.
+  .dlcontainer .dllisting-location {
+    background: transparent;
+    border:     0;
+    box-shadow: none;
+    flex-basis: 100%;
+    margin:     3em 0 0;
+    max-width:  100%;
+    order:      3;
+
+    &__map {
+      border: 0;
+    }
+
+    // Meta item.
+    .dllisting-meta__item {
+      line-height:   2.5rem;
+      margin-bottom: 0;
+      padding:       0;
+      &--map-link {
+        text-align: right;
+      }
+    }
+  }
+
+  // Sidebar
+  #dlsidebar-listings {
+    margin-bottom: 0;
+    margin-top:    .5rem;
+    position:      relative;
+    top:           0;
+
+    .dlsidebar-wrapper {
+      position:   relative;
+      top:        0;
+      transition: top $global-transition-duration $global-transition-timing;
+      > * {
+        z-index: 1;
+      }
+    }
+
+    .dlevents__card {
+      background:    $color-white;
+      border:        1px solid $color-border;
+      border-radius: $global-border-radius;
+      box-shadow:    $global-box-shadow;
+      margin-bottom: 16px;
+      padding:       1rem;
+
+      &--title {
+        font-size:     1rem;
+        margin-bottom: .5em;
+      }
+
+      // Lists
+      .dlevents__items {
+        display:     flex;
+        flex-wrap:   wrap;
+        line-height: 1.4;
+        > li {
+          flex:          1 0 100%;
+          line-height:   1.85;
+          margin-bottom: .47em;
+          &.dlevents__items--phone,
+          &.dlevents__items--url {
+            flex:   1 0 50%;
+            margin: 0;
+          }
+          &.dlevents__items--url {
+            text-align: right;
+          }
+        }
+        > li,
+        > li ~ *,
+        > li .dlevents-calendar label {
+          color:       $color-gray;
+          font-family: inherit;
+          font-size:   .8rem;
+          font-weight: 400;
+        }
+        > li i {
+          font-size:    1rem;
+          margin-right: .35em;
+        }
+        > li .dlevents-calendar label {
+          margin: 0;
+        }
+
+        > li a {
+          border-bottom: 0;
+          color:         $color-gray;
+          &:hover {
+            border-bottom: 0;
+            color:         $color-primary;
+          }
+        }
+
+        .dlevents-calendar label span {
+          margin: 0;
+          &:hover {
+            color: $color-primary;
+          }
+        }
+
+        .dlevents-calendar .add-to-calendar-checkbox:checked ~ .add-to-calendar-lists {
+          height:     auto;
+          opacity:    1;
+          transition: all $global-transition-duration $global-transition-timing;
+          z-index:    10;
+        }
+        .dlevents-calendar .add-to-calendar-checkbox ~ .add-to-calendar-lists {
+          display:    block;
+          height:     0;
+          opacity:    0;
+          transition: all $global-transition-duration $global-transition-timing;
+          z-index:    -1;
+        }
+
+        .dlevents-calendar .add-to-calendar-lists {
+          background:    $color-white;
+          border:        1px solid $color-border;
+          border-radius: 5px;
+          margin:        0;
+          max-width:     100%;
+          padding:       .7em;
+          position:      absolute;
+          width:         auto;
+
+          > ul {
+            margin: 0;
+            li {
+              margin-bottom: .3em;
+              &:last-of-type {
+                margin-bottom: 0;
+              }
+              > a {
+                color:      $color-gray;
+                transition: color $global-transition-duration $global-transition-timing;
+                em {
+                  color: $color-gray--light;
+                }
+                &.oui::before {
+                  display:                 inline-block;
+                  font-size:               inherit;
+                  -moz-osx-font-smoothing: grayscale;
+                  -webkit-font-smoothing:  antialiased;
+                  margin-right:            .5rem;
+                  text-rendering:          auto;
+                }
+                &.oui-yahoo::before {
+                  font-family: 'FontAwesome', sans-serif;
+                  content:     '\f19e';
+                }
+                &.oui-google::before {
+                  font-family: 'FontAwesome', sans-serif;
+                  content:     '\f1a0';
+                }
+                &.oui-ical::before {
+                  font-family: 'FontAwesome', sans-serif;
+                  content:     '\f274';
+                }
+                &.oui-outlook::before {
+                  font-family: 'FontAwesome', sans-serif;
+                  content:     '\f17a';
+                }
+                &:hover {
+                  border: 0;
+                  color:  $color-gray--light;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .dlactions,
+    .dlsocials-links,
+    .dlevents__card {
+      display: none;
+    }
+
+    .dlsidebar-wrapper.no-sticky {
+      .dlactions,
+      .dlsocials-links {
+        display: block;
+      }
+
+      .dlevents__card {
+        display: none;
+      }
+    }
+
+    .dlsidebar-wrapper.sidebar-sticky.fixed {
+      position:   fixed;
+      top:        120px;
+      transition: top $global-transition-duration $global-transition-timing;
+
+      .dlactions,
+      .dlsocials-links,
+      .dlevents__card {
+        display: block;
+        opacity: 1;
+      }
+
+      // Sidebar Stop.
+      &.stop {
+        bottom:   0;
+        position: absolute;
+        top:      auto;
+      }
+    }
+
+    .dlactions {
+      box-shadow: $global-box-shadow;
+    }
+
+    .dlevent-ticket-wrapper {
+      box-shadow:    $global-box-shadow;
+      margin-bottom: 16px;
+    }
+  }
+}
+
+// Events short-code in sidebar.
+.dl-is-singular-listings.single-events #dlsidebar-listings .dlsc-events .dlevent-ticket-wrapper {
+  box-shadow:    none;
+  margin-bottom: 0;
+}
+
+@media only screen and (max-width: 1024px) {
+
+  .dl-is-singular-listings.single-events {
+    // Article.
+    .dlpost > .dlarticle {
+      .dlarticle__content {
+        margin-top: 1.81em;
+      }
+      .dlarticle__header {
+        margin-bottom: 1.81em;
+      }
+    }
+    #dlsidebar-listings {
+      .dlactions,
+      .dlsocials-links,
+      .dlevents__card {
+        display: block;
+        opacity: 1;
+      }
+    }
+  }
+
+}
+
+@media only screen and (max-width: 640px) {
+
+  .dl-is-singular-listings.single-events {
+
+    // Article.
+    .dlpost > .dlarticle {
+      .dlarticle__content {
+        .dlevent-ticket-wrapper {
+          background: $color-body-background;
+          bottom:     0;
+          left:       0;
+          margin:     0 auto;
+          padding:    1rem;
+          position:   fixed;
+          right:      0;
+          width:      100%;
+          z-index:    999999;
+        }
+      }
+    }
+  }
+
+}

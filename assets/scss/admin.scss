@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+// Settings
+@import 'settings/colors';
+// Useful Links
+@import 'admin/usefulLinks/style';
+// Utils
+@import 'utils/clearfix',
+'utils/hide-text',
+'utils/form-ui',
+'utils/box-model';
+// Components.
+@import 'admin/components/metaboxes/metabox',
+'admin/components/metaboxes/metabox-tabs',
+'admin/components/termboxes/termbox',
+'admin/components/list-table',
+'admin/components/vc/fields';
+// Layout
+@import 'admin/layout/panel',
+'admin/layout/panel-settings';
+// Screens
+@import 'admin/screen/listing-package';
+
+// Temporary hide qibla submenu.
+#toplevel_page_qibla-events-options {
+  .wp-submenu a[href="admin.php?page=qibla-events-options"] {
+    display: none;
+  }
+  // Useful links.
+  .wp-submenu li:nth-child(7) {
+    border-bottom:  1px solid #444;
+    margin-bottom:  .3rem;
+    padding-bottom: .3rem;
+  }
+}
+
+// Temporary hide the "Schedule" link unit the issue is fixed.
+// @see https://github.com/woocommerce/woocommerce/pull/15034
+#listing_pricing_product_data ._listing_sale_price_field .description,
+#listing_pricing_product_data .sale_price_dates_fields {
+  display: none;
+}

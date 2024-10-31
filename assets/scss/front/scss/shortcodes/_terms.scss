@@ -1,0 +1,25 @@
+//
+// Terms Shortcode
+//
+.dlsc-terms {
+
+  .dlarticle {
+    // Set the margin and padding specifically for this articles.
+    margin-bottom: 1.5em;
+
+    // The title
+    &__title {
+      // The article title inherit the general rules applied to the dlarticle__title.
+      z-index: 2;
+
+      &-label {
+        position: relative;
+      }
+    }
+
+    // The Term Description Content
+    &__content {
+      @extend .screen-reader-text;
+    }
+  }
+}

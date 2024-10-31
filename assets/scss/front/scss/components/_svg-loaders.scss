@@ -1,0 +1,15 @@
+//
+// Svg Loaders
+//
+.svgloader {
+  display: none;
+  margin:  0 auto;
+
+  rect {
+    fill: $color-primary;
+  }
+}
+
+.ajax-loader.is-active {
+  display: block;
+}

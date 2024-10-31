@@ -1,0 +1,163 @@
+//
+// Listings Manager Posts
+//
+.dlmanager-posts {
+  width: 100%;
+
+  // Single post.
+  &-post {
+    // Title
+    &__title {
+      line-height:    1.5;
+      max-width:      75%;
+      vertical-align: middle;
+
+      a {
+        //font-size: 1.125rem;
+
+        & + span {
+          display:   block;
+          //font-size: $font-size--small;
+        }
+      }
+    }
+
+    // Status
+    &__status {
+      text-align: center;
+
+      .dlpost-status {
+        //font-size: 1.63rem;
+        margin:    0;
+
+        span {
+          @extend .screen-reader-text;
+        }
+
+        // Grouped
+        &--publish::before,
+        &--pending::before,
+        &--qibla-expired::before {
+          @include font-smoothing;
+          font-family: Lineawesome;
+        }
+
+        // Published
+        &--publish::before {
+          color:   $color-green;
+          content: '\f17b';
+        }
+
+        // Pending
+        &--pending::before {
+          color:   $color-yellow;
+          content: '\f1cd';
+        }
+
+        // Expired
+        &--qibla-expired::before {
+          color:   $color-red;
+          content: '\f34d';
+        }
+      }
+    }
+
+    // Actions
+    &__actions {
+      // Only for the td container.
+      // Remove if not necessary.
+      width: 25%;
+
+      .dlmanager-post-actions {
+        @include no-list-style;
+        display:         flex;
+        justify-content: flex-end;
+      }
+
+      // Single action.
+      .dlmanager-post-action {
+        align-items: center;
+        //font-size:   1.63rem;
+        display:     flex;
+
+        a {
+          // Override the WooCommerce rules defined for shop_table.
+          // scss-lint:disable ImportantRule
+          border-bottom: 0 !important;
+          color:         $color-font-body !important;
+
+          &:hover {
+            // Override the WooCommerce rules defined for shop_table.
+            // scss-lint:disable ImportantRule
+            border-bottom: 0 !important;
+            color:         $color-primary !important;
+          }
+        }
+      }
+
+      .dlmanager-post-action + .dlmanager-post-action {
+        margin-left: .63em;
+      }
+
+      i {
+        pointer-events: none;
+      }
+    }
+  }
+}
+
+// No listings found.
+.dlmanager-posts--no-listings {
+  .dlmanager-posts {
+    &__title {
+      margin-bottom: 0;
+    }
+  }
+}
+
+table.dlmanager-posts {
+  th,
+  td {
+    padding:    .63em;
+    text-align: center;
+  }
+
+  th:first-child,
+  td:first-child {
+    padding-left: 0;
+    text-align:   left;
+  }
+
+  th:last-child,
+  td:last-child {
+    padding-right: 0;
+    text-align:    right;
+  }
+
+  th {
+    min-width: 73px;
+  }
+}
+
+//
+// MEDIA QUERY
+//
+@media only screen and (min-width: map-get($breakpoints, 'md')) {
+
+  .dlmanager-posts {
+    // Single post.
+    &-post {
+      // Thumbnail
+      &__thumbnail {
+        display: inline-block;
+      }
+
+      // Title
+      &__title {
+        display:     inline-block;
+        margin-left: $global-horizontal-margin / 2;
+      }
+    }
+  }
+
+}

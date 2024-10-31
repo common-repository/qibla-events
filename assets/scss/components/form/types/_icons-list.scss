@@ -1,0 +1,70 @@
+//
+// Form Type Icons List
+//
+.dltype-current-icons-grid {
+  background:      $color-white;
+  border:          10px solid $color-white;
+  box-shadow:      0 0 1px darken($color-gray, 15%);
+  display:         flex;
+  flex-direction:  row;
+  flex-wrap:       wrap;
+  height:          280px;
+  justify-content: space-between;
+  max-width:       450px;
+  overflow:        scroll;
+  position:        absolute;
+  z-index:         1000;
+
+  &__item {
+    border:     1px solid $color-border;
+    cursor:     pointer;
+    display:    block;
+    font-size:  1rem;
+    margin:     1px;
+    padding:    .31em; // 5px
+    text-align: center;
+    width:      46px;
+
+    &:hover {
+      background:   $color-primary;
+      border-color: $color-primary--dark;
+      color:        $color-white;
+    }
+  }
+}
+
+.dltype-icon-list-current {
+  background-color: $color-white;
+  border:           1px solid $color-gray;
+  cursor:           pointer;
+  // Override the default font size of the vendor.
+  // scss-lint:disable ImportantRule
+  font-size:        1.4rem !important;
+  margin-left:      .63em;
+  padding:          .2em 1em .2em .4em;
+  position:         relative;
+
+  &:hover::after {
+    color: $color-gray;
+  }
+
+  &::after {
+    align-items: center;
+    border-left: 1px solid $color-border;
+    bottom:      0;
+    color:       $color-gray;
+    content:     '\f0dd';
+    display:     flex;
+    font-family: 'FontAwesome', sans-serif;
+    font-size:   .7rem;
+    padding:     0 .31em;
+    position:    absolute;
+    right:       0;
+    top:         0;
+  }
+}
+
+.dltype-icon-list-current,
+.dltype-icon-list-current::after {
+  vertical-align: middle;
+}

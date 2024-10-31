@@ -1,0 +1,175 @@
+//
+// Typography Settings
+//
+
+// Font Family
+$font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif !default;
+
+// Weights
+$font-weight--light: 300;
+$font-weight: 400;
+$font-weight--bold: 700;
+$font-weight--black: 900;
+
+// Font Sizes
+$font-size: 1rem; // 16px
+$font-size--small: .88rem; // 14px
+$font-size--big: 2rem; // 32px
+
+// Global line Height
+$global-line-height: 1.85;
+
+// Fonts
+$typography_body: (
+  color: $color-font-body,
+  font-family: $font-family
+) !default;
+
+$typography_headings: (
+  h1: (
+    color: $color-gray,
+    font-weight: $font-weight--black,
+  ),
+  h2: (
+    color: $color-gray,
+    font-weight: $font-weight--bold
+  ),
+  h3: (
+    color: $color-gray,
+    font-weight: $font-weight--bold
+  ),
+  h4: (
+    color: $color-gray,
+    font-weight: $font-weight--bold
+  ),
+  h5: (
+    color: $color-gray,
+    font-weight: $font-weight--bold
+  ),
+  h6: (
+    color: $color-gray,
+    font-weight: $font-weight--bold
+  )
+) !default;
+
+// Jumbotron Title
+$typography-jumbotron-title: (
+  // This is needed because on front the jumbo-tron title is treated as a h1 title but it's not.
+  color: $color-primary
+) !default;
+
+//
+// Anchor
+//
+$typography_anchor: (
+  border-bottom: 2px solid transparent,
+  color: $color-primary,
+  text-decoration: none,
+  hover:(
+    border-bottom-color: $color-primary,
+    // Explicitly set to color primary to able to pass to
+    // anchor-text mixin a different color in :link state.
+    color: $color-primary
+  )
+);
+
+//
+// Brand
+//
+$typography_brand: (
+  title: (
+    font-size: 2rem,
+    font-style: italic,
+    font-weight: $font-weight--black
+  ),
+  description: (
+    font-size: 1rem,
+    font-style: italic,
+    font-weight: $font-weight--light
+  )
+);
+
+//
+// Navigation
+//
+$typography_nav-item: (
+  link: (
+    color: $color-gray--light
+  )
+);
+
+$typography_nav-item_hightlight: (
+  color: $color-primary
+);
+
+$typography_nav-main: (
+  font-family: $font-family,
+  font-weight: $font-weight--bold
+) !default;
+
+$typography_nav-main_submenu: (
+  link: (
+    color: $color-gray
+  ),
+);
+
+//
+// Listings
+//
+$typography_listings-single_header: (
+  title:(
+    color: $color-gray
+  ),
+  subtitle:(
+    color: lighten($color-gray, 26%),
+    font-size: 1.2rem
+  )
+);
+
+//
+// Listings Meta
+//
+$typography_listings-meta: (
+  font-size: .8rem,
+  icon: (
+    font-size: 1rem
+  )
+);
+
+//
+// Buttons
+//
+$typography_btn: (
+  font-family: $font-family
+) !default;
+
+//
+// Footer
+//
+$typography_footer: (
+  color: $color-white,
+  link: (
+    border-bottom-color: transparent,
+    color: $color-white,
+  ),
+  link-hover: (
+    border-bottom-color: $color-white
+  )
+) !default;
+
+//
+// Colophon
+//
+$typography_colophon: (
+  color: $color-white,
+  link: (
+    color: $color-white
+  ),
+  link-hover: (
+    border-bottom-color: $color-white
+  )
+) !default;
+
+$typography_colophon-content: (
+  font-size: .88rem
+);

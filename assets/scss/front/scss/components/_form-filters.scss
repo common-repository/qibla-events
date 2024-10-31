@@ -1,0 +1,198 @@
+//
+// Form Filters Component
+//
+.dlform-filter {
+  background-color: $color-white;
+  // Keep 0 for horizontal padding, we add them later depending on archive listings. See below.
+  padding:          ($global-padding / 2) 0;
+  // Make the element large such as the container to prevent wrong shrink when the content is missed.
+  // This fix the width of the element even when the number of the items contained are less than the element
+  // numbers allowed by the .multicheck-list flex value.
+  width:            100%;
+
+  // Fields
+  .dl-field {
+    text-transform: capitalize;
+
+    // Separate the fields.
+    &:nth-child(even) {
+      margin-top: $global-vertical-margin / 2;
+    }
+
+    > label {
+      @extend .screen-reader-text;
+    }
+  }
+
+  // Hidden Fields
+  &__hidden-fields {
+    margin-top: $global-padding;
+  }
+
+  // Multi-check field
+  @include multicheck-list-flex;
+
+  // Form actions
+  &__actions {
+    text-align: right;
+    width:      100%;
+
+    .dlform-filter__action + .dlform-filter__action {
+      margin-left: 1em;
+    }
+  }
+
+  // States
+  &--open {
+    // Workaround
+    // Needed on small devices. This overlap the google map when it's opened.
+    // On IE 10 There are problems with the following rules when applied directly to the opened form.
+    .dlgoogle-map-full-screen & {
+      bottom:   0;
+      position: absolute;
+      top:      0;
+      z-index:  9899;
+    }
+
+    .dlform-filter__actions {
+      background-color: $color-white;
+      bottom:           0;
+      left:             0;
+      padding:          $global-padding / 2;
+      position:         fixed;
+      transform:        translate3d(0, 0, 0);
+      z-index:          9999;
+    }
+  }
+
+  &--fixed {
+    left:     0;
+    position: fixed;
+    right:    0;
+    top:      0;
+  }
+}
+
+.dlform-filter:not(.dlform-filter--open) {
+  .dlform-filter__hidden-fields {
+    // Temporary.
+    display: none;
+  }
+}
+
+//
+// Form filter Map variants
+//
+.dl-is-listings-archive {
+  // Map variant
+  &--with-map .dlform-filter {
+    border:              1px solid transparent;
+    border-bottom-color: $color-border;
+    // Add padding when with map.
+    padding-left:        $padding-container;
+    padding-right:       $padding-container;
+  }
+
+  // No Map variant
+  &--no-map .dlform-filter {
+    position: relative;
+
+    // Add a wide background strip.
+    &::before {
+      @include wide-background-strip;
+      display: flex;
+    }
+  }
+}
+
+//
+// MEDIA QUERIES
+//
+@media only screen and (min-width: map-get($breakpoints, 'sm')) {
+
+  //
+  // Form Filters
+  //
+  .dlform-filter {
+    @include cf;
+
+    // Fields
+    .dl-field {
+      float: left;
+      width: 48%;
+
+      &:nth-child(even) {
+        float:      right;
+        // Reset the small device margin for fields.
+        margin-top: 0;
+      }
+
+      &--multi-check,
+      &--checkbox {
+        // Checkboxes are treated differently.
+        // scss-lint:disable ImportantRule
+        float: none !important;
+        width: 100% !important;
+      }
+    }
+
+    // Hidden Fields
+    &__hidden-fields {
+      clear:      both;
+      margin-top: ($global-vertical-margin + $global-padding);
+    }
+  }
+}
+
+@media only screen and (min-width: map-get($breakpoints, 'md')) {
+
+  //
+  // Form Filters
+  //
+  .dlform-filter {
+
+    // The Hidden Fields
+    &__hidden-fields {
+      width: 100%;
+    }
+  }
+
+}
+
+@media only screen and (min-width: map-get($breakpoints, 'nm')) {
+
+  //
+  // Form Filters
+  //
+  .dlform-filter {
+    // Hidden Fields
+    &__hidden-fields {
+      clear: both;
+    }
+  }
+
+
+  //
+  // Form filter Map variants
+  //
+  .dl-is-listings-archive {
+    // Map Variant
+    &--with-map .dlform-filter {
+      padding-left:  $global-padding;
+      padding-right: $global-padding;
+
+      // States
+      &--open {
+        .dlform-filter__actions {
+          @include enumerate-props($boxmodel_listings-archive_main);
+        }
+      }
+    }
+
+    // No map variant
+    &--no-map .dlform-filter {
+      padding-left:  0;
+      padding-right: 0;
+    }
+  }
+}

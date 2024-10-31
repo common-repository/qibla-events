@@ -1,0 +1,61 @@
+//
+// Listing Location
+//
+// @View qibla-events/views/customFields/listings/listingsLocation.php
+//
+.dllisting-location {
+  background-color: $color-white;
+  border:           1px solid $color-border;
+  // Same margin top defined in _sidebar.scss for widgets.
+  // Needed to distantiate the location from the product.
+  margin-top:       1em;
+  padding:          0;
+
+  &:first-child {
+    // Remove the margin top if the first element child.
+    // We can have the product within the single listing before the location.
+    // To distantiate the map location element from the product we added the margin top.
+    // Because we don't know which markup will be used for product, we always add the margin-top for the
+    // listing-location element.
+    // But if the product isn't set for a listing we need to remove it from the location element.
+    // Related with the sidebar.scss top value.
+    margin-top: 0;
+  }
+
+  &__map {
+    // Use the border as padding since add the padding doesn't shrink the map.
+    // Should be the same of the padding but for some calculation difference the .8 align the elements.
+    border: .8em solid $color-white;
+
+    // We don't want that the user can move the map instead of
+    // scrolling the page on mobile devices.
+    .is-mobile & {
+      pointer-events: none;
+    }
+
+    a {
+      // Explicitly set. The designer don't like the rules of usability.
+      // scss-lint:disable ImportantRule
+      border-bottom: 0 !important;
+    }
+  }
+
+  // Address
+  .dllisting-address {
+    border-top: 0;
+    font-style: normal;
+  }
+}
+
+//
+// MEDIA QUERIES
+//
+@media only screen and (min-width: map-get($breakpoints, 'nm')) {
+
+  .is-mobile .dllisting-location {
+    &__map {
+      pointer-events: initial;
+    }
+  }
+
+}

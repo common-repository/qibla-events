@@ -1,0 +1,42 @@
+//
+// Components Wishlist
+//
+
+.dlwishlist-adder-wrapper {
+  position: absolute;
+  right:    1rem;
+  top:      .3rem;
+  z-index:  3;
+
+  .dlwishlist-adder {
+    border:    0;
+    cursor:    pointer;
+    font-size: 1.75rem;
+
+    &::before {
+      content:     '\f237';
+      display:     inline-block;
+      font-family: Lineawesome;
+      transition:  all $global-transition-duration $global-transition-timing;
+    }
+
+    &:not(.is-stored)::before {
+      color: $color-white;
+    }
+
+    &.is-stored::before,
+    &:hover::before {
+      color:   $color-primary;
+      content: '\f236';
+    }
+
+    &:hover::before {
+      transform: scale(1.3);
+    }
+
+    // Status
+    &.is-running {
+      pointer-events: none;
+    }
+  }
+}

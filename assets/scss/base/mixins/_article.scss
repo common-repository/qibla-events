@@ -1,0 +1,31 @@
+//
+// Mixins Article
+//
+
+// The Article Icon
+@mixin article-icon {}
+
+//
+// Article Square
+//
+// - Title
+// - Header
+//
+
+// Square Title
+@mixin article-square-title {}
+
+@mixin article-square-header {}
+
+//
+// Article Card
+//
+// - Active
+// - TranslateY
+//
+
+// Active status
+@mixin article-active {}
+
+// TranslateY
+@mixin article-translateY {}

@@ -1,0 +1,345 @@
+//
+// Jumbotron Component
+//
+// 1. Header Sticky
+//
+// The header sticky edit the way the jumbotron and his content is posizioned.
+// First of all, the padding top for the header fixed is added via the css, see the `.dlheader--fixed ~ .dljumbotron`
+// for large and small devices. Then, add margin bottom to the jumbotron content when the header skin is set to transparent.
+//
+// Why the margin bottom to the jumbotron content for header transparent skin?
+// Because visually the content of the jumbotron doesn't appear centered.
+//
+// 1.1 Set the padding top for fixed header. (Searchable within the file).
+//
+.dljumbotron {
+  @include flexboxtweener((-ms-flex-align:center, -ms-flex-direction:row));
+  align-items:      center;
+  // If you change this, change even the default value for the post meta option.
+  background-color: rgba(255, 255, 255, .3);
+  display:          flex;
+  // Pages have title inside the jumbo-tron, vh prevent to overlaps header and jumbo-tron.
+  min-height:       47vh;
+  max-height:       350px;
+  padding-left:     $global-horizontal-padding / 2;
+  padding-right:    $global-horizontal-padding / 2;
+  position:         relative;
+
+  &::before {
+    transition: all $global-transition-duration $global-transition-timing;
+  }
+
+  .is-winIE & {
+    // IE need an height.
+    height: 1px;
+  }
+
+  a {
+    @include anchor-text((color: lighten($color-gray, $color-light-module)));
+  }
+
+  .dlcontainer {
+    // Remove the horizontal container padding.
+    // We use the padding defined at dljumbotron level instead.
+    padding-left:  0;
+    padding-right: 0;
+
+    // below the .dlheader
+    // @see wiki/Z-Index%20Elements
+    z-index:       9899;
+  }
+
+  &__title,
+  .dlsubtitle {
+    line-height: 1;
+    text-align:  center;
+  }
+
+  &__title {
+    @include enumerate-props($typography-jumbotron-title);
+    font-size:   2rem;
+    font-weight: $font-weight--bold;
+    margin:      0 0 1.25rem; // Take it related to the font size.
+
+    &:only-child {
+      margin: 0
+    }
+  }
+
+  .dlsubtitle {
+    color:         $color-primary;
+    font-size:     1.6rem;
+    margin-bottom: 0;
+  }
+
+  // When the overlay is set.
+  &--overlay {
+    @include dloverlay--before;
+
+    &,
+    a,
+    .dljumbotron__title,
+    .dlsubtitle {
+      color: $color-white;
+    }
+  }
+  // Darken
+  &--overlay-darken {
+    &::before {
+      background-color: transparentize($color-black, .4);
+    }
+  }
+
+  // Video Background
+  &--has-background-video {
+
+    &::before {
+      // Above the video.
+      z-index: 2;
+    }
+
+    #wp-custom-header {
+      bottom:    0;
+      left:      50%;
+      min-width: 100vw;
+      overflow:  hidden;
+
+      position:  absolute;
+      right:     0;
+      top:       0;
+      transform: translateX(-50%);
+
+      // The play/pause button.
+      #wp-custom-header-video-button {
+        display: none;
+      }
+
+      // The iframe.
+      #wp-custom-header-video {
+        left:       50%;
+        // This reset the max-width for the iframe base tag.
+        // It's needed to make the video full width.
+        max-width:  inherit;
+        min-height: 100%;
+        position:   absolute;
+        top:        50%;
+        transform:  translate(-50%, -50%);
+      }
+    }
+  }
+
+  // Parallax
+  &--use-parallax {
+    // This z-index is needed to prevent jarallax to set it to 0
+    // z-index: 0 here will hide the search navigation/suggestions.
+    z-index: 1;
+  }
+}
+
+// 1.1 Set the padding top for fixed header.
+.dlheader--fixed ~ .dljumbotron {
+  padding-bottom: $height-header;
+  padding-top:    $height-header * 2;
+}
+
+// Reduce the padding for the jumbotron when skin is transparent, so visually we see the content vertically centered.
+.dlheader--fixed.dlheader--original-skin-transparent ~ .dljumbotron {
+  padding-top: $height-header;
+}
+
+// Has Gallery
+// The wrapper is created via javascript.
+.dljumbotron-gallery-wrapper {
+  // Border to zero because the tag is an anchor.
+  border:  0;
+  display: block;
+}
+
+// The labelIcon element.
+// This is also created via js.
+.dljumbotron-gallery-label {
+  color:          $color-white;
+  cursor:         pointer;
+  display:        block;
+  line-height:    1;
+  // Let us to click throught the element.
+  pointer-events: none;
+  // Position Absolute to able to click on it and open the gallery.
+  // The element is within the main content because of the position needed is inside the container.
+  position:       absolute;
+  top:            -$global-vertical-margin;
+  // z-index to prevent to hide the element below the jumbotron.
+  z-index:        1;
+
+  i {
+    font-size:      2rem;
+    line-height:    .7;
+    margin-right:   .33em;
+    vertical-align: middle;
+  }
+}
+
+//
+// Front and Listing
+//
+// Take care on min/max height within different media queries.
+//
+.dl-is-front-page .dljumbotron,
+.dl-is-singular-listings .dljumbotron,
+.single-listings .dljumbotron {
+  max-height: 640px;
+  min-height: 640px;
+  min-height: 67vmin;
+}
+
+//
+// Grouped Post and Page
+//
+.single-post.dl-has-post-thumbnail,
+.page.dl-has-post-thumbnail {
+  .dljumbotron {
+    margin: 0 0 -5.13em;
+  }
+}
+
+//
+// Single Post
+//
+.single-post {
+
+  // The Jumbo-tron.
+  .dljumbotron {
+    text-align: center;
+
+    // The post meta.
+    .dlarticle__meta {
+      // Remove the default meta padding.
+      padding: 0;
+
+      &-link::before {
+        // @note Keep the rem as of this margin is directly applied to the text.
+        margin-right: .21rem;
+      }
+
+      &-item--terms {
+        text-transform: capitalize;
+      }
+    }
+  }
+}
+
+// Only when there is a featured image.
+// And only on post post type.
+.single-post.dl-has-post-thumbnail .dljumbotron {
+  // @note Explicitly set to 100% because of some browsers incongruences
+  max-height: 100%;
+  padding:    8.36em 0;
+}
+
+//
+// Header Skin Jumbo-tron
+//
+// The following selectors are needed because of the main nav will be overlapped by the
+// jumbo-tron itself. This is why the gradient for the skin-transparent is applied to jumbo-tron.
+//
+.dlheader--skin-transparent ~ .dljumbotron-gallery-wrapper .dljumbotron,
+.dlheader--skin-transparent ~ .dljumbotron {
+
+  &::after {
+    background: transparent linear-gradient(to bottom, rgba(0, 0, 0, .7), rgba(0, 0, 0, 0));
+    bottom:     0;
+    content:    '';
+    height:     150px;
+    left:       0;
+    position:   absolute;
+    right:      0;
+    top:        0;
+  }
+}
+
+//
+// MEDIA QUERIES
+//
+@media only screen and (max-width: map-get($breakpoints, 'md')) and (orientation: portrait) {
+
+  .dl-is-singular-listings .dljumbotron,
+  .single-listings .dljumbotron {
+    height: 60vh;
+  }
+
+}
+
+@media only screen and (max-width: map-get($breakpoints, 'md')) and (orientation: landscape) {
+
+  .dl-is-singular-listings .dljumbotron,
+  .single-listings .dljumbotron {
+    min-height: 43vh;
+  }
+
+}
+
+@media only screen and (min-width: map-get($breakpoints, 'md')) {
+
+  .dljumbotron {
+    padding-left:  $global-horizontal-padding;
+    padding-right: $global-horizontal-padding;
+
+    &__title {
+      font-size: 4rem;
+    }
+  }
+
+  // Homepage Template
+  .dl-is-front-page .dljumbotron {
+    .dlcontainer {
+      // This is for the search component.
+      width: 80%;
+    }
+  }
+
+}
+
+@media only screen and (max-width: 85.38em) {
+
+  .page-template-homepage .dljumbotron,
+  .page-template-homepage .dlheader--fixed ~ .dljumbotron {
+    max-height: 100%;
+  }
+
+  .page-template-homepage .dljumbotron {
+    height: 94.2vh;
+  }
+
+  .page-template-homepage .dlheader--skin-transparent ~ .dljumbotron,
+  .page-template-homepage .dlheader--fixed ~ .dljumbotron {
+    height:     auto;
+    min-height: 100vh;
+  }
+
+}
+
+// - at 1025px
+@media only screen and (min-width: 64.06em) {
+
+  // 1.1 Set the padding top for fixed header.
+  // Related to the height of the header in large devices.
+  .dlheader--fixed ~ .dljumbotron {
+    // Apply extra padding and height when header is set to be sticky.
+    // When header is sticky header get the --fixed modifier and put in fixed position.
+    // This cause the jumbotron to lose part of the height than when header is not sticky.
+    padding-bottom: $height-header--large-device;
+    padding-top:    $height-header--large-device * 2;
+
+    // Homepage has his own rules.
+    body:not(.dl-is-front-page):not(.dl-is-singular-listings) &,
+    body:not(.dl-is-front-page):not(.single-listings) & {
+      min-height: 53.2vh;
+    }
+  }
+
+  // Reduce the padding for the jumbotron when skin is transparent, so visually we see the content vertically centered.
+  .dlheader--fixed.dlheader--original-skin-transparent ~ .dljumbotron {
+    padding-top: $height-header--large-device;
+  }
+
+}

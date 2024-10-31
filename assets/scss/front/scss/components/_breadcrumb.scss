@@ -1,0 +1,56 @@
+//
+// Breadcrumb Component
+//
+.dlbreadcrumb {
+  margin-bottom: .7em;
+}
+
+.dlbreadcrumb,
+.dllisting-terms {
+
+  &__list {
+    @extend .u-no-list-style;
+  }
+
+  &__item,
+  &__link,
+  span[typeof="v:Breadcrumb"],
+  a {
+    color: lighten($color-gray, 26%);
+  }
+
+  // Link list item
+  &__item {
+    display: inline-block;
+  }
+
+  // The link
+  a,
+  &__link {
+    // Explicitly set, the designer don't like the rules of usability.
+    border-bottom: 0;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+
+  span[typeof="v:Breadcrumb"] > a::after {
+    // icon angle-right.
+    content:        '\f112';
+    font-family:    LineAwesome, sans-serif;
+    vertical-align: middle;
+  }
+}
+
+.dlbreadcrumb {
+  flex:          1 0 100%;
+  -ms-flex: 1 0 auto;
+  margin-bottom: $global-vertical-margin;
+}
+
+.dllisting-terms {
+  &__item + .dllisting-terms__item {
+    margin-left: .33em;
+  }
+}

@@ -1,0 +1,88 @@
+//
+// Pagination
+//
+.dlpagination {
+  margin:     $global-vertical-margin 0 0;
+  text-align: center;
+
+  // List items
+  &__list {
+    @extend .u-no-list-style;
+  }
+
+  // Items
+  &__item {
+    display:        inline-block;
+    vertical-align: middle;
+
+    &:nth-child(n+2) {
+      margin-left: .5em;
+    }
+
+    a {
+      border:  1px solid $color-border;
+      color:   $color-gray--light;
+      // Set this display to fix the height issue with the list container.
+      display: inline-block;
+
+      &:hover {
+        background-color: $color-primary;
+        border-color:     $color-primary;
+        color:            $color-white;
+      }
+
+      .dlpagination--post-paged &:hover,
+      &.next,
+      &.prev {
+        // Set to transparent for when hover.
+        border-color: transparent;
+      }
+
+      .dlpagination--post-paged &,
+      &.next {
+        // Little fix because of the icon.
+        padding-right: .7em;
+      }
+      &.prev {
+        // Little fix because of the icon.
+        padding-left: .7em;
+      }
+
+      // Only the link that contains only the page-numbers.
+      // Because wordpress add the page-numbers class even to the "next" and "prev" link.
+      .dlpagination--post-paged &,
+      &[class="page-numbers"],
+      &.next:hover,
+      &.prev:hover {
+        border-radius: $global-border-radius;
+        box-shadow:    $global-box_shadow;
+      }
+
+      // Icon.
+      i {
+        // This prevent click events issues on archive listings for ajax pagination.
+        pointer-events: none;
+      }
+    }
+
+    .dlpagination--post-paged & a,
+    .page-numbers {
+      padding: .3em .8em;
+    }
+
+    &--post-paged a,
+      // Avoid .prev and .next to get the background.
+    [class="page-numbers"] {
+      background-color: $color-white;
+    }
+  }
+}
+
+//
+// Archive Listings Pagination
+//
+.dl-is-listings-archive {
+  .dlpagination {
+    margin-top: 0;
+  }
+}

@@ -1,0 +1,259 @@
+//
+// Sidebar Layout
+//
+.dlsidebar {
+
+  // General List
+  ul {
+    @extend .u-no-list-style;
+
+    ul {
+      margin-left: 1em;
+    }
+  }
+
+  // General Widget
+  &__widget {
+    &__title {
+      flex:        1 0 100%;
+      font-size:   1rem;
+      font-weight: $font-weight--bold;
+    }
+  }
+}
+
+//
+// Main Sidebars
+//
+.dlwrapper .dlsidebar {
+  flex:       1 0 100%;
+  margin-top: $global-vertical-margin;
+  order:      3;
+
+  &__widget {
+    // Main Sidebar List
+    li {
+      // Needed to able to override other plugins property.
+      // scss-lint:disable ImportantRule
+      padding: .55em 0 !important;
+
+      ul li:last-child,
+      ol li:last-child {
+        padding-bottom: 0;
+      }
+    }
+
+    // Nested Ul's
+    // Include .children and .sub-menu.
+    li ul {
+      padding-top: .55em;
+    }
+
+    ul li + li,
+    ol li + li,
+    li ul li:first-child {
+      border-top: 1px solid lighten($color-gray, 48%);
+    }
+  }
+
+  // Main Sidebar Consecutive Widgets
+  &__widget + .dlsidebar__widget {
+    margin-top: $global-vertical-margin;
+  }
+}
+
+//
+// Sidebar Listings
+//
+.dl-is-singular-listings,
+.single-listings {
+
+  .dlwrapper .dlsidebar {
+
+    &:empty {
+      // Reset the margin for empty sidebars.
+      margin: 0;
+    }
+
+    &__widget {
+      @include enumerate-props($boxmodel_boxed-widget);
+      margin-top: 1em;
+    }
+
+    // When there is no sidebar defined or the fw isn't active.
+    &--none {
+      margin: $global-vertical-margin 0;
+    }
+
+    // Variants
+    &--left,
+    &--right {
+      margin: $global-vertical-margin 0;
+    }
+  }
+}
+
+//
+// Sidebar WooCommerce
+//
+.woocommerce {
+  &.dlsidebar {
+    &__widget {
+      li {
+        a {
+          border: 0 !important;
+        }
+
+        img {
+          height: 48px !important;
+          width:  48px !important;
+        }
+      }
+    }
+  }
+
+  ul.product_list_widget {
+    li {
+      @extend .u-cf;
+      color: $color-gray--light;
+
+      &,
+      a {
+        display: block;
+      }
+
+      a:not(.remove) {
+        color: $color-font-body;
+
+        &:hover {
+          color: $color-primary;
+        }
+      }
+
+      .reviewer,
+      .amount {
+        font-size: $font-size--small;
+      }
+    }
+  }
+}
+
+.dlsidebar {
+  .woocommerce-MyAccount-navigation + .dlsidebar__widget {
+    margin-top: $global-vertical-margin;
+  }
+}
+
+//
+// Footer Sidebar
+//
+.dlsidebar--footer {
+  padding-bottom: 4em;
+
+  // The Widgets
+  .dlsidebar__widget {
+    // @note use the padding because of the flex will be added later and margin may not work as expected.
+    padding: 3.81em 0 0;
+
+    // Widget Title
+    &__title {
+      margin-bottom:  0;
+      text-transform: uppercase;
+    }
+  }
+}
+
+//
+// MEDIA QUERIES
+//
+@media only screen and (min-width: map-get($breakpoints, 'md')) {
+
+  //
+  // Footer Sidebar
+  //
+  .dlsidebar--footer {
+    // The Widgets
+    .dlsidebar__widget {
+      flex-basis: 20%;
+
+      &:first-child {
+        flex-basis:    60%;
+        padding-right: 20%;
+      }
+    }
+  }
+
+}
+
+@media only screen and (min-width: map-get($breakpoints, 'nm')) {
+
+  //
+  // Main Sidebar
+  //
+  .dlwrapper .dlsidebar {
+    // Remove the small devices sidebar margin.
+    margin-top:   0;
+    padding-left: $global-horizontal-padding;
+  }
+
+  // This is the main sidebar within the main wrapper.
+  .page-template-fullwidth .dlwrapper > .dlsidebar,
+  .dlwrapper > .dlcontainer--flex > .dlsidebar {
+    -ms-flex:   1 0 35%;
+    flex-basis: 35%;
+    max-width:  35%;
+  }
+
+  //
+  // Sidebar Variants
+  //
+  .dlwrapper .dlsidebar--left,
+  .dlwrapper .dlsidebar--right {
+    margin: 0;
+  }
+
+  .dl-is-singular-listings .dlwrapper .dlsidebar--left,
+  .dl-is-singular-listings .dlwrapper .dlsidebar--right,
+  .single-listings .dlwrapper .dlsidebar--left,
+  .single-listings .dlwrapper .dlsidebar--right {
+    position: relative;
+    // Put the sidebar one level up to the single listing header.
+    z-index:  2;
+  }
+
+  .dl-is-singular-listings.dl-has-jumbotron .dlwrapper .dlsidebar--left,
+  .dl-is-singular-listings.dl-has-jumbotron .dlwrapper .dlsidebar--right,
+  .single-listings.dl-has-jumbotron .dlwrapper .dlsidebar--left,
+  .single-listings.dl-has-jumbotron .dlwrapper .dlsidebar--right {
+    // For more info about the value, have a look at the listings-location.scss
+    top: -5.68em;
+  }
+
+  .dlwrapper .dlsidebar--left {
+    order:         1;
+    // Reset the default sidebar padding.
+    // If the framework is not active, the default sidebar is on the right side.
+    padding-left:  0;
+    padding-right: $global-horizontal-padding;
+  }
+
+  .dlwrapper .dlsidebar--right {
+    order:         3;
+    padding-left:  $global-horizontal-padding;
+    // Reset the default sidebar padding.
+    // If the framework is not active, the default sidebar is on the right side.
+    padding-right: 0;
+  }
+
+}
+
+@media only screen and (min-width: map-get($breakpoints, 'nm')) and (max-width: map-get($breakpoints, 'xl')) {
+
+  //
+  // Sidebar
+  //
+  .dlsidebar {
+    font-size: .88em;
+  }
+
+}

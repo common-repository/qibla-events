@@ -1,0 +1,36 @@
+//
+// Related Posts Component
+//
+.dlrelated-posts {
+
+  // Title
+  &__title {
+    text-align: center;
+
+    &:first-child {
+      // Add margin top when the title is the first element within the container.
+      // We added the shortcode section to the related posts and it's that that add the margin to separate
+      // the title, but when the section is not rendered since the support is only within the singular listings we need
+      // to add the margin top to the title.
+      padding-top: convert_unit_to_rem($dlsc-section-padding-bottom);
+    }
+  }
+
+  // Section Shortcode
+  // Tweaks for section shortcode within the related posts.
+  .dlsc-section {
+    // Title
+    &__title {
+      color:          $color-white;
+      font-size:      3rem;
+      line-height:    1;
+      text-transform: uppercase;
+    }
+
+    // Container after the section shortcode.
+    + .dlcontainer {
+      padding-bottom: 1.81em;
+      padding-top:    $global-vertical-padding;
+    }
+  }
+}

@@ -1,0 +1,197 @@
+//
+// Archives Layout
+//
+.dl-is-blog,
+.search,
+.archive {
+
+  .dlarchive {
+    // Header
+    &__header {
+      margin-bottom: $global-vertical-margin;
+    }
+
+    // Title
+    &__title {
+      margin-bottom: 0;
+    }
+  }
+
+  // General article.
+  .dlarticle {
+    @include article-col-3;
+  }
+}
+
+.dl-has-sidebar.dl-is-blog,
+.dl-has-sidebar.search,
+.dl-has-sidebar.archive {
+  .dlarticle {
+    @include article-col-sidebar;
+  }
+}
+
+//
+// Blog Archive
+//
+.dl-is-blog {
+  main {
+    // Only the archives for blog need this.
+    // If you add this within other archives pages the layout will be broken.
+    -ms-flex: 1 0 auto;
+  }
+}
+
+//
+// Archive Listings Layout
+//
+.dl-is-listings-archive {
+
+  .dlposts-found {
+    margin: 0;
+  }
+
+  // Width Map
+  &--with-map {
+
+    #dlpage-wrapper > .dlwrapper {
+      &,
+      .dlcontainer {
+        // Reset the default row style.
+        // Also reset the search paged container style.
+        margin:  0;
+        padding: 0;
+      }
+
+      .dlcontainer {
+        max-width: 100%;
+      }
+    }
+
+    // The main content
+    #dlmain {
+      // Set to min 100vh to prevent issues on filter form open height.
+      min-height: 100vh;
+      position:   relative;
+    }
+
+    // The posts found
+    .dlposts-found {
+      &__current-page-label i {
+        margin: 0 .23em 0 0;
+      }
+    }
+
+    // The posts list.
+    .dllistings-list {
+      padding:  1em $padding-container;
+      // Needed by the ajax loader.
+      position: relative;
+
+      .dlarticle {
+        // Override the default columns.
+        @extend .col--sm-12;
+        @extend .col--md-6;
+        @extend .col--xxl-4;
+      }
+    }
+
+    // The footer.
+    .dlarchive-listings-footer {
+      @extend .u-cf;
+      margin:     $boxmodel_archive-description_margin;
+      margin-top: 0;
+      padding:    0 $padding-container;
+
+      &__right {
+        float:      left;
+        margin-top: ($global-vertical-margin / 2);
+      }
+
+      // Breadcrumb
+      .dlbreadcrumb {
+        margin: 0;
+      }
+    }
+  }
+
+  // No Map
+  &--no-map {
+    .dlarchive {
+      // Add margin bottom to distanziate the content from the footer.
+      margin-bottom: $global-vertical-margin;
+      &#dlmain {
+        -ms-flex:  1 0 100%;
+        flex:      1 0 100%;
+        max-width: 100%;
+      }
+    }
+
+    // Content
+    .dlwrapper {
+      margin-top: 0;
+    }
+
+    // Pagination
+    .dlpagination {
+      margin-top: $global-vertical-margin;
+    }
+  }
+}
+
+//
+// MEDIA QUERIES
+//
+@media only screen and (min-width: map-get($breakpoints, 'sm')) {
+
+  //
+  // Archive Listings Layout
+  //
+  .dl-is-listings-archive--with-map {
+    // The footer.
+    .dlarchive-listings-footer {
+      @include flexboxtweener((-ms-flex-align: center));
+      align-items:     center;
+      display:         flex;
+      justify-content: space-between;
+
+      &__left,
+      &__right {
+        width: 50%;
+      }
+
+      &__right {
+        // Reset the margin top for small screens.
+        margin-top: 0;
+      }
+
+      // Pagination
+      .dlpagination {
+        float: right;
+      }
+    }
+  }
+
+}
+
+@media only screen and (min-width: map-get($breakpoints, 'nm')) {
+
+  //
+  // Archive Listings Layout
+  //
+  .dl-is-listings-archive--with-map {
+    main {
+      @include enumerate-props($boxmodel_listings-archive_main);
+      // Remove the base flex rule defined in _main.scss.
+      flex:  1 0 60%;
+      order: 1;
+    }
+
+    .dlarchive-listings-footer,
+    .dllistings-list {
+      padding-left:  1rem;
+      padding-right: 1rem;
+    }
+  }
+
+}

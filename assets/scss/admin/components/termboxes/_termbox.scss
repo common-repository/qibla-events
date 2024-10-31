@@ -1,0 +1,18 @@
+//
+// Component Admin TermBox
+//
+[name="edittag"] {
+
+  .form-field + .form-field {
+    border-top : 1px solid $color-border;
+  }
+
+  // Form field description.
+  // Stylize like as other descriptions.
+  .form-field__description {
+    color:      #666;
+    font-size:  14px;
+    font-style: italic;
+    margin:     2px 0 5px;
+  }
+}

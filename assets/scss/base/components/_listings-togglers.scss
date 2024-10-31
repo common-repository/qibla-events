@@ -1,0 +1,49 @@
+//
+// Components Filters Toggler
+//
+.dltoggler {
+  background-color: lighten($color-gray--light, 35%);
+  border:           1px solid $color-border;
+}
+
+#dllistings_filter_toggler.dllistings-toggler--active {
+  left: $global-horizontal-margin;
+}
+
+#dllistings_map_toggler.dllistings-toggler--active {
+  right: $global-horizontal-margin;
+}
+
+//
+// MEDIA QUERIES
+//
+
+@media only screen and (max-width: 63.94em) {
+
+  //
+  // Togglers No Map Variant
+  //
+  .dl-is-listings-archive--with-map {
+    .dltogglers {
+      @include flexboxtweener;
+      bottom:          0;
+      display:         flex;
+      justify-content: space-between;
+      left:            0;
+      position:        fixed;
+      right:           0;
+      // Below the filters form.
+      z-index:         9999;
+    }
+
+    .dltoggler {
+      // Remove the btn border radius.
+      border-radius: 0;
+      flex-basis:    50%;
+      -ms-flex:      1 0 auto;
+      padding:       1rem;
+      text-align:    center;
+    }
+  }
+
+}

@@ -1,0 +1,72 @@
+//
+// Brand Component
+//
+// Note:
+// img.dlbrand__logo - Sorry but due to "woocommerce img, woocommerce-page" img and to prevent
+// issues with images within the woocommere pages, we tricked the selector to override the above wc rule.
+//
+.dlbrand {
+  @include enumerate-props($typography_brand);
+
+  // Site title
+  &__title {
+    @include enumerate-props(map-get($typography_brand, 'title'));
+    line-height: 1;
+    margin:      0; // Pay attention, the brand may be an heading or a paragraph.
+  }
+
+  // Site Link
+  &__link {
+    border:          0;
+    text-decoration: none;
+  }
+
+  // Brand Logo
+  img.dlbrand__logo {
+    height:     2.25rem;
+    transition: height $global-transition-timing $global-transition-duration;
+    width:      auto;
+  }
+
+  // The Motto.
+  &__description {
+    @include enumerate-props(map-get($typography_brand, 'description'));
+    margin: 0;
+  }
+}
+
+//
+// Mobile Header Brand
+//
+.dlheader--mobile {
+  .dlbrand {
+    flex-grow: 1;
+    -ms-flex:  1 0 auto;
+    padding:   $padding-header-vertical;
+  }
+}
+
+//
+// MEDIA QUERIES
+//
+@media only screen and (min-width: map-get($breakpoints, 'xl')) {
+
+  //
+  // Brand Component
+  //
+  .dlbrand {
+    // Brand Logo
+    img.dlbrand__logo {
+      height: 3.25rem;
+    }
+  }
+
+  .dlheader--is-sticky {
+    .dlbrand {
+      img.dlbrand__logo {
+        height: 2.5rem;
+      }
+    }
+  }
+
+}

@@ -1,0 +1,151 @@
+//
+// Rules Mixins
+//
+
+// Enumerate properties.
+@mixin enumerate-props($list) {
+  @each $prop, $value in $list {
+    @if 'map' != type_of($value) {
+      #{$prop}: #{$value};
+    }
+  }
+}
+
+// Admin bar margin.
+@mixin admin-bar-margin($elem, $prefix: true) {
+
+  @if ($prefix) {
+    $elem: '.admin-bar #{$elem}';
+  }
+
+  #{$elem} {
+    @content;
+    margin-top: 32px;
+  }
+
+  @media screen and (max-width: 782px) {
+    #{$elem} {
+      @content;
+      margin-top: 46px;
+    }
+  }
+}
+
+// Clear Fix
+@mixin cf {
+  //
+  // For modern browsers
+  // 1. The space content is one way to avoid an Opera bug when the
+  //    contenteditable attribute is included anywhere else in the document.
+  //    Otherwise it causes space to appear at the top and bottom of elements
+  //    that are clearfixed.
+  // 2. The use of `table` rather than `block` is only necessary if using
+  //    `:before` to contain the top-margins of child elements.
+  //
+  &::before,
+  &::after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+    clear:   both;
+  }
+
+  //For IE 6/7 only
+  //Include this rule to trigger hasLayout and contain floats.
+  *zoom: 1;
+}
+
+// Reset Lists
+@mixin no-list-style {
+  list-style: none !important;
+  margin:     0;
+  padding:    0;
+}
+
+@mixin default-list-style {
+  list-style: initial;
+  margin:     initial;
+  padding:    initial;
+}
+
+@mixin highlight-text {
+  color: $color-primary;
+}
+
+@mixin reflect-element {
+  -moz-transform:    scaleX(-1);
+  -o-transform:      scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform:         scaleX(-1);
+  filter:            FlipH;
+  -ms-filter:        "FlipH";
+}
+
+// Hide Content
+// @see https://make.wordpress.org/core/2017/10/22/changes-to-the-screen-reader-text-css-class-in-wordpress-4-9/
+@mixin screen-reader-text {
+  & {
+    clip:     rect(1px, 1px, 1px, 1px);
+    height:   1px;
+    margin:   0;
+    overflow: hidden;
+    padding:  0;
+    position: absolute !important;
+    width:    1px;
+
+    &:focus {
+      background-color: $color-background;
+      border-radius:    3px;
+      box-shadow:       0 0 2px 2px rgba(0, 0, 0, 0.6);
+      clip:             auto !important;
+      color:            #21759b;
+      display:          block;
+      font-size:        14px;
+      font-size:        0.875rem;
+      font-weight:      bold;
+      height:           auto;
+      left:             5px;
+      line-height:      normal;
+      padding:          15px 23px 14px;
+      text-decoration:  none;
+      top:              5px;
+      width:            auto;
+      z-index:          100000; // Above WP toolbar.
+    }
+  }
+}
+
+// Hide header
+@mixin hide-header {
+  clip:     rect(1px, 1px, 1px, 1px);
+  height:   1px;
+  margin:   0;
+  overflow: hidden;
+  padding:  0;
+  width:    1px;
+}
+
+@mixin unscreen-reader-text {
+  clip:     auto;
+  position: static;
+  height:   auto;
+  width:    auto;
+  overflow: initial; // If create issue, have a look at the main nav sub-menu item 2 Depth.
+}
+
+@mixin hide {
+  // When we want to hide must be sure that the element will be hidden.
+  // scss-lint:disable ImportantRule
+  display: none !important;
+}
+
+// Mixed
+@mixin wide-background-strip {
+  background:    $color-white;
+  border-bottom: 1px solid $color-border;
+  bottom:        0;
+  content:       '';
+  left:          -9999px;
+  position:      absolute;
+  right:         -9999px;
+  top:           0;
+}

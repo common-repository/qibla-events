@@ -1,0 +1,93 @@
+//
+// Calendar
+//
+
+// Setting Width.
+.ui-datepicker {
+  // Hide datepicker element.
+  display:   none;
+  max-width: 100%;
+  width:     100%;
+}
+
+.ev-calendar-search.ui-datepicker {
+  max-width: 320px;
+}
+
+.ui-datepicker-inline {
+  &.ui-datepicker {
+    table .ui-state-disabled {
+      background-color: $calendar-disabled-bg;
+    }
+    table td {
+      border: 1px solid $color-border;
+    }
+  }
+}
+
+// Events Calendar in Search bar.
+.ev-calendar-search {
+  border:        1px solid $color-border;
+  border-radius: 5px;
+  padding:       .5em;
+  // Override z-index.
+  // scss-lint:disable ImportantRule
+  z-index:       9999 !important;
+  &.ui-datepicker {
+    table .ui-state-disabled {
+      background-color: $calendar-disabled-bg;
+    }
+    table td {
+      border: 1px solid $color-border;
+    }
+  }
+  table tbody {
+    border: 1px solid $color-border;
+  }
+  table td span,
+  table td a {
+    padding: .8em .7em;
+  }
+}
+
+.ev-trigger-calendar {
+  background:  $calendar-trigger-bg;
+  border-top:  1px solid $calendar-trigger-border;
+  cursor:      pointer;
+  line-height: 2;
+  padding:     .2rem .69rem .4rem;
+  i {
+    margin-right: 10px;
+  }
+}
+
+//
+// Calendar Front
+//
+#qibla_calendar_filter {
+  padding: .5em;
+  .ui-datepicker table tbody {
+    border: 1px solid $color-border;
+  }
+  .ui-datepicker table td span,
+  .ui-datepicker table td a {
+    padding: .8em .4em;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .ev-calendar-search {
+    // Setting Width.
+    &.ui-datepicker {
+      // Override left position.
+      // scss-lint:disable ImportantRule
+      left:      10px !important;
+      max-width: 300px;
+      width:     100%;
+      table td span,
+      table td a {
+        padding: 4px;
+      }
+    }
+  }
+}

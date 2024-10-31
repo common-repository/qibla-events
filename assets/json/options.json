@@ -1,0 +1,24 @@
+{
+  "general": {
+    "disable_css": "off"
+  },
+  "listings": {
+    "archive_show_map": "on",
+    "posts_per_page": 10,
+    "order_by_featured": "on",
+    "disable_reviews": "off",
+    "expired_listing_email": "",
+    "listings_archive_description": ""
+  },
+  "google_map": {
+    "apikey": "",
+    "zoom": 15
+  },
+  "search": {
+    "type": "simple",
+    "placeholder": "What are you looking for?",
+    "geocoded_placeholder": "Where about?",
+    "submit_label": "Search",
+    "submit_icon": "lineawesome::la-search"
+  }
+}

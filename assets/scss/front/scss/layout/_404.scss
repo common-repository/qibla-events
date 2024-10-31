@@ -1,0 +1,51 @@
+//
+// 404 Layout
+//
+.error404 {
+  #dlpage-wrapper > .dlwrapper {
+    margin:  0;
+    padding: ($height-header + 8.38em) 0 8.38em;
+  }
+}
+
+.dlfw.error404 {
+  #dlpage-wrapper > .dlwrapper {
+    @include dloverlay--before;
+
+    // The WordPress base search
+    .search-form {
+      @include flexboxtweener;
+      display: flex;
+    }
+
+    // The theme search
+    .dlsearch {
+      // Reset the margin added by the search-form.
+      margin-top: 0;
+      position:   relative;
+      width:      100%;
+    }
+  }
+}
+
+// Page Content
+.dl404 {
+
+  &__title,
+  &__subtitle {
+    margin-bottom: 0;
+    text-align:    center;
+
+    .dlfw & {
+      color: $color-white;
+    }
+  }
+
+  &__search-form {
+    @include flexboxtweener;
+    // The flex is not useful when the framework is active.
+    // Used only for the theme that have a different markup.
+    display:    flex;
+    margin-top: 1.8em;
+  }
+}

@@ -1,0 +1,73 @@
+//
+// Listings Socials Links
+//
+.dl-is-singular-listings .dlwrapper,
+.single-listings .dlwrapper {
+  .dlsocials-links {
+    margin-bottom: 1em;
+    margin-top:    1em;
+
+    // The list wrapper
+    &__list {
+      @include flexboxtweener((-ms-flex: 1 0 auto));
+      box-shadow:      $global-box_shadow;
+      display:         flex;
+      flex:            1 0 100%;
+      justify-content: space-between;
+    }
+
+    // List Item
+    &__item {
+      // Flex in case we need to use ajax-loader in it.
+      display:     flex;
+      align-items: center;
+    }
+
+    &__item,
+    &__link {
+      // Flex in case we need to use ajax-loader in it.
+      flex-grow: 1;
+      -ms-flex:  1 0 auto;
+    }
+
+    &__item + .dlsocials-links__item .dlsocials-links__link {
+      // Remove the border left from adjacent item links
+      // For more info see the property border for the __link selector.
+      border-left: 0;
+    }
+
+    // The icon link
+    &__link {
+      background-color: $color-white;
+      // Use the border to the link element to able to change it on hover.
+      border:           1px solid $color-border;
+      color:            lighten($color-gray, $color-light-module);
+      font-size:        1.2rem;
+      height:           auto;
+      padding-bottom:   .75em;
+      padding-top:      .75em;
+      position:         relative;
+      width:            auto;
+
+      &:hover {
+        background-color: $color-primary;
+        border-color:     $color-primary;
+        color:            $color-white;
+      }
+    }
+  }
+}
+
+//
+// MEDIA QUERIES
+//
+@media only screen and (min-width: 64em) {
+
+  .dl-is-singular-listings .dlwrapper,
+  .single-listings .dlwrapper {
+    .dlsocials-links {
+      margin-bottom: 0;
+    }
+  }
+
+}

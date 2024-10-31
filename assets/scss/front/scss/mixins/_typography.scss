@@ -1,0 +1,32 @@
+//
+// Typography Mixins
+//
+
+//
+// Font Smoothing
+//
+@mixin font-smoothing {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing:  antialiased;
+}
+
+//
+// Anchor
+//
+@mixin anchor-text($rules: false, $hoverRules: false) {
+
+  @if false == $rules {
+    $rules: $typography_anchor;
+  }
+
+  @if false == $hoverRules {
+    $hoverRules: map-get($typography_anchor, 'hover');
+  }
+
+  @include enumerate-props($rules);
+
+  &:active,
+  &:hover {
+    @include enumerate-props($hoverRules);
+  }
+}

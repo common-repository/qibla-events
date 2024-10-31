@@ -1,0 +1,18 @@
+.screen-reader-text {
+  @include screen-reader-text;
+}
+
+// Hide header
+.hide-header {
+  @include hide-header;
+}
+
+// Unhide text
+.unscreen-reader-text {
+  @include unscreen-reader-text;
+}
+
+// Display None
+.hidden {
+  @include hide;
+}

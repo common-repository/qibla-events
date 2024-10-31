@@ -1,0 +1,11 @@
+//
+// Homepage Template
+//
+.page-template-homepage {
+
+  #dlpage-wrapper > .dlwrapper {
+    // Reset the base page wrapper margin.
+    // see _singular.scss.
+    margin: 0;
+  }
+}

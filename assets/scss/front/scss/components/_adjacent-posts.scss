@@ -1,0 +1,114 @@
+//
+// Adjacent Posts
+//
+.dladjacent-articles {
+  background-color: $color-white;
+  border:           1px solid $color-border;
+  border-left:      0;
+  border-right:     0;
+  padding:          1.6em 0;
+
+  .dlcontainer {
+    max-width: $max-width-single-post-container;
+  }
+
+  &__next,
+  &__prev {
+    @include flexboxtweener((-ms-flex-align:center));
+    align-self:     center;
+    flex-grow:      1;
+  }
+
+  &__prev {
+    margin-bottom: 1.6em;
+  }
+
+  // The Next / Previus post
+  &__label {
+    display:     block;
+    font-weight: $font-weight--bold;
+  }
+
+  // Labels
+  &__labels {
+    display: block;
+  }
+
+  .dlthumbnail {
+    margin-right: 2em;
+  }
+
+  // The post link.
+  &__link {
+    @include flexboxtweener((-ms-flex-align:center, -ms-flex-pack:start));
+    align-items: center;
+    border:      0;
+    color:       $color-gray;
+    display:     flex;
+
+    &:hover,
+    &:hover::before,
+    &:hover::after {
+      color: $color-primary;
+    }
+  }
+}
+
+//
+
+// MEDIA QUERIES
+//
+@media only screen and (min-width: map-get($breakpoints, 'lg')) {
+
+  .dladjacent-articles {
+    // Prev Post
+    &__prev {
+      // Remove the default margin bottom.
+      margin-bottom: 0;
+    }
+
+    // Next Post
+    &__next {
+      text-align: right;
+    }
+
+    // The labels
+    &__next .dlthumbnail {
+      margin-left:  2em;
+      // Reset the small-screen margin right.
+      margin-right: 0;
+    }
+
+    // The links
+    &__next &__link {
+      -ms-flex-direction: row-reverse;
+      flex-direction:     row-reverse;
+    }
+
+    &__prev &__link::before,
+    &__next &__link::before {
+      font-family: Lineawesome;
+    }
+
+    // The icons for prev and next links
+    &__prev &__link::before {
+      content:      '\f111';
+      margin-right: $global-horizontal-margin / 2;
+    }
+
+    // From ::after to ::before because of the row-reverse direction.
+    &__next &__link::before {
+      content:     '\f112';
+      margin-left: $global-horizontal-margin / 2;
+    }
+
+    // The title
+    &__post-title {
+      display:   inline-block;
+      // This value is arbitrary based on breakpoint view.
+      max-width: 300px;
+    }
+  }
+
+}
+

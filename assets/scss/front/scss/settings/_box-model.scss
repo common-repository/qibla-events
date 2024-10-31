@@ -1,0 +1,113 @@
+//
+// Box Model Settings
+//
+
+//
+// Variables Global
+//
+// Margin
+$global-margin: 2.3em;
+// Vertical Margin
+$global-vertical-margin: 2.81em;
+// Horizontal Padding
+$global-horizontal-margin: 2.3em;
+// Padding
+$global-padding: 2.3em;
+// Vertical Padding
+$global-vertical-padding: 2.81em;
+// Horizontal Padding
+// This is the padding left and right for all elements that is needed when the device width is less than .row width.
+// In that case we need a padding to the left/right sides and we use this size.
+$global-horizontal-padding: $global-padding;
+// Border Radius
+$global-border-radius: .19em;
+// Box Shadow
+$global-box_shadow: 0 1px 1px transparentize($color-black, .9);
+$global-box_shadow--negative: 0 -1px -1px transparentize($color-black, .9);
+// Transforms
+$global-transform-scale: 1.04;
+
+//
+// Variables Container
+//
+$padding-container: $global-padding / 2;
+$max-width-single-post-container: 960px;
+
+//
+// Variables Table
+//
+$padding-cell: .45em;
+
+//
+// Variables Form
+//
+$margin-label: .35em;
+// Use rem to prevent big padding when input is inside the label tag.
+$padding-input: .45rem .69rem;
+$padding-input--small-devices: .9rem 1.38rem;
+
+//
+// Variables Header
+//
+$padding-header-vertical: .375em;
+// Basic header height calculated on the content inside its.
+$height-header: 3.13em; // 50px
+$height-header--large-device: 3.81em; // 61px
+
+$boxmodel_nav-item: (
+  link: (
+    border-top: 1px solid lighten($color-border, 15%)
+  )
+);
+
+//
+// Variables Article
+//
+$boxmodel_article--card: (
+  background-color: $color-white,
+  subtitle: (
+    padding: 1.15rem 2.55rem
+  )
+);
+
+// Extend the general main element.
+$boxmodel_listings-archive_main: (
+  width: 60%
+);
+
+$boxmodel_boxed-widget: (
+  background-color: $color-white,
+  border: 1px solid $color-border,
+  border-radius: $global-border-radius,
+  box-shadow: $global-box_shadow,
+  padding: .94em
+);
+
+//
+// Variables Archives
+//
+$boxmodel_archive-description_margin: 1.95em 0;
+
+//
+// Variables Footer
+//
+$boxmodel_footer: (
+  background-color: $color-background-footer
+) !default;
+
+$boxmodel_colophon: (
+  background-color: $color-background-colophon
+) !default;
+
+//
+// Variables Map
+//
+$boxmodel_archive-map: (
+  // Width is related with $boxmodel_listings-archive_main width.
+  width: 40%
+);
+
+//
+// Variable Shortcode Section Component
+//
+$dlsc-section-padding-bottom: 2em;

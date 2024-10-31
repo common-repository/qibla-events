@@ -1,0 +1,188 @@
+//
+// Admin List Table
+//
+.dl-is-listings-type-table-list,
+.post-type-testimonial {
+
+  .wp-list-table {
+
+    // Columns.
+    .column-location {
+      .dlicon {
+        color:          $color-primary;
+        font-size:      1.25rem;
+        margin-right:   .63em;
+        vertical-align: middle;
+      }
+    }
+
+    .column-gallery,
+    .column-featured,
+    .column-amenities,
+    .column-creator,
+    .column-comments {
+      padding: .63em;
+      width:   30px;
+    }
+
+    .column-thumbnail {
+      width: 8%;
+    }
+
+    .column-thumbnail {
+      img {
+        height: auto;
+        width:  100%;
+      }
+    }
+
+    .column-category {
+      width: 10%;
+    }
+
+    .column-location {
+      width: 35%;
+    }
+  }
+
+  // Table Head.
+  th {
+    .has-icon {
+      @extend %screen-reader-text;
+    }
+  }
+}
+
+.dl-is-listings-type-table-list {
+  // Table headers Group.
+  #featured,
+  #category,
+  #creator,
+  #comments a > span:first-child {
+    &::before {
+      font-family: Lineawesome;
+    }
+  }
+
+  // Featured Th column
+  #featured {
+    &::before {
+      content: '\f320';
+    }
+  }
+
+  // Featured Th column
+  #creator {
+    &::before {
+      content: '\f374';
+    }
+  }
+
+  // Category
+  #category {
+    &::before {
+      content: '\f33b';
+    }
+  }
+
+  // Reviews
+  #comments a > span:first-child {
+    &::before {
+      content: '\f1a1';
+    }
+  }
+
+  // Author
+  #comments a {
+    padding: 0;
+  }
+
+  // Hide text but show Icon.
+  #the-list .column-featured,
+  #the-list .column-gallery,
+  #the-list .column-amenities {
+
+    span {
+      @extend %screen-reader-text;
+    }
+
+    // The Icon.
+    .dlicon {
+      color:     $color-gray;
+      font-size: 1.25rem;
+
+      // For when the value is yes.
+      &--active {
+        color: $color-primary;
+      }
+    }
+  }
+
+  #the-list .column-amenities {
+    .dlicon {
+      color: $color-primary;
+    }
+  }
+
+  // Center alignments Columns
+  #featured,
+  #category,
+  #creator,
+  #comments,
+  #the-list .column-category,
+  #the-list .column-creator,
+  #the-list .column-featured,
+  #the-list .column-gallery,
+  #the-list .column-amenities,
+  #the-list .column-comments {
+    text-align: center;
+  }
+
+  // Fix for the sortable columns with centered text.
+  #comments a > span:first-child {
+    float: none;
+  }
+
+  // Move the sorting indicator to right.
+  #comments a > span.sorting-indicator {
+    float: right;
+  }
+}
+
+.post-type-testimonial {
+
+  .wp-list-table {
+    .column-thumbnail {
+      width: 74px;
+
+      img {
+        height: 64px;
+        width:  64px;
+      }
+    }
+  }
+}
+
+// Media Query
+// 782 is the value for wp table list columns.
+@media only screen and (max-width: 782px) {
+
+  .dl-is-listings-type-table-lists,
+  .post-type-testimonial {
+
+    .wp-list-table {
+      .column-thumbnail {
+        // Don't show unnecessary columns in small devices.
+        // scss-lint:disable ImportantRule
+        display:    none !important;
+        text-align: right;
+
+        &::before {
+          text-align: left;
+        }
+      }
+    }
+  }
+
+}
+

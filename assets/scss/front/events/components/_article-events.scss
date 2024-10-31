@@ -1,0 +1,110 @@
+//
+// Events Card
+//
+.dlsc-events,
+.dlarticle--events {
+  &.dlarticle {
+    .dlarticle__title {
+      line-height: 1.2;
+    }
+    &--has-button {
+      .dlarticle__meta {
+        // Override Padding Top.
+        // scss-lint:disable ImportantRule
+        padding-top: 2.2em !important;
+      }
+      .dlarticle__title {
+        padding-bottom: 1.7em;
+      }
+    }
+
+    .dlsubtitle + .dlarticle__meta {
+      // Override Padding Top.
+      // scss-lint:disable ImportantRule
+      padding-top: 0 !important;
+    }
+
+    &--card {
+      .dlsubtitle {
+        padding: 1.75rem 2.55rem 1.15rem;
+      }
+      .dlarticle {
+        &__header {
+          .dlevent-ticket-wrapper {
+            bottom:   -15px;
+            left:     0;
+            position: absolute;
+            right:    0;
+            z-index:  10;
+            .event-ticket-button {
+              background:  $color-primary;
+              border:      1px solid $color-primary;
+              color:       $color-white;
+              font-size:   1rem;
+              font-weight: 300;
+              padding:     .4em .93em;
+            }
+          }
+        }
+        &__meta {
+          align-items:     center;
+          display:         flex;
+          justify-content: center;
+          padding:         1.75rem 1.15rem;
+
+          &--time {
+            border-right: 1px solid $color-border;
+            flex:         1 0 40%;
+            max-width:    125px;
+            padding:      .2rem .8rem 0 0;
+          }
+
+          &--timein {
+            display:    flex;
+            text-align: right;
+            &.multi-dates {
+              flex-direction: column;
+              text-align:     center;
+            }
+          }
+
+          &--day {
+            flex:        1 0 60%;
+            font-size:   22px;
+            line-height: 1;
+          }
+
+          &--mouth,
+          &--day-text {
+            display:    block;
+            text-align: center;
+            width:      100%;
+          }
+
+          &--mouth-day {
+            flex:           1 0 40%;
+            font-size:      15px;
+            line-height:    1.2;
+            text-transform: capitalize;
+          }
+
+          &--address {
+            flex:        1 0 60%;
+            font-size:   12px;
+            line-height: 1.3;
+            padding:     0 0 0 .8rem;
+          }
+        }
+      }
+    }
+  }
+  .dlarticle__meta .dlarticle__meta--time + .dlarticle__meta--address {
+    text-align: left;
+  }
+
+  .dlarticle__meta--time.no-address {
+    border: 0;
+    flex:   1 0 100%;
+    margin: 0 auto;
+  }
+}

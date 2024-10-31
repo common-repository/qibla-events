@@ -1,0 +1,110 @@
+//
+// Jumbotron Component
+//
+// 1. Header Sticky
+//
+// The header sticky edit the way the jumbotron and his content is posizioned.
+// First of all, the padding top for the header fixed is added via the css, see the `.dlheader--fixed ~ .dljumbotron`
+// for large and small devices. Then, add margin bottom to the jumbotron content when the header skin is set to transparent.
+//
+// Why the margin bottom to the jumbotron content for header transparent skin?
+// Because visually the content of the jumbotron doesn't appear centered.
+//
+// 1.1 Set the padding top for fixed header. (Searchable within the file).
+//
+.dljumbotron {
+  @include flexboxtweener((-ms-flex-align:center, -ms-flex-direction:row));
+  align-items:      center;
+  // If you change this, change even the default value for the post meta option.
+  background-color: rgba(255, 255, 255, .3);
+  display:          flex;
+  // Pages have title inside the jumbo-tron, vh prevent to overlaps header and jumbo-tron.
+  min-height:       47vh;
+  max-height:       350px;
+  padding-left:     $global-horizontal-padding / 2;
+  padding-right:    $global-horizontal-padding / 2;
+  position:         relative;
+
+  &::before {
+    transition: all $global-transition-duration $global-transition-timing;
+  }
+
+  .is-winIE & {
+    // IE need an height.
+    height: 1px;
+  }
+}
+
+// Has Gallery
+// The wrapper is created via javascript.
+.dljumbotron-gallery-wrapper {
+  // Border to zero because the tag is an anchor.
+  border:  0;
+  display: block;
+}
+
+// The labelIcon element.
+// This is also created via js.
+.dljumbotron-gallery-label {
+  bottom:         1.3rem;
+  color:          $color-white;
+  cursor:         pointer;
+  display:        block;
+  line-height:    1;
+  // Let us to click throught the element.
+  pointer-events: none;
+  // Position Absolute to able to click on it and open the gallery.
+  // The element is within the main content because of the position needed is inside the container.
+  position:       absolute;
+  // z-index to prevent to hide the element below the jumbotron.
+  z-index:        1;
+
+  i {
+    font-size:      2rem;
+    line-height:    .7;
+    margin-right:   .33em;
+    vertical-align: middle;
+  }
+}
+
+//
+// Front and Listing
+//
+// Take care on min/max height within different media queries.
+//
+.dl-is-singular-listings .dljumbotron,
+.single-listings .dljumbotron {
+  max-height: 400px;
+  min-height: 400px;
+  min-height: 44vmin;
+}
+
+//
+// MEDIA QUERIES
+//
+@media only screen and (max-width: map-get($breakpoints, 'md')) and (orientation: portrait) {
+
+  .dl-is-singular-listings .dljumbotron,
+  .single-listings .dljumbotron {
+    height: 30vh;
+  }
+
+}
+
+@media only screen and (max-width: map-get($breakpoints, 'md')) and (orientation: landscape) {
+
+  .dl-is-singular-listings .dljumbotron,
+  .single-listings .dljumbotron {
+    min-height: 43vh;
+  }
+
+}
+
+@media only screen and (min-width: map-get($breakpoints, 'md')) {
+
+  .dljumbotron {
+    padding-left:  $global-horizontal-padding;
+    padding-right: $global-horizontal-padding;
+  }
+
+}

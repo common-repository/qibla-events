@@ -1,0 +1,129 @@
+//
+// Components Buttons
+// Some selectors are concatenate with the main block selector
+// this is needed for some modifier in relation with buttons like reset and submit.
+//
+// @todo Remove the data-icon-type Not used.
+//
+.dlbtn {
+  @include btn;
+
+  &__icon--after,
+  &__icon--before {
+    bottom:         1px;
+    font-size:      2rem;
+    line-height:    0;
+    position:       relative;
+    vertical-align: middle;
+  }
+}
+
+// Tiny Size
+.dlbtn.dlbtn--tiny {
+  @include btn--tiny;
+}
+
+// Small Size
+.dlbtn.dlbtn--small {
+  @include btn--small;
+}
+
+// Medium Size
+.dlbtn.dlbtn--medium {
+  @include btn--medium;
+}
+
+// Wide Button
+.dlbtn--wide {
+  @include btn--wide;
+}
+
+// Gray & Gray Ghost
+.dlbtn--gray {
+  @include btn--gray;
+}
+
+// White Variant
+.dlbtn--white {
+  @include btn--white;
+}
+
+// Ghost
+// Put the ghost modified after all of the buttons styles to be sure to override them.
+.dlbtn--ghost {
+  @include btn--ghost;
+}
+
+// @todo REMOVE THE DATA_ICON_TYPE. IT'S OLD.
+// Icons
+// The data-icon-type is referred to the fontfamily.
+// The data-icon-{before|after} is refered to the icon value in unicode format.
+// Remember that the value of the data-icon- must be as htmlentity like "&#xf0f4;"
+.dlbtn[data-icon-type="fontawesome"] {
+  &::before,
+  &::after {
+    font-family: FontAwesome, sans-serif;
+  }
+}
+
+.dlbtn[data-icon-type="lineawesome"] {
+  &::before,
+  &::after {
+    font-family: LineAwesome, sans-serif;
+  }
+}
+
+.dlbtn__icon--before,
+.dlbtn[data-icon-type="fontawesome"],
+.dlbtn[data-icon-type="lineawesome"] {
+  &::before {
+    margin-right: 1.18rem;
+  }
+}
+
+.dlbtn[data-icon-type="fontawesome"],
+.dlbtn[data-icon-type="lineawesome"] {
+  &::after {
+    margin-left: 1.18rem;
+  }
+}
+
+.dlbtn[data-icon-before]::before {
+  content: attr(data-icon-before);
+}
+
+.dlbtn[data-icon-after]::after {
+  content: attr(data-icon-after);
+}
+
+// Icon & Input submit
+// Inputs cannot have subelements, so the ::before and ::after doesn't works.
+// We must reset the button appearance and wrap the input by a span or something else.
+// The markup will be like:
+//    <span class="dlbtn dlbtn--{modifier}" data-icon-type="font-family" data-icon-before="&#x{Unicode};">
+//       <input type="submit" />
+//    </span>
+.dlbtn[data-icon-type] input[type="button"],
+.dlbtn[data-icon-type] input[type="reset"],
+.dlbtn[data-icon-type] input[type="submit"] {
+  -moz-appearance:    none;
+  -webkit-appearance: none;
+  background:         none;
+  border:             0;
+  color:              inherit;
+  margin:             0;
+  padding:            0;
+}
+
+//
+// MEDIA QUERIES
+//
+@media only screen and (min-width: map-get($breakpoints, 'md')) {
+
+  .dlbtn__icon--after {
+    &::before {
+      margin-left: 1.18rem;
+    }
+  }
+
+}

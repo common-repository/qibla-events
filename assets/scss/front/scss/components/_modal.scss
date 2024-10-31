@@ -1,0 +1,112 @@
+//
+// Modal Component
+//
+.dlmodal {
+  background-color: $color-white;
+  border:           1px solid $color-border;
+  border-radius:    $global-border-radius;
+  box-shadow:       $global-box_shadow;
+  margin:           0 auto;
+  padding:          $global-padding;
+  position:         relative;
+  width:            100%;
+  z-index:          9999;
+
+  // Header
+  &__header {
+    text-align: center;
+  }
+
+  // Title
+  &__title {
+    line-height:   1;
+    margin-bottom: 0;
+  }
+
+  // Close Btn
+  &-close {
+    @include flexboxtweener((-ms-flex-pack:center, -ms-flex-align:center));
+    align-items:     center;
+    color:           $color-border;
+    cursor:          pointer;
+    display:         flex;
+    height:          3em;
+    justify-content: center;
+    padding:         .63em;
+    padding-top:     .75em;
+    position:        absolute;
+    right:           0;
+    text-decoration: none;
+    top:             0;
+    width:           3em;
+
+    &:hover {
+      border-bottom-color: transparent;
+      color:               $color-primary;
+      text-decoration:     none;
+      transition:          all $global-transition-duration $global-transition-timing;
+    }
+
+    // Icon
+    i {
+      font-size: 1.25rem;
+    }
+  }
+
+  // Alert
+  .dlalert {
+    font-size:     $font-size--small;
+    margin-bottom: $global-vertical-margin / 2;
+  }
+
+  // Button
+  button,
+  input[type="submit"],
+  .dlbtn {
+    padding-bottom: .64em;
+    padding-top:    .64em;
+  }
+}
+
+// The form
+.dlmodal .dlform {
+  // Submit
+  .dl-field--submit {
+    margin-bottom: 0;
+  }
+
+  input[type="submit"] {
+    width: 100%;
+  }
+}
+
+// Overlay
+.dlmodal-overlay {
+  background-color: transparentize($color-black, $color-transparentize-module);
+  bottom:           0;
+  left:             0;
+  overflow:         scroll;
+  position:         fixed;
+  right:            0;
+  top:              0;
+  z-index:          99999;
+}
+
+//
+// MEDIA QUERIES
+//
+
+@media only screen and (min-width: map-get($breakpoints, 'lg')) {
+
+  //
+  // Modal Component
+  //
+  // When the modal become a modal non full screen.
+  //
+  .dlmodal {
+    max-width: 540px;
+    top:       12%;
+    width:     76%;
+  }
+
+}

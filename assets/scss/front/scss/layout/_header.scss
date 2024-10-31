@@ -1,0 +1,106 @@
+//
+// Header Layout
+//
+.dlheader {
+  @extend .hide-header;
+  background-color:           $color-white;
+  padding:                    0 $global-horizontal-padding;
+  // Set this to be sure the header is above all other contents.
+  position:                   relative;
+  transition-delay:           75ms;
+  transition-duration:        $global-transition-duration;
+  transition-property:        background-color, color;
+  transition-timing-function: $global-transition-timing;
+  // Override The width for fix width from class .unscreen-reader-text applied when loaded document.
+  // scss-lint:disable ImportantRule
+  width:                      100% !important;
+  // @see wiki/Z-Index%20Elements
+  z-index:                    9900;
+
+  .dlcontainer {
+    @include flexboxtweener((-ms-flex-align:center));
+    align-items:   center;
+    // Reset the global row margin.
+    margin-bottom: 0;
+    margin-top:    0;
+    // Even if the markup include the container the header is not forced within the max-width of it.
+    // In other words, header is full width.
+    max-width:     100%;
+    padding:       0;
+
+    &--flex {
+      // Override the default _container.scss behavior.
+      flex-wrap: nowrap;
+    }
+  }
+}
+
+//
+// Header Skins
+//
+// - Dark that is transparent and absoluted positioned.
+// - Light that is full filled colored and not absolute.
+//
+.dlheader {
+  // Light Skin
+  &--skin-light {
+    @include header-skin('light');
+  }
+
+  // Dark Skin
+  &--skin-transparent {
+    @include header-skin('transparent') {
+      left:     0;
+      position: absolute;
+      right:    0;
+      top:      0;
+    }
+  }
+
+  &--skin-transparent-dark {
+    @extend .dlheader--skin-transparent;
+    // Override the transparent background.
+    // scss-lint:disable ImportantRule
+    background-color: rgba(0, 0, 0, .5) !important;
+  }
+}
+
+//
+// Header Fixed
+//
+.dlheader--fixed {
+  @include header-fixed
+}
+
+@include admin-bar-margin('.dlheader--fixed');
+
+//
+// Header Sticky
+//
+.dlheader--is-sticky {
+  // Little hack for chrome that not rendering correctly the element
+  // during scrolling. Cause a glitch.
+  transform: translateZ(0);
+}
+
+//
+// Header Mobile
+//
+.dlheader--mobile {
+  // Override every margins, even the one added by the .admin-bar rule.
+  // scss-lint:disable ImportantRule
+  margin:     0;
+  padding:    0;
+  text-align: center;
+
+  .dlcontainer {
+    @include flexboxtweener((-ms-flex-align:stretch, -ms-flex: 1 0 auto));
+    align-items:     center;
+    display:         flex;
+    flex:            1 0 100%;
+    justify-content: space-between;
+    // Remove the default padding for the container, instead add it to every element within the mobile header.
+    // We can manage the elements style in more consistent way.
+    padding:         0;
+  }
+}
